@@ -2,6 +2,10 @@
 export JAVA_HOME=$OPENSHIFT_DATA_DIR/jdk1.8.0_65
 export PATH=$JAVA_HOME/bin:$PATH
 
+echo 'Building Backend app'
+
 ${OPENSHIFT_DATA_DIR}apache-maven-3.3.9/bin/mvn -f ${OPENSHIFT_REPO_DIR}backend/beer-app/pom.xml clean package -s ${OPENSHIFT_REPO_DIR}.openshift/settings.xml
+
+echo 'Booting up'
 
 nohup java -jar -Dserver.port=${OPENSHIFT_DIY_PORT} -Dserver.address=${OPENSHIFT_DIY_IP} ${OPENSHIFT_REPO_DIR}backend/beer-app/target/*.jar > ${OPENSHIFT_DIY_LOG_DIR}/java.log 2>&1 &
