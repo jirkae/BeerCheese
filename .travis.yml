@@ -12,6 +12,7 @@ deploy:
   provider: openshift
   skip_cleanup: true
   deployment_branch: HEAD:master
+  condition: "$TRAVIS_BRANCH = master"
   app: beer
   user:
     secure: "rXF9I7rejANsafLKERgg1DK9gFrhEGa3PeaOT4k5BEJWGu3bA8J9FdOoHPRvawRg57GCBkLIwwU2q5LpH67AFdKeEGcv/CfM/iiQhMZfCXFp0JUIxwFjKwwy9kMxiIKV+GPRiskj6nYcqhnQwDRYFa7F9cjXuYySfVwgPGb6bP/1KyO0dst3X7JdyjxOpdgNyg8FAevhFz3q7wGq+yYkNl9uUjEIKLSvxXo4DtBCpD/qt5c9HHVIDIfv9U2GUVO5Mp5V4FFnUzms4SKbhRsSmcs/vIM53Kb56kK51WjFyoepxCsfzKre8MMWTvTmxdD2xXHuOAMN6SqKQ99jKK+/8Wpk451BMaD26QB9g/nkmFci8lfSDVws+Xik0r0d++6XropNxsBd+pRXlkCmCM6pnVef1YR53kEVTCw2VRPwKHu8Wh4lnqyNk/CDrwILpdDt4idxyk/NkHY+dgRXWRhLZ7sSzi/ITU4fTwdkOcVLEqaxsQhOLwRQnbPSbWlvihUUbW0be0D/K4qNpoehXsatASi/cdDAoruRiQkFKy5TP5VCvl45/RQO0G52JOXjhoNBY1ww9HEJQQ58HPxM0jyfJto9sCzX0gBQ15wogOaA7dLCNG3rsFN+z6HWR1cyBRMYgOK7yGLDkKrd734luTnTLMWS9OWaIIvJIpB2QmaDW1I="
