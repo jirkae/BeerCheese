@@ -8,6 +8,9 @@ addons:
       - oracle-java8-set-default
       - oracle-java8-installer
 script: sh build.sh
+branches:
+  only:
+  - master
 deploy:
   provider: openshift
   skip_cleanup: true
