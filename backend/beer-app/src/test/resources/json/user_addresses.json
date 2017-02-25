@@ -1,0 +1,20 @@
+{
+  "addresses": {
+    "items": [
+      {
+        "address": {
+          "id": 1,
+          "street": "shitty street 7",
+          "city": "shittown",
+          "country": "Afghanistan",
+          "note": "yolo",
+          "links": {
+            "self": "/api/addresses/1",
+            "user": "/api/users/1",
+            "userAddresses": "/api/addresses?user=1"
+          }
+        }
+      }
+    ]
+  }
+}

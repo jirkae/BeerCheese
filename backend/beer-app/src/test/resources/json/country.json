@@ -1,0 +1,9 @@
+{
+  "country": {
+    "id": 12,
+    "name": "Aruba",
+    "links": {
+      "self": "/api/countries/12"
+    }
+  }
+}

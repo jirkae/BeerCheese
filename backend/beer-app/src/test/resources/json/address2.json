@@ -1,0 +1,12 @@
+{
+  "address": {
+    "id": 2,
+    "street": "shitty street 8",
+    "city": "shittown 2",
+    "country": "Afghanistan",
+    "note": "yolo",
+    "links": {
+      "self": "/api/addresses/2"
+    }
+  }
+}

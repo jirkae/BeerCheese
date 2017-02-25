@@ -1,0 +1,15 @@
+{
+  "roles": {
+    "items": [
+      {
+        "role": {
+          "id": 1,
+          "name": "admin",
+          "links": {
+            "self": "/api/roles/1"
+          }
+        }
+      }
+    ]
+  }
+}

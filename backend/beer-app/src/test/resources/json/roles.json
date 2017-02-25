@@ -1,0 +1,24 @@
+{
+  "roles": {
+    "items": [
+      {
+        "role": {
+          "id": 1,
+          "name": "admin",
+          "links": {
+            "self": "/api/roles/1"
+          }
+        }
+      },
+      {
+        "role": {
+          "id": 2,
+          "name": "user",
+          "links": {
+            "self": "/api/roles/2"
+          }
+        }
+      }
+    ]
+  }
+}

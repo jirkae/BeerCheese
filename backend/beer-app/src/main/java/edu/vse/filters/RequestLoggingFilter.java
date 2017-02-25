@@ -34,6 +34,6 @@ public class RequestLoggingFilter extends AbstractFilter {
         if (servletRequest.getQueryString() == null) {
             return servletRequest.getRequestURI();
         }
-        return servletRequest.getRequestURI() + servletRequest.getRequestURI();
+        return servletRequest.getRequestURI() + servletRequest.getQueryString();
     }
 }
