@@ -1,16 +1,21 @@
 language: node_js
 node_js:
-- "7"
+  - "7"
 sudo: false
 addons:
   apt:
     packages:
       - oracle-java8-set-default
       - oracle-java8-installer
+cache:
+  apt: true
+  directories:
+    - '$HOME/.m2/repository'
+    - '$TRAVIS_BUILD_DIR/frontend/node_modules'
 script: sh build.sh
 branches:
   only:
-  - master
+    - master
 deploy:
   provider: openshift
   skip_cleanup: true
