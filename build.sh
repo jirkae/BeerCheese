@@ -3,7 +3,14 @@
 echo '\n###Backend build###\n'
 
 cd $TRAVIS_BUILD_DIR/backend/beer-app
+java -version
+
 mvn clean install
+
+rc=$?
+if [[ $rc -ne 0 ]] ; then
+  echo 'Failure during Backend build'; exit $rc
+fi
 
 echo '\n###Frontend build###\n'
 
@@ -11,6 +18,11 @@ cd $TRAVIS_BUILD_DIR/frontend
 
 npm install
 npm run build
+
+rc=$?
+if [[ $rc -ne 0 ]] ; then
+  echo 'Failure during Frontend build'; exit $rc
+fi
 
 echo 'Copying built Frontend app'
 

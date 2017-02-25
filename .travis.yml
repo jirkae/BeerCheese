@@ -8,7 +8,6 @@ addons:
       - oracle-java8-set-default
       - oracle-java8-installer
 cache:
-  apt: true
   directories:
     - '$HOME/.m2/repository'
     - '$TRAVIS_BUILD_DIR/frontend/node_modules'
