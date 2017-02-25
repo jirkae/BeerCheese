@@ -7,6 +7,9 @@ addons:
     packages:
       - oracle-java8-set-default
       - oracle-java8-installer
+env:
+  global:
+    - JAVA_HOME=/usr/lib/jvm/java-8-oracle
 cache:
   directories:
     - '$HOME/.m2/repository'
