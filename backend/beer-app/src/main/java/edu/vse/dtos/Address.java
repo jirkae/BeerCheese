@@ -7,6 +7,8 @@ import static edu.vse.utils.UriConstants.address;
 import static java.util.Objects.nonNull;
 import static org.springframework.util.Assert.notNull;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -15,6 +17,7 @@ import edu.vse.utils.UriConstants;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("address")
+@JsonInclude(NON_NULL)
 public class Address {
 
     private final Integer id;
@@ -22,23 +25,26 @@ public class Address {
     private final String city;
     private final String country;
     private final String note;
+    private final String user;
     private final Links links;
 
-    public Address(Integer id, String street, String city, String country, String note) {
+    public Address(Integer id, String street, String city, Integer country, String note) {
         this.id = id;
         this.street = street;
         this.city = city;
-        this.country = country;
+        this.country = UriConstants.country.expand(country).toString();
         this.note = note;
+        this.user = null;
         this.links = new Links(id, null);
     }
 
-    public Address(Integer id, String street, String city, String country, String note, Integer user) {
+    public Address(Integer id, String street, String city, Integer country, String note, Integer user) {
         this.id = id;
         this.street = street;
         this.city = city;
-        this.country = country;
+        this.country = UriConstants.country.expand(country).toString();
         this.note = note;
+        this.user = nonNull(user) ? UriConstants.user.expand(id).toString() : null;
         this.links = new Links(id, user);
     }
 
@@ -62,6 +68,10 @@ public class Address {
         return note;
     }
 
+    public String getUser() {
+        return user;
+    }
+
     public Links getLinks() {
         return links;
     }
@@ -69,7 +79,6 @@ public class Address {
     @JsonInclude(NON_NULL)
     public static class Links {
         private final String self;
-        private final String user;
         private final String userAddresses;
 
         public Links(Integer id, Integer user) {
@@ -77,20 +86,14 @@ public class Address {
 
             this.self = address.expand(id).toString();
             if (nonNull(user)) {
-                this.user = UriConstants.user.expand(id).toString();
                 this.userAddresses = UriConstants.userAddresses.expand(id).toString();
             } else {
-                this.user = null;
                 this.userAddresses = null;
             }
         }
 
         public String getSelf() {
             return self;
-        }
-
-        public String getUser() {
-            return user;
         }
 
         public String getUserAddresses() {

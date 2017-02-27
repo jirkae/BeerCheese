@@ -1,0 +1,10 @@
+{
+  "wrapping": {
+    "id": 1,
+    "name": "Paper box",
+    "price": 0.0,
+    "links": {
+      "self": "/api/wrappings/1"
+    }
+  }
+}

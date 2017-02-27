@@ -1,0 +1,21 @@
+{
+  "products": {
+    "items": [
+      {
+        "product": {
+          "id": 1,
+          "name": "Beer",
+          "price": 100.0,
+          "quantity": 2,
+          "priceAfterDiscount": 90.0,
+          "active": true,
+          "supplier": "/api/suppliers/1",
+          "image": "/images/1.jpeg",
+          "links": {
+            "self": "/api/products/1"
+          }
+        }
+      }
+    ]
+  }
+}

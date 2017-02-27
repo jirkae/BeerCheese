@@ -272,6 +272,10 @@ INSERT INTO `shipping` ( `name`, `price`, `delivery_time`) VALUES ('Deliver Serv
 INSERT INTO `shipping` ( `name`, `price`, `delivery_time`) VALUES ('Deliver Service - 1 day', 150, 1);
 INSERT INTO `shipping` ( `name`, `price`, `delivery_time`) VALUES ('Deliver Service - 12 hours', 250, 0.5);
 
+INSERT INTO `wrapping` (`name`, `price`) VALUES ('Paper box', 0);
+INSERT INTO `wrapping` (`name`, `price`) VALUES ('Gift wrapping', 100);
+INSERT INTO `wrapping` (`name`, `price`) VALUES ('Gift wrapping - DELUX', 500);
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

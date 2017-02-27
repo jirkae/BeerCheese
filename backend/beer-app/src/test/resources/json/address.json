@@ -3,11 +3,11 @@
     "id": 1,
     "street": "shitty street 7",
     "city": "shittown",
-    "country": "Afghanistan",
+    "country": "/api/countries/1",
+    "user": "/api/users/1",
     "note": "yolo",
     "links": {
       "self": "/api/addresses/1",
-      "user": "/api/users/1",
       "userAddresses": "/api/addresses?user=1"
     }
   }

@@ -1,0 +1,19 @@
+<config
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+    <cache alias="/roles/" uses-template="default"/>
+    <cache alias="/countries/" uses-template="default"/>
+    <cache alias="/suppliers/" uses-template="default"/>
+    <cache alias="/products/" uses-template="default"/>
+    <cache alias="/wrappings/" uses-template="default"/>
+
+    <cache-template name="default">
+        <expiry>
+            <ttl unit="seconds">60</ttl>
+        </expiry>
+        <heap unit="entries">100</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache-template>
+</config>
+

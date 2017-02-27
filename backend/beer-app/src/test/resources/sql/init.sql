@@ -6,3 +6,7 @@ INSERT INTO `user_role` (`user`, `role`) VALUES (1, 1);
 
 INSERT INTO `address` (`id`, `user`, `street`, `city`, `country`, `note`) VALUES (1, 1, 'shitty street 7', 'shittown', 1, 'yolo');
 INSERT INTO `address` (`id`, `user`, `street`, `city`, `country`, `note`) VALUES (2, NULL, 'shitty street 8', 'shittown 2', 1, 'yolo');
+
+INSERT INTO `supplier` (`id`, `name`, `phone_number`, `delivery_time`) VALUES (1, 'YoloCorp', '+420789098678', 3);
+
+INSERT INTO `product` (`id`, `supplier`, `name`, `price`, `quantity`, `price_after_discount`, `active`, `image`) VALUES (1, 1, 'Beer', 100, 2, 90, 1, '/images/1.jpeg');

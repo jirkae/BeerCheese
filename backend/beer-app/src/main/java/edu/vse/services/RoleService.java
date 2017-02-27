@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import edu.vse.daos.RoleDao;
@@ -24,6 +25,7 @@ public class RoleService {
         this.roleDao = roleDao;
     }
 
+    @Cacheable(value = "/roles/", key = "#p0")
     public Optional<Role> getRole(int id) {
         RoleEntity roleEntity = roleDao.getOne(id);
         if (nonNull(roleEntity)) {
@@ -33,6 +35,7 @@ public class RoleService {
         }
     }
 
+    @Cacheable(value = "/roles/")
     public Roles listRoles() {
         List<Role> roles = roleDao.findAll()
                 .stream()

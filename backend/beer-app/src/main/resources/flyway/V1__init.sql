@@ -180,7 +180,7 @@ CREATE TABLE `product_package` (
   `product` INT NOT NULL AUTO_INCREMENT,
   `package` INT NOT NULL,
   `quantity` INT NOT NULL,
-  `price_per_product` FLOAT NOT NULL,
+  `price` FLOAT NOT NULL,
   PRIMARY KEY (`product`, `package`),
   INDEX `fk_product_has_package_package1_idx` (`package` ASC),
   INDEX `fk_product_has_package_product1_idx` (`product` ASC),

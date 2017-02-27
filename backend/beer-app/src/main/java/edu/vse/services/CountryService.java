@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import edu.vse.daos.CountryDao;
@@ -25,6 +26,7 @@ public class CountryService {
         this.countryDao = countryDao;
     }
 
+    @Cacheable(value = "/countries/", key = "#p0")
     public Optional<Country> get(int id) {
         CountryEntity countryEntity = countryDao.getOne(id);
         if (nonNull(countryEntity)) {
@@ -34,6 +36,7 @@ public class CountryService {
         }
     }
 
+    @Cacheable(value = "/countries/")
     public Countries listAll() {
         List<Country> collect = countryDao.findAll().stream().map(CountryEntity::toDto).collect(toList());
         return new Countries(collect);

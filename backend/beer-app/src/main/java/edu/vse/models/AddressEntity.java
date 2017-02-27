@@ -90,6 +90,6 @@ public class AddressEntity {
     }
 
     public Address toDto() {
-        return new Address(id, street, city, country.getName(), note, user);
+        return new Address(id, street, city, country.getId(), note, user);
     }
 }
