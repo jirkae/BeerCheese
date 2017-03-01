@@ -1,6 +1,6 @@
 #!/bin/sh
 mkdir -p ${OPENSHIFT_DATA_DIR}backups
-timestamp=$( date +%T )
+timestamp=$( date +%D )
 
 mysqldump --host=${OPENSHIFT_MYSQL_DB_HOST} --port=${OPENSHIFT_MYSQL_DB_PORT} --user=${OPENSHIFT_MYSQL_DB_USERNAME} --password=${OPENSHIFT_MYSQL_DB_PASSWORD} beer > ${OPENSHIFT_DATA_DIR}backups/beer-$timestamp
 
