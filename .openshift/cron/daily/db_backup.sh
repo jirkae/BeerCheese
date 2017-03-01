@@ -2,7 +2,7 @@
 mkdir -p ${OPENSHIFT_DATA_DIR}backups
 timestamp=$( date +%T )
 
-mysqldump --host=${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT} --user=${OPENSHIFT_MYSQL_DB_USERNAME} --password=${OPENSHIFT_MYSQL_DB_PASSWORD} beer > ${OPENSHIFT_DATA_DIR}backups/beer-$timestamp
+mysqldump --host=${OPENSHIFT_MYSQL_DB_HOST} --port=${OPENSHIFT_MYSQL_DB_PORT} --user=${OPENSHIFT_MYSQL_DB_USERNAME} --password=${OPENSHIFT_MYSQL_DB_PASSWORD} beer > ${OPENSHIFT_DATA_DIR}backups/beer-$timestamp
 
 rc=$?
 if [ $rc -ne 0 ] ; then
