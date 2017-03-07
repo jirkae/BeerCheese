@@ -1,11 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ import edu.vse.models.AddressEntity;
 @Service
 public class AddressService {
 
+    private static final Logger log = LoggerFactory.getLogger(AddressService.class);
+
     private final AddressDao addressDao;
 
     @Autowired
@@ -25,10 +30,10 @@ public class AddressService {
     }
 
     public Optional<Address> getAddress(int id) {
-        AddressEntity addressEntity = addressDao.getOne(id);
-        if (nonNull(addressEntity)) {
-            return Optional.of(addressEntity).map(AddressEntity::toDto);
-        } else {
+        try {
+            return Optional.of(addressDao.getOne(id)).map(AddressEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=address-not-found id={}", id);
             return Optional.empty();
         }
     }

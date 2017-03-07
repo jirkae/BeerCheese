@@ -1,12 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import edu.vse.models.CountryEntity;
 @Service
 public class CountryService {
 
+    private static final Logger log = LoggerFactory.getLogger(CountryService.class);
+
     private final CountryDao countryDao;
 
     @Autowired
@@ -28,10 +32,10 @@ public class CountryService {
 
     @Cacheable(value = "/countries/", key = "#p0")
     public Optional<Country> get(int id) {
-        CountryEntity countryEntity = countryDao.getOne(id);
-        if (nonNull(countryEntity)) {
-            return Optional.of(countryEntity).map(CountryEntity::toDto);
-        } else {
+        try {
+            return Optional.of(countryDao.getOne(id)).map(CountryEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=country-not-found id={}", id);
             return Optional.empty();
         }
     }

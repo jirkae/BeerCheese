@@ -1,11 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ import edu.vse.models.WrappingEntity;
 @Service
 public class WrappingService {
 
+    private static final Logger log = LoggerFactory.getLogger(WrappingService.class);
+
     private final WrappingDao wrappingDao;
 
     @Autowired
@@ -27,10 +32,10 @@ public class WrappingService {
 
     @Cacheable(value = "/wrappings/", key = "#p0")
     public Optional<Wrapping> get(int id) {
-        WrappingEntity wrappingEntity = wrappingDao.getOne(id);
-        if (nonNull(wrappingEntity)) {
-            return Optional.of(wrappingEntity).map(WrappingEntity::toDto);
-        } else {
+        try {
+            return Optional.of(wrappingDao.getOne(id)).map(WrappingEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=wrapping-not-found id={}", id);
             return Optional.empty();
         }
     }

@@ -1,11 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ import edu.vse.models.RoleEntity;
 @Service
 public class RoleService {
 
+    private static final Logger log = LoggerFactory.getLogger(RoleService.class);
+
     private final RoleDao roleDao;
 
     @Autowired
@@ -27,10 +32,10 @@ public class RoleService {
 
     @Cacheable(value = "/roles/", key = "#p0")
     public Optional<Role> getRole(int id) {
-        RoleEntity roleEntity = roleDao.getOne(id);
-        if (nonNull(roleEntity)) {
-            return Optional.of(roleEntity).map(RoleEntity::toDto);
-        } else {
+        try {
+            return Optional.of(roleDao.getOne(id)).map(RoleEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=role-not-found id={}", id);
             return Optional.empty();
         }
     }

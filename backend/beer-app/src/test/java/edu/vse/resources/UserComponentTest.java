@@ -2,6 +2,7 @@ package edu.vse.resources;
 
 import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.vse.AbstractAppMvcTest;

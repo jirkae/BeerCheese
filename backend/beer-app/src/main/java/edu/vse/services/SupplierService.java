@@ -1,11 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ import edu.vse.models.SupplierEntity;
 @Service
 public class SupplierService {
 
+    private static final Logger log = LoggerFactory.getLogger(SupplierService.class);
+
     private final SupplierDao supplierDao;
 
     @Autowired
@@ -27,10 +32,10 @@ public class SupplierService {
 
     @Cacheable(value = "/suppliers/", key = "#p0")
     public Optional<Supplier> get(int id) {
-        SupplierEntity supplierEntity = supplierDao.getOne(id);
-        if (nonNull(supplierEntity)) {
-            return Optional.of(supplierEntity).map(SupplierEntity::toDto);
-        } else {
+        try {
+            return Optional.of(supplierDao.getOne(id)).map(SupplierEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=supplier-not-found id={}", id);
             return Optional.empty();
         }
     }

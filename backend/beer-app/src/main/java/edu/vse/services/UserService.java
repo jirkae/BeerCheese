@@ -1,12 +1,14 @@
 package edu.vse.services;
 
-import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import edu.vse.daos.UserDao;
@@ -17,6 +19,8 @@ import edu.vse.models.UserEntity;
 @Service
 public class UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
+
     private final UserDao userDao;
 
     public UserService(UserDao userDao) {
@@ -24,10 +28,10 @@ public class UserService {
     }
 
     public Optional<User> getUser(int id) {
-        UserEntity userEntity = userDao.findOne(id);
-        if (nonNull(userEntity)) {
-            return Optional.of(userEntity).map(UserEntity::toDto);
-        } else {
+        try {
+            return Optional.of(userDao.getOne(id)).map(UserEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=user-not-found id={}", id);
             return Optional.empty();
         }
     }
