@@ -15,6 +15,7 @@ import edu.vse.utils.UriConstants;
 public class Product {
 
     private final Integer id;
+    private final String category;
     private final String name;
     private final Float price;
     private final Integer quantity;
@@ -24,7 +25,7 @@ public class Product {
     private final String image;
     private final Links links;
 
-    public Product(Integer id, String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier) {
+    public Product(Integer id, Integer category, String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -34,10 +35,15 @@ public class Product {
         this.supplier = UriConstants.supplier.expand(supplier).toString();
         this.image = image;
         this.links = new Links(id);
+        this.category = UriConstants.category.expand(category).toString();
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public String getName() {

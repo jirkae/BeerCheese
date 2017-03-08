@@ -1,0 +1,26 @@
+{
+  "categories": {
+    "items": [
+      {
+        "category": {
+          "id": 2,
+          "name": "Lager",
+          "mainCategory": "/api/categories/1",
+          "links": {
+            "self": "/api/categories/2"
+          }
+        }
+      },
+      {
+        "category": {
+          "id": 3,
+          "name": "Ale",
+          "mainCategory": "/api/categories/1",
+          "links": {
+            "self": "/api/categories/3"
+          }
+        }
+      }
+    ]
+  }
+}

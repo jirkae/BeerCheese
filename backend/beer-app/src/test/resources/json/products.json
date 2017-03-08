@@ -4,6 +4,7 @@
       {
         "product": {
           "id": 1,
+          "category": "/api/categories/1",
           "name": "Beer",
           "price": 100.0,
           "quantity": 2,

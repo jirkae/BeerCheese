@@ -1,37 +1,57 @@
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 USE `beer` ;
 
-CREATE TABLE `supplier` (
+CREATE TABLE IF NOT EXISTS `supplier` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `phone_number` VARCHAR(45) NULL,
   `delivery_time` FLOAT NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `product` (
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `main_category` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_category_category1_idx` (`main_category` ASC),
+  CONSTRAINT `fk_category_category1`
+  FOREIGN KEY (`main_category`)
+  REFERENCES `category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `supplier` INT NOT NULL,
+  `category` INT NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `price` FLOAT NOT NULL,
   `quantity` INT NOT NULL,
   `price_after_discount` FLOAT NULL,
   `active` INT(1) NOT NULL,
   `image` VARCHAR(255) NULL,
-  PRIMARY KEY (`id`),
+  `description` VARCHAR(2048) NULL,
+  PRIMARY KEY (`id`, `category`),
   INDEX `fk_Product_Supplier_idx` (`supplier` ASC),
+  INDEX `fk_product_category1_idx` (`category` ASC),
   CONSTRAINT `fk_Product_Supplier`
-    FOREIGN KEY (`supplier`)
-    REFERENCES `supplier` (`id`)
+  FOREIGN KEY (`supplier`)
+  REFERENCES `supplier` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product_category1`
+  FOREIGN KEY (`category`)
+  REFERENCES `category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `login` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
@@ -43,29 +63,29 @@ CREATE TABLE `user` (
   `security_question` VARCHAR(255) NULL,
   `security_answer` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `order_status` (
+CREATE TABLE IF NOT EXISTS `order_status` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `payment_type` (
+CREATE TABLE IF NOT EXISTS `payment_type` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `shipping` (
+CREATE TABLE IF NOT EXISTS `shipping` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `price` FLOAT NOT NULL,
   `delivery_time` FLOAT NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `order` (
+CREATE TABLE IF NOT EXISTS `order` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user` INT NOT NULL,
   `order_status` INT NOT NULL,
@@ -77,58 +97,58 @@ CREATE TABLE `order` (
   INDEX `fk_order_payment_type1_idx` (`payment_type` ASC),
   INDEX `fk_order_shipping1_idx` (`shipping` ASC),
   CONSTRAINT `fk_Order_User1`
-    FOREIGN KEY (`user`)
-    REFERENCES `user` (`id`)
+  FOREIGN KEY (`user`)
+  REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_order_status1`
-    FOREIGN KEY (`order_status`)
-    REFERENCES `order_status` (`id`)
+  FOREIGN KEY (`order_status`)
+  REFERENCES `order_status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_payment_type1`
-    FOREIGN KEY (`payment_type`)
-    REFERENCES `payment_type` (`id`)
+  FOREIGN KEY (`payment_type`)
+  REFERENCES `payment_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_shipping1`
-    FOREIGN KEY (`shipping`)
-    REFERENCES `shipping` (`id`)
+  FOREIGN KEY (`shipping`)
+  REFERENCES `shipping` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `role` (
+CREATE TABLE IF NOT EXISTS `role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `user_role` (
+CREATE TABLE IF NOT EXISTS `user_role` (
   `user` INT NOT NULL,
   `role` INT NOT NULL,
   PRIMARY KEY (`user`, `role`),
   INDEX `fk_User_has_Role_Role1_idx` (`role` ASC),
   INDEX `fk_User_has_Role_User1_idx` (`user` ASC),
   CONSTRAINT `fk_User_has_Role_User1`
-    FOREIGN KEY (`user`)
-    REFERENCES `user` (`id`)
+  FOREIGN KEY (`user`)
+  REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_User_has_Role_Role1`
-    FOREIGN KEY (`role`)
-    REFERENCES `role` (`id`)
+  FOREIGN KEY (`role`)
+  REFERENCES `role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `country` (
+CREATE TABLE IF NOT EXISTS `country` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `address` (
+CREATE TABLE IF NOT EXISTS `address` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user` INT NULL,
   `street` VARCHAR(255) NOT NULL,
@@ -139,25 +159,25 @@ CREATE TABLE `address` (
   INDEX `fk_address_user1_idx` (`user` ASC),
   INDEX `fk_address_country1_idx` (`country` ASC),
   CONSTRAINT `fk_address_user1`
-    FOREIGN KEY (`user`)
-    REFERENCES `user` (`id`)
+  FOREIGN KEY (`user`)
+  REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_address_country1`
-    FOREIGN KEY (`country`)
-    REFERENCES `country` (`id`)
+  FOREIGN KEY (`country`)
+  REFERENCES `country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `wrapping` (
+CREATE TABLE IF NOT EXISTS `wrapping` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `price` FLOAT NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `package` (
+CREATE TABLE IF NOT EXISTS `package` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `wrapping` INT NOT NULL,
   `order` INT NOT NULL,
@@ -165,18 +185,18 @@ CREATE TABLE `package` (
   INDEX `fk_package_wrapping1_idx` (`wrapping` ASC),
   INDEX `fk_package_order1_idx` (`order` ASC),
   CONSTRAINT `fk_package_wrapping1`
-    FOREIGN KEY (`wrapping`)
-    REFERENCES `wrapping` (`id`)
+  FOREIGN KEY (`wrapping`)
+  REFERENCES `wrapping` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_package_order1`
-    FOREIGN KEY (`order`)
-    REFERENCES `order` (`id`)
+  FOREIGN KEY (`order`)
+  REFERENCES `order` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `product_package` (
+CREATE TABLE IF NOT EXISTS `product_package` (
   `product` INT NOT NULL AUTO_INCREMENT,
   `package` INT NOT NULL,
   `quantity` INT NOT NULL,
@@ -185,24 +205,24 @@ CREATE TABLE `product_package` (
   INDEX `fk_product_has_package_package1_idx` (`package` ASC),
   INDEX `fk_product_has_package_product1_idx` (`product` ASC),
   CONSTRAINT `fk_product_has_package_product1`
-    FOREIGN KEY (`product`)
-    REFERENCES `product` (`id`)
+  FOREIGN KEY (`product`)
+  REFERENCES `product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_product_has_package_package1`
-    FOREIGN KEY (`package`)
-    REFERENCES `package` (`id`)
+  FOREIGN KEY (`package`)
+  REFERENCES `package` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `order_address_type` (
+CREATE TABLE IF NOT EXISTS `order_address_type` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
-DEFAULT CHARACTER SET = utf8mb4;
+  DEFAULT CHARACTER SET = utf8mb4;
 
-CREATE TABLE `order_address` (
+CREATE TABLE IF NOT EXISTS `order_address` (
   `order` INT NOT NULL,
   `address` INT NOT NULL,
   `order_address_type` INT NOT NULL,
@@ -211,22 +231,21 @@ CREATE TABLE `order_address` (
   INDEX `fk_order_has_address_order1_idx` (`order` ASC),
   INDEX `fk_order_address_order_address_type1_idx` (`order_address_type` ASC),
   CONSTRAINT `fk_order_has_address_order1`
-    FOREIGN KEY (`order`)
-    REFERENCES `order` (`id`)
+  FOREIGN KEY (`order`)
+  REFERENCES `order` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_has_address_address1`
-    FOREIGN KEY (`address`)
-    REFERENCES `address` (`id`)
+  FOREIGN KEY (`address`)
+  REFERENCES `address` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_order_address_order_address_type1`
-    FOREIGN KEY (`order_address_type`)
-    REFERENCES `order_address_type` (`id`)
+  FOREIGN KEY (`order_address_type`)
+  REFERENCES `order_address_type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-DEFAULT CHARACTER SET = utf8mb4;
-
+  DEFAULT CHARACTER SET = utf8mb4;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

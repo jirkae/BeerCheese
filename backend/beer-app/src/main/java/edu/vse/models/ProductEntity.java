@@ -5,6 +5,8 @@ import static javax.persistence.GenerationType.AUTO;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import edu.vse.dtos.Product;
@@ -16,6 +18,10 @@ public class ProductEntity {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "category")
+    private CategoryEntity category;
 
     private String name;
 
@@ -31,10 +37,13 @@ public class ProductEntity {
 
     private Integer supplier;
 
+    private String description;
+
     public ProductEntity() {
     }
 
-    public ProductEntity(String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier) {
+    public ProductEntity(CategoryEntity category, String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier, String description) {
+        this.category = category;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -42,6 +51,7 @@ public class ProductEntity {
         this.active = active;
         this.image = image;
         this.supplier = supplier;
+        this.description = description;
     }
 
     public Integer getId() {
@@ -50,6 +60,18 @@ public class ProductEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getName() {
@@ -108,7 +130,11 @@ public class ProductEntity {
         this.supplier = supplier;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public Product toDto() {
-        return new Product(id, name, price, quantity, priceAfterDiscount, active, image, supplier);
+        return new Product(id, category.getId(), name, price, quantity, priceAfterDiscount, active, image, supplier);
     }
 }

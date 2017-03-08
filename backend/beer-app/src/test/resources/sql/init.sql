@@ -9,4 +9,4 @@ INSERT INTO `address` (`id`, `user`, `street`, `city`, `country`, `note`) VALUES
 
 INSERT INTO `supplier` (`id`, `name`, `phone_number`, `delivery_time`) VALUES (1, 'YoloCorp', '+420789098678', 3);
 
-INSERT INTO `product` (`id`, `supplier`, `name`, `price`, `quantity`, `price_after_discount`, `active`, `image`) VALUES (1, 1, 'Beer', 100, 2, 90, 1, '/images/1.jpeg');
+INSERT INTO `product` (`id`, `supplier`, `category`, `name`, `price`, `quantity`, `price_after_discount`, `active`, `image`, `description`) VALUES (1, 1, 1, 'Beer', 100, 2, 90, 1, '/images/1.jpeg', 'test description');

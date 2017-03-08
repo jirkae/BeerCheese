@@ -1,0 +1,10 @@
+{
+  "category": {
+    "id": 1,
+    "name": "Beer",
+    "links": {
+      "self": "/api/categories/1",
+      "subCategories": "/api/categories?mainCategory=1"
+    }
+  }
+}

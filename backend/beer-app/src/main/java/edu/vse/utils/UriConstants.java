@@ -2,8 +2,6 @@ package edu.vse.utils;
 
 import org.springframework.web.util.UriTemplate;
 
-import com.sun.jndi.toolkit.url.Uri;
-
 public class UriConstants {
 
     public static final UriTemplate user = new UriTemplate("/api/users/{id}");
@@ -31,4 +29,8 @@ public class UriConstants {
     public static final UriTemplate _package = new UriTemplate("/api/packages/{id}");
 
     public static final UriTemplate order = new UriTemplate("/api/orders/{id}");
+
+    public static final UriTemplate category = new UriTemplate("/api/categories/{id}");
+    public static final UriTemplate categories = new UriTemplate("/api/categories");
+    public static final UriTemplate subCategories = new UriTemplate("/api/categories?mainCategory={id}");
 }
