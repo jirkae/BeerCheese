@@ -33,4 +33,6 @@ public class UriConstants {
     public static final UriTemplate category = new UriTemplate("/api/categories/{id}");
     public static final UriTemplate categories = new UriTemplate("/api/categories");
     public static final UriTemplate subCategories = new UriTemplate("/api/categories?mainCategory={id}");
+
+    public static final UriTemplate image = new UriTemplate("/images/{id}");
 }

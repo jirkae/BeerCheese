@@ -22,6 +22,7 @@
         <rest-fire.version>0.4.0</rest-fire.version>
         <mariaDB4j.version>2.2.3</mariaDB4j.version>
         <json-unit.version>1.18.0</json-unit.version>
+        <commons-io.version>2.5</commons-io.version>
     </properties>
 
     <dependencies>
@@ -65,6 +66,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
 
         <dependency>

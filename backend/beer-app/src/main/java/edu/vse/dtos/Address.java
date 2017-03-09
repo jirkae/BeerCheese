@@ -7,8 +7,6 @@ import static edu.vse.utils.UriConstants.address;
 import static java.util.Objects.nonNull;
 import static org.springframework.util.Assert.notNull;
 
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;

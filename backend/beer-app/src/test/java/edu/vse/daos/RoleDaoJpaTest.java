@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.vse.AbstractAppJpaTest;
-import edu.vse.dtos.Role;
 import edu.vse.models.RoleEntity;
 
 public class RoleDaoJpaTest extends AbstractAppJpaTest {

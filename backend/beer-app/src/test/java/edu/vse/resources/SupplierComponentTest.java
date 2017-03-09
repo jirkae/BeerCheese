@@ -5,7 +5,6 @@ import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
 import org.junit.Test;
 
 import edu.vse.AbstractAppMvcTest;
-import net.javacrumbs.jsonunit.JsonMatchers;
 
 public class SupplierComponentTest extends AbstractAppMvcTest {
 

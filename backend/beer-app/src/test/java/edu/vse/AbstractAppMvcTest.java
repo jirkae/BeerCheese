@@ -14,6 +14,4 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Sql(scripts = "classpath:sql/init.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(scripts = "classpath:sql/truncate.sql", executionPhase = AFTER_TEST_METHOD)
 public abstract class AbstractAppMvcTest extends AbstractAppComponentTest {
-
-
 }

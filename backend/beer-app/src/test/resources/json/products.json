@@ -11,7 +11,7 @@
           "priceAfterDiscount": 90.0,
           "active": true,
           "supplier": "/api/suppliers/1",
-          "image": "/images/1.jpeg",
+          "image": "/images/guhppkyg5c",
           "links": {
             "self": "/api/products/1"
           }

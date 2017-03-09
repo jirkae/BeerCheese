@@ -33,7 +33,7 @@ public class Product {
         this.priceAfterDiscount = priceAfterDiscount;
         this.active = active;
         this.supplier = UriConstants.supplier.expand(supplier).toString();
-        this.image = image;
+        this.image = UriConstants.image.expand(image).toString();
         this.links = new Links(id);
         this.category = UriConstants.category.expand(category).toString();
     }

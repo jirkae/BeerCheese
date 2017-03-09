@@ -5,7 +5,9 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.AllOf.allOf;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ProductDaoJpaTest extends AbstractAppJpaTest {
                         hasProperty("quantity", is(2)),
                         hasProperty("priceAfterDiscount", is(new Float(90))),
                         hasProperty("active", is(true)),
-                        hasProperty("image", is("/images/1.jpeg")),
+                        hasProperty("image", is("guhppkyg5c")),
                         hasProperty("description", is("test description")),
                         hasProperty("category",
                                 allOf(
@@ -74,5 +76,19 @@ public class ProductDaoJpaTest extends AbstractAppJpaTest {
     public void testSave() throws Exception {
         CategoryEntity categoryEntity = testEntityManager.find(CategoryEntity.class, 1);
         productDao.save(new ProductEntity(categoryEntity, "Beer2", new Float(101), 3, new Float(100), true, "/images/2.jpeg", 1, "troll"));
+    }
+
+    @Test
+    public void testExistsTrue() throws Exception {
+        boolean imageUriExists = productDao.imageUriExists("guhppkyg5c");
+
+        assertTrue(imageUriExists);
+    }
+
+    @Test
+    public void testExistsFalse() throws Exception {
+        boolean imageUriExists = productDao.imageUriExists("guhpdsadsadsapkyg5c");
+
+        assertFalse(imageUriExists);
     }
 }
