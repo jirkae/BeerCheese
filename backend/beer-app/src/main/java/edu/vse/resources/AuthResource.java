@@ -102,7 +102,7 @@ public class AuthResource {
         return ResponseEntity.status(OK).build();
     }
 
-    @RequestMapping(value = "/logout", method = DELETE)
+    @RequestMapping(value = "/login", method = DELETE)
     @Transactional
     public ResponseEntity<Void> logout(ServletRequest servletRequest, ServletResponse servletResponse) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
