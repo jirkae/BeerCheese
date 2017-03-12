@@ -6,6 +6,14 @@ echo 'Building Backend app'
 
 ${OPENSHIFT_DATA_DIR}apache-maven-3.3.9/bin/mvn -f ${OPENSHIFT_REPO_DIR}backend/beer-app/pom.xml clean package -DskipTests -s ${OPENSHIFT_REPO_DIR}.openshift/settings.xml
 
+echo 'Updating deployment properties(beside JWT secrets)'
+
+sed -e "s|spring.datasource.username.*|spring.datasource.username=${OPENSHIFT_MYSQL_DB_USERNAME}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+sed -e "s|spring.datasource.password.*|spring.datasource.password=${OPENSHIFT_MYSQL_DB_PASSWORD}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+sed -e "s|spring.datasource.jdbcUrl.*|spring.datasource.jdbcUrl=jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/beer|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+sed -e "s|server.port.*|server.port=${OPENSHIFT_DIY_PORT}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+sed -e "s|server.address.*|server.address=${OPENSHIFT_DIY_IP}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+
 echo 'Booting up'
 
-nohup java -XX:+UseG1GC -Xmx384M -jar -Dspring.datasource.username=${OPENSHIFT_MYSQL_DB_USERNAME} -Dspring.datasource.password=${OPENSHIFT_MYSQL_DB_PASSWORD} -Dspring.datasource.jdbcUrl=jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/beer -Dserver.port=${OPENSHIFT_DIY_PORT} -Dserver.address=${OPENSHIFT_DIY_IP} ${OPENSHIFT_REPO_DIR}backend/beer-app/target/*.jar > ${OPENSHIFT_DIY_LOG_DIR}/java.log 2>&1 &
+nohup java -XX:+UseG1GC -Xmx384M -Dspring.config.location=${OPENSHIFT_DATA_DIR}deployment/app.properties -jar ${OPENSHIFT_REPO_DIR}backend/beer-app/target/*.jar > ${OPENSHIFT_DIY_LOG_DIR}/java.log 2>&1 &

@@ -1,19 +1,25 @@
 package edu.vse;
 
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 import static java.lang.Integer.valueOf;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.util.ResourceUtils;
 
 import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
+import io.jsonwebtoken.Jwts;
 import net.javacrumbs.restfire.RequestBuilder;
 import net.javacrumbs.restfire.RequestFactory;
 import net.javacrumbs.restfire.RequestProcessor;
@@ -26,6 +32,9 @@ public abstract class AbstractAppComponentTest {
 
     @LocalServerPort
     private String port;
+
+    @Value("${security.jwt.secret.access}")
+    private String accessJwtSecret;
 
     private final HttpClient httpClient = HttpClientBuilder.create().build();
 
@@ -59,6 +68,34 @@ public abstract class AbstractAppComponentTest {
             }
         });
     }
+
+    protected RequestFactory fireAsAdmin() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(5, Calendar.MINUTE);
+
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("X-Roles", "admin");
+        claims.put("X-User", 1);
+        claims.put("X-Username", "dummy");
+        claims.put("X-Expiration", calendar.getTime());
+
+        String token = Jwts.builder()
+                .setSubject("dummy")
+                .setClaims(claims)
+                .signWith(HS512, accessJwtSecret)
+                .compact();
+
+        return new HttpComponentsRequestFactory(httpClient, new RequestProcessor() {
+            @Override
+            public void processRequest(RequestBuilder requestBuilder) {
+                requestBuilder.withPort(valueOf(port));
+                requestBuilder.withHeader("content-type", "application/json");
+                requestBuilder.withHeader("X-Auth", token);
+            }
+        });
+    }
+
 
     protected String getResourceAsString(final String fullPathOnClassPath) {
         try {

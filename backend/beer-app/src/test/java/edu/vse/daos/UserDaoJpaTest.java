@@ -40,6 +40,7 @@ public class UserDaoJpaTest extends AbstractAppJpaTest {
                 allOf(
                         hasProperty("id", is(1)),
                         hasProperty("login", is("dummy")),
+                        hasProperty("password", is("$2a$10$abqFjbMuW8wadiKbOMpguuM5WfJK1i9J4mRE/qKEy82Uz/VjgJbsW")),
                         hasProperty("firstName", is("Jan")),
                         hasProperty("lastName", is("Jiri")),
                         hasProperty("phoneNumber", is("+420777888777")),

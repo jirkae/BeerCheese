@@ -5,5 +5,6 @@ TRUNCATE user_role;
 TRUNCATE address;
 TRUNCATE supplier;
 TRUNCATE product;
+TRUNCATE token;
 
 SET FOREIGN_KEY_CHECKS=1;

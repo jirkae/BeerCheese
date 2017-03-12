@@ -81,7 +81,7 @@ public class ImageResourceComponentTest extends AbstractAppMvcTest {
 
     @Test
     public void testUploadFile() throws Exception {
-        fire()
+        fireAsAdmin()
                 .post()
                 .withHeader("Content-type", "multipart/form-data; boundary=---------------------------9051914041544843365972754266")
                 .withBody("-----------------------------9051914041544843365972754266\r\n" +
@@ -106,7 +106,7 @@ public class ImageResourceComponentTest extends AbstractAppMvcTest {
 
     @Test
     public void testUploadFileToNonExistingFilename() throws Exception {
-        fire()
+        fireAsAdmin()
                 .post()
                 .withHeader("Content-type", "multipart/form-data; boundary=---------------------------9051914041544843365972754266")
                 .withBody("-----------------------------9051914041544843365972754266\r\n" +

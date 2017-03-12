@@ -3,10 +3,14 @@ package edu.vse.models;
 import static javax.persistence.GenerationType.AUTO;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import edu.vse.dtos.User;
@@ -21,6 +25,8 @@ public class UserEntity {
 
     private String login;
 
+    private String password;
+
     private String firstName;
 
     private String lastName;
@@ -31,16 +37,29 @@ public class UserEntity {
 
     private Date birthday;
 
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user", nullable = false, updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "role", nullable = false, updatable = false)
+    )
+    private List<RoleEntity> roles;
+
     public UserEntity() {
     }
 
-    public UserEntity(String login, String firstName, String lastName, String email, String phoneNumber, Date birthday) {
+    public UserEntity(String login) {
         this.login = login;
+    }
+
+    public UserEntity(String login, String password, String firstName, String lastName, String email, String phoneNumber, Date birthday, List<RoleEntity> roles) {
+        this.login = login;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.birthday = birthday;
+        this.roles = roles;
     }
 
     public Integer getId() {
@@ -57,6 +76,14 @@ public class UserEntity {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -97,6 +124,14 @@ public class UserEntity {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public User toDto() {
