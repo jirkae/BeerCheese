@@ -12,6 +12,7 @@
           "active": true,
           "supplier": "/api/suppliers/1",
           "image": "/images/guhppkyg5c",
+          "description": "test description",
           "links": {
             "self": "/api/products/1"
           }

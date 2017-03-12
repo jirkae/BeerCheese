@@ -17,6 +17,23 @@
             "roles": "/api/roles?user=1"
           }
         }
+      },
+      {
+        "user": {
+          "id": 2,
+          "login": "user",
+          "firstName": "Ivan",
+          "lastName": "Jiri",
+          "email": "dummy@dummy.io",
+          "phoneNumber": "+420777888777",
+          "birthday": "31/12/2011",
+          "links": {
+            "self": "/api/users/2",
+            "orders": "/api/orders?user=2",
+            "addresses": "/api/addresses?user=2",
+            "roles": "/api/roles?user=2"
+          }
+        }
       }
     ]
   }

@@ -62,7 +62,7 @@ public class UserDaoJpaTest extends AbstractAppJpaTest {
     public void testFindAll() throws Exception {
         List<UserEntity> all = userDao.findAll();
 
-        assertThat(all, hasSize(1));
+        assertThat(all, hasSize(2));
     }
 
     @Test

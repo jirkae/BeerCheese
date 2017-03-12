@@ -1,0 +1,12 @@
+{
+  "registration": {
+    "login": "dummyRegistration",
+    "password": "troll",
+    "verifyPassword": "troll",
+    "firstName": "Jan",
+    "lastName": "Jiri",
+    "email": "dummy@dummy.io",
+    "phoneNumber": "+420777888777",
+    "birthday": "31/12/2011"
+  }
+}

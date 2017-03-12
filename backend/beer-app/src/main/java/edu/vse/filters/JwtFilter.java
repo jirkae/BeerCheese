@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,11 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import edu.vse.context.CallContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwt;
@@ -63,6 +62,9 @@ public class JwtFilter extends AbstractFilter {
                 return;
             }
 
+            //side affect - sets CallContext in thread local
+            setUpCallContext(userId, username, roles);
+
             List<SimpleGrantedAuthority> authorities = Arrays.stream(roles.split(","))
                     .map(r -> new SimpleGrantedAuthority(r))
                     .collect(toList());
@@ -75,5 +77,10 @@ public class JwtFilter extends AbstractFilter {
         } else {
             chain.doFilter(request, response);
         }
+    }
+
+    private void setUpCallContext(Integer userId, String username, String roles) {
+        CallContext callContext = new CallContext(username, userId, Arrays.asList(roles.split(",")));
+        CallContext.setContext(callContext);
     }
 }

@@ -1,17 +1,17 @@
 {
   "product": {
-    "id": 1,
+    "id":  2,
     "category": "/api/categories/1",
     "name": "Beer",
-    "price": 100.0,
+    "price": 110.0,
     "quantity": 2,
     "priceAfterDiscount": 90.0,
     "active": true,
     "supplier": "/api/suppliers/1",
-    "image": "/images/guhppkyg5c",
-    "description": "test description",
+    "image":  "${json-unit.ignore}",
+    "description": "test description2",
     "links": {
-      "self": "/api/products/1"
+      "self": "/api/products/2"
     }
   }
 }

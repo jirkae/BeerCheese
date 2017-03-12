@@ -135,6 +135,6 @@ public class ProductEntity {
     }
 
     public Product toDto() {
-        return new Product(id, category.getId(), name, price, quantity, priceAfterDiscount, active, image, supplier);
+        return new Product(id, category.getId(), name, price, quantity, priceAfterDiscount, active, image, supplier, description);
     }
 }

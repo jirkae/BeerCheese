@@ -4,5 +4,5 @@
   "error": "Not Found",
   "exception": "edu.vse.exceptions.NotFoundException",
   "message": "User not found.",
-  "path": "/api/users/2"
+  "path": "/api/users/100"
 }

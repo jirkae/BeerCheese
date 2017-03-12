@@ -1,0 +1,11 @@
+{
+  "product": {
+    "name": "Beer",
+    "category": "/api/categories/1",
+    "price": 110.0,
+    "quantity": 2,
+    "priceAfterDiscount": 90.0,
+    "supplier": "/api/suppliers/1",
+    "description": "test description2"
+  }
+}

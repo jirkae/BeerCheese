@@ -59,6 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // set access rules
         http.authorizeRequests()
                 .requestMatchers(r -> r.getRequestURI().startsWith("/images/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
+                .requestMatchers(r -> r.getRequestURI().startsWith("/api/products/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
+                .antMatchers("/api/users/current").authenticated()
+                .antMatchers("/api/users").hasAuthority("admin")
+                .antMatchers("/api/addresses**").authenticated()
                 .antMatchers("/**").permitAll();
     }
 

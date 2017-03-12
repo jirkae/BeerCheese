@@ -38,6 +38,15 @@ public class AddressService {
         }
     }
 
+    public Optional<Address> getAddressForUser(int id, int user) {
+        try {
+            return addressDao.getByIdAndUser(id, user).map(AddressEntity::toDto);
+        } catch (EntityNotFoundException e) {
+            log.info("action=address-not-found id={}", id);
+            return Optional.empty();
+        }
+    }
+
     public Addresses getUsersAdresses(int user) {
         List<Address> collect = addressDao.findByUser(user)
                 .stream()

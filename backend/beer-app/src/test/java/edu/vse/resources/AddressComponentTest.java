@@ -10,7 +10,7 @@ public class AddressComponentTest extends AbstractAppMvcTest {
 
     @Test
     public void testGetAddress() throws Exception {
-        fire()
+        fireAsAdmin()
                 .get()
                 .to("/api/addresses/1")
                 .expectResponse()
@@ -20,7 +20,7 @@ public class AddressComponentTest extends AbstractAppMvcTest {
 
     @Test
     public void testGetAddressWithoutUser() throws Exception {
-        fire()
+        fireAsAdmin()
                 .get()
                 .to("/api/addresses/2")
                 .expectResponse()
@@ -30,11 +30,11 @@ public class AddressComponentTest extends AbstractAppMvcTest {
 
     @Test
     public void testListAddressesByUser() throws Exception {
-        fire()
+        fireAsAdmin()
                 .get()
                 .to("/api/addresses?user=1")
                 .expectResponse()
                 .havingStatusEqualTo(200)
-                .havingBody(jsonEquals(getResourceAsString("json/user_addresses.json")));
+                .havingBody(jsonEquals(getResourceAsString("json/userAddresses.json")));
     }
 }

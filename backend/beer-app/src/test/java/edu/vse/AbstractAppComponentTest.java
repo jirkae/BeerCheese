@@ -70,22 +70,18 @@ public abstract class AbstractAppComponentTest {
     }
 
     protected RequestFactory fireAsAdmin() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(5, Calendar.MINUTE);
+        String token = generateToken("dummy", "admin");
 
-        HashMap<String, Object> claims = new HashMap<>();
-        claims.put("X-Roles", "admin");
-        claims.put("X-User", 1);
-        claims.put("X-Username", "dummy");
-        claims.put("X-Expiration", calendar.getTime());
+        return fireAuthenticated(token);
+    }
 
-        String token = Jwts.builder()
-                .setSubject("dummy")
-                .setClaims(claims)
-                .signWith(HS512, accessJwtSecret)
-                .compact();
+    protected RequestFactory fireAsUser() {
+        String token = generateToken("user", "user");
 
+        return fireAuthenticated(token);
+    }
+
+    private RequestFactory fireAuthenticated(String token) {
         return new HttpComponentsRequestFactory(httpClient, new RequestProcessor() {
             @Override
             public void processRequest(RequestBuilder requestBuilder) {
@@ -94,6 +90,24 @@ public abstract class AbstractAppComponentTest {
                 requestBuilder.withHeader("X-Auth", token);
             }
         });
+    }
+
+    private String generateToken(String username, String roles) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(5, Calendar.MINUTE);
+
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put("X-Roles", roles);
+        claims.put("X-User", 1);
+        claims.put("X-Username", username);
+        claims.put("X-Expiration", calendar.getTime());
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setClaims(claims)
+                .signWith(HS512, accessJwtSecret)
+                .compact();
     }
 
 

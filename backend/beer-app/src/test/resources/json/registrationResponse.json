@@ -1,0 +1,17 @@
+{
+  "user": {
+    "id": 3,
+    "login": "dummyRegistration",
+    "firstName": "Jan",
+    "lastName": "Jiri",
+    "email": "dummy@dummy.io",
+    "phoneNumber": "+420777888777",
+    "birthday": "31/12/2011",
+    "links": {
+      "self": "/api/users/3",
+      "orders": "/api/orders?user=3",
+      "addresses": "/api/addresses?user=3",
+      "roles": "/api/roles?user=3"
+    }
+  }
+}

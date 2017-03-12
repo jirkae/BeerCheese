@@ -5,6 +5,8 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
 import static edu.vse.utils.UriConstants.product;
 import static org.springframework.util.Assert.notNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -23,9 +25,33 @@ public class Product {
     private final boolean active;
     private final String supplier;
     private final String image;
+    private final String description;
     private final Links links;
 
-    public Product(Integer id, Integer category, String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier) {
+    @JsonCreator
+    public Product(@JsonProperty("id") Integer id,
+                   @JsonProperty("category") String category,
+                   @JsonProperty("name") String name,
+                   @JsonProperty("price") Float price,
+                   @JsonProperty("quantity") Integer quantity,
+                   @JsonProperty("priceAfterDiscount") Float priceAfterDiscount,
+                   @JsonProperty("active") boolean active,
+                   @JsonProperty("supplier") String supplier,
+                   @JsonProperty("description") String description) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.priceAfterDiscount = priceAfterDiscount;
+        this.active = active;
+        this.supplier = supplier;
+        this.image = null;
+        this.links = null;
+        this.category = category;
+        this.description = description;
+    }
+
+    public Product(Integer id, Integer category, String name, Float price, Integer quantity, Float priceAfterDiscount, boolean active, String image, Integer supplier, String description) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -36,6 +62,7 @@ public class Product {
         this.image = UriConstants.image.expand(image).toString();
         this.links = new Links(id);
         this.category = UriConstants.category.expand(category).toString();
+        this.description = description;
     }
 
     public Integer getId() {
@@ -72,6 +99,10 @@ public class Product {
 
     public String getImage() {
         return image;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Links getLinks() {

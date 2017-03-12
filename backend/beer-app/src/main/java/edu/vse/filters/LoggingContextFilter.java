@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.MDC;
 
+import edu.vse.context.CallContext;
+
 public class LoggingContextFilter extends AbstractFilter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -20,6 +22,8 @@ public class LoggingContextFilter extends AbstractFilter {
             setUpRequestId(servletResponse);
             chain.doFilter(request, response);
         } finally {
+            //clear MDC and call context in last filter
+            CallContext.clearContext();
             MDC.clear();
         }
     }

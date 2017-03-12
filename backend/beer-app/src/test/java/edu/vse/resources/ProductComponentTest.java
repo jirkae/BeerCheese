@@ -37,4 +37,34 @@ public class ProductComponentTest extends AbstractAppMvcTest {
                 .havingStatusEqualTo(200)
                 .havingBody(jsonEquals(getResourceAsString("json/products.json")));
     }
+
+    @Test
+    public void testPostProduct() throws Exception {
+        fireAsAdmin()
+                .post()
+                .to("/api/products")
+                .withBody(getResourceAsString("json/createProduct.json"))
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/createProductResponse.json")));
+
+        fire()
+                .get()
+                .to("/api/products/2")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/createProductResponse.json")));
+    }
+
+    @Test
+    public void testUpdateProduct() throws Exception {
+        fireAsAdmin()
+                .put()
+                .to("/api/products/1")
+                // can reused for update
+                .withBody(getResourceAsString("json/createProduct.json"))
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/updateProductResponse.json")));
+    }
 }
