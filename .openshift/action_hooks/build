@@ -1,12 +1,16 @@
 #!/bin/bash
 cd $OPENSHIFT_DATA_DIR
 
+rm *.tar.gz
+
 if [ ! -d apache-maven-3.3.9 ]; then
   wget http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   tar -zxf apache-maven-3.3.9-bin.tar.gz
 fi
 
-if [ ! -d jdk1.8.0_65 ]; then
-  wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u65-b16/jdk-8u65-linux-i586.tar.gz
-  tar -zxf jdk-8u65-linux-i586.tar.gz
+if [ ! -d jdk1.8.0_121 ]; then
+  wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u121-b13/e9e7ea248e2c4826b92b3f075a80e441/jdk-8u121-linux-i586.tar.gz
+  tar -zxf jdk-8u121-linux-i586.tar.gz
 fi
+
+rm *.tar.gz
