@@ -60,7 +60,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
             fire()
                     .delete()
-                    .to("/api/auth/logout")
+                    .to("/api/auth/login")
                     .withHeader("X-Auth", xAuth)
                     .expectResponse()
                     .havingStatusEqualTo(200)
