@@ -1,8 +1,6 @@
 #!/bin/bash
 cd $OPENSHIFT_DATA_DIR
 
-rm *.tar.gz
-
 if [ ! -d apache-maven-3.3.9 ]; then
   wget http://www-us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   tar -zxf apache-maven-3.3.9-bin.tar.gz
@@ -13,4 +11,4 @@ if [ ! -d jdk1.8.0_121 ]; then
   tar -zxf jdk-8u121-linux-i586.tar.gz
 fi
 
-rm *.tar.gz
+[ -e *.tar.gz ] && rm *.tar.gz
