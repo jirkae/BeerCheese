@@ -41,3 +41,5 @@ cp -a $TRAVIS_BUILD_DIR/frontend/build/* $TRAVIS_BUILD_DIR/backend/beer-app/src/
 
 git add .
 git commit -m "Deploy"
+
+rm -Rf /home/travis/.m2/repository/edu/vse/beer-app/
