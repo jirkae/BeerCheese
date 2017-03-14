@@ -1,44 +1,58 @@
 package edu.vse.dtos;
 
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
-import static java.util.Objects.nonNull;
-import static org.springframework.util.Assert.notNull;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import edu.vse.utils.UriConstants;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
-import edu.vse.utils.UriConstants;
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+import static org.springframework.util.Assert.notNull;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("package")
 public class Package {
 
     private final Integer id;
-    private final Wrapping wrapping;
+    private final String order;
+    private final String wrapping;
     private final List<EmbeddedProduct> products;
     private final Links links;
 
-    public Package(Integer id, Wrapping wrapping, List<EmbeddedProduct> products) {
-        this(id, wrapping, products, null);
+    public Package(Integer id, Integer order, Integer wrapping, List<EmbeddedProduct> products) {
+        this.id = id;
+        this.order = UriConstants.order.expand(order).toString();
+        this.wrapping = UriConstants.wrapping.expand(wrapping).toString();
+        this.products = products;
+        this.links = new Links(id);
     }
 
-    public Package(Integer id, Wrapping wrapping, List<EmbeddedProduct> products, Integer order) {
+    @JsonCreator
+    public Package(@JsonProperty("id") Integer id,
+                   @JsonProperty("order") String order,
+                   @JsonProperty("wrapping") String wrapping,
+                   @JsonProperty("products") List<EmbeddedProduct> products) {
         this.id = id;
+        this.order = order;
         this.wrapping = wrapping;
         this.products = products;
-        this.links = new Links(id, order);
+        this.links = new Links(id);
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Wrapping getWrapping() {
+    public String getOrder() {
+        return order;
+    }
+
+    public String getWrapping() {
         return wrapping;
     }
 
@@ -53,25 +67,15 @@ public class Package {
     @JsonInclude(NON_NULL)
     public static class Links {
         private final String self;
-        private final String order;
 
-        public Links(Integer id, Integer order) {
-            notNull(id);
+        public Links(Integer id) {
+            notNull(id, "Id is mandatory.");
 
             this.self = UriConstants._package.expand(id).toString();
-            if (nonNull(order)) {
-                this.order = UriConstants.order.expand(order).toString();
-            } else {
-                this.order = null;
-            }
         }
 
         public String getSelf() {
             return self;
-        }
-
-        public String getOrder() {
-            return order;
         }
     }
 
@@ -82,9 +86,18 @@ public class Package {
         private final Float price;
 
         public EmbeddedProduct(Integer product, Integer quantity, Float price) {
-            notNull(product);
+            notNull(product, "Product is mandatory.");
 
             this.product = UriConstants.product.expand(product).toString();
+            this.quantitity = quantity;
+            this.price = price;
+        }
+
+        @JsonCreator
+        public EmbeddedProduct(@JsonProperty("product") String product,
+                               @JsonProperty("quantity") Integer quantity,
+                               @JsonProperty("price") Float price) {
+            this.product = product;
             this.quantitity = quantity;
             this.price = price;
         }

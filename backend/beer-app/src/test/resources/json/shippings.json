@@ -1,0 +1,50 @@
+{
+  "shippings": {
+    "items": [
+      {
+        "shipping": {
+          "id": 1,
+          "name": "Pick up",
+          "price": 0.0,
+          "deliveryTime": 0.0,
+          "links": {
+            "self": "/api/shippings/1"
+          }
+        }
+      },
+      {
+        "shipping": {
+          "id": 2,
+          "name": "Deliver Service - 2 days",
+          "price": 100.0,
+          "deliveryTime": 2.0,
+          "links": {
+            "self": "/api/shippings/2"
+          }
+        }
+      },
+      {
+        "shipping": {
+          "id": 3,
+          "name": "Deliver Service - 1 day",
+          "price": 150.0,
+          "deliveryTime": 1.0,
+          "links": {
+            "self": "/api/shippings/3"
+          }
+        }
+      },
+      {
+        "shipping": {
+          "id": 4,
+          "name": "Deliver Service - 12 hours",
+          "price": 250.0,
+          "deliveryTime": 0.5,
+          "links": {
+            "self": "/api/shippings/4"
+          }
+        }
+      }
+    ]
+  }
+}

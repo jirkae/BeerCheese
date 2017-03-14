@@ -70,13 +70,13 @@ public abstract class AbstractAppComponentTest {
     }
 
     protected RequestFactory fireAsAdmin() {
-        String token = generateToken("dummy", "admin");
+        String token = generateToken("dummy", "admin", 1);
 
         return fireAuthenticated(token);
     }
 
     protected RequestFactory fireAsUser() {
-        String token = generateToken("user", "user");
+        String token = generateToken("user", "user", 2);
 
         return fireAuthenticated(token);
     }
@@ -92,14 +92,14 @@ public abstract class AbstractAppComponentTest {
         });
     }
 
-    private String generateToken(String username, String roles) {
+    private String generateToken(String username, String roles, int id) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(5, Calendar.MINUTE);
 
         HashMap<String, Object> claims = new HashMap<>();
         claims.put("X-Roles", roles);
-        claims.put("X-User", 1);
+        claims.put("X-User", id);
         claims.put("X-Username", username);
         claims.put("X-Expiration", calendar.getTime());
 

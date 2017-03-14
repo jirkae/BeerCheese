@@ -53,7 +53,7 @@ public class Supplier {
         private final String suppliersProducts;
 
         public Links(Integer id) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = supplier.expand(id).toString();
             this.suppliersProducts = UriConstants.suppliersProducts.expand(id).toString();

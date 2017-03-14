@@ -38,7 +38,7 @@ public class Role {
         private final String self;
 
         public Links(Integer id) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = role.expand(id).toString();
         }

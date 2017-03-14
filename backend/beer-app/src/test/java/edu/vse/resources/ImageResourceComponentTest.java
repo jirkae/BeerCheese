@@ -85,7 +85,7 @@ public class ImageResourceComponentTest extends AbstractAppMvcTest {
                 .post()
                 .withHeader("Content-type", "multipart/form-data; boundary=---------------------------9051914041544843365972754266")
                 .withBody("-----------------------------9051914041544843365972754266\r\n" +
-                        "Content-Disposition: form-data; name=\"file\"; filename=\"a.txt\"\r\n" +
+                        "Content-Disposition: form-data; name=\"image\"; filename=\"a.txt\"\r\n" +
                         "Content-Type: text/plain\r\n" +
                         "\r\n" +
                         "Content of a.txt.\r\n" +
@@ -110,7 +110,7 @@ public class ImageResourceComponentTest extends AbstractAppMvcTest {
                 .post()
                 .withHeader("Content-type", "multipart/form-data; boundary=---------------------------9051914041544843365972754266")
                 .withBody("-----------------------------9051914041544843365972754266\r\n" +
-                        "Content-Disposition: form-data; name=\"file\"; filename=\"a.txt\"\r\n" +
+                        "Content-Disposition: form-data; name=\"image\"; filename=\"a.txt\"\r\n" +
                         "Content-Type: text/plain\r\n" +
                         "\r\n" +
                         "Content of a.txt.\r\n" +

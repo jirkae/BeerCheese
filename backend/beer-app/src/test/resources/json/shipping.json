@@ -1,0 +1,11 @@
+{
+  "shipping": {
+    "id": 1,
+    "name": "Pick up",
+    "price": 0.0,
+    "deliveryTime": 0.0,
+    "links": {
+      "self": "/api/shippings/1"
+    }
+  }
+}

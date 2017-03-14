@@ -46,6 +46,5 @@ public class AddressResource {
         } else {
             return new Addresses(Collections.emptyList());
         }
-
     }
 }

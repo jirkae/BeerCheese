@@ -65,7 +65,7 @@ public class ImageResource {
     }
 
     @RequestMapping(value = "/{filename}", method = POST)
-    public ResponseEntity<Void> uploadImage(@PathVariable String filename, @RequestParam("file") MultipartFile multipartFile) {
+    public ResponseEntity<Void> uploadImage(@PathVariable String filename, @RequestParam("image") MultipartFile multipartFile) {
         URI location;
         try {
             location = new URI(UriConstants.image.expand(filename).toString());

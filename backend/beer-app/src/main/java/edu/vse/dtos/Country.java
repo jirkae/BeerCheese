@@ -38,7 +38,7 @@ public class Country {
         private final String self;
 
         public Links(Integer id) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = country.expand(id).toString();
         }

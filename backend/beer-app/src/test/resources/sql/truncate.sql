@@ -1,10 +1,11 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-TRUNCATE user;
+TRUNCATE `user`;
 TRUNCATE user_role;
 TRUNCATE address;
 TRUNCATE supplier;
 TRUNCATE product;
 TRUNCATE token;
+TRUNCATE `order`;
 
 SET FOREIGN_KEY_CHECKS=1;

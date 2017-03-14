@@ -24,8 +24,7 @@ public class UserComponentTest extends AbstractAppMvcTest {
                 .get()
                 .to("/api/users/1")
                 .expectResponse()
-                .havingStatusEqualTo(200)
-                .havingBody(jsonEquals(getResourceAsString("json/user.json")));
+                .havingStatusEqualTo(403);
     }
 
     @Test

@@ -56,7 +56,7 @@ public class Category {
         private final String subCategories;
 
         public Links(Integer id, Integer mainCategory) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = UriConstants.category.expand(id).toString();
             if (Objects.nonNull(mainCategory)) {

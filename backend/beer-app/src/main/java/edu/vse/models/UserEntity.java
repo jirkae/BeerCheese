@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import edu.vse.dtos.User;
 
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 public class UserEntity {
 
     @Id
@@ -39,7 +39,7 @@ public class UserEntity {
 
     @ManyToMany
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user", nullable = false, updatable = false),
+            joinColumns = @JoinColumn(name = "`user`", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "role", nullable = false, updatable = false)
     )
     private List<RoleEntity> roles;

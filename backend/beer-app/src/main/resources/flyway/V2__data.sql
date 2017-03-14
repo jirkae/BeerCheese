@@ -253,9 +253,6 @@ INSERT INTO `country` (`name`) VALUES ('Zaire');
 INSERT INTO `country` (`name`) VALUES ('Zambia');
 INSERT INTO `country` (`name`) VALUES ('Zimbabwe');
 
-INSERT INTO `order_address_type` (`name`) VALUES ('Billing');
-INSERT INTO `order_address_type` (`name`) VALUES ('Shipping');
-
 INSERT INTO `order_status` (`name`) VALUES ('Preparing');
 INSERT INTO `order_status` (`name`) VALUES ('Waiting for payment');
 INSERT INTO `order_status` (`name`) VALUES ('Shipped');

@@ -85,7 +85,7 @@ public class User {
         private final String roles;
 
         public Links(Integer id) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = user.expand(id).toString();
             this.orders = userOrders.expand(id).toString();

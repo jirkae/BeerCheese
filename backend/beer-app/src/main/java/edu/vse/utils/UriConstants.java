@@ -27,6 +27,7 @@ public class UriConstants {
     public static final UriTemplate wrapping = new UriTemplate("/api/wrappings/{id}");
 
     public static final UriTemplate _package = new UriTemplate("/api/packages/{id}");
+    public static final UriTemplate ordersPackages = new UriTemplate("/api/packages?order={id}");
 
     public static final UriTemplate order = new UriTemplate("/api/orders/{id}");
 
@@ -35,4 +36,7 @@ public class UriConstants {
     public static final UriTemplate subCategories = new UriTemplate("/api/categories?mainCategory={id}");
 
     public static final UriTemplate image = new UriTemplate("/images/{id}");
+
+    public static final UriTemplate shipping = new UriTemplate("/api/shippings/{id}");
+    public static final UriTemplate shippings = new UriTemplate("/api/shippings");
 }

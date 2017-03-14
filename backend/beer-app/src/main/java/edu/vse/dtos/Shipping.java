@@ -1,26 +1,28 @@
 package edu.vse.dtos;
 
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
-import static edu.vse.utils.UriConstants.wrapping;
-import static org.springframework.util.Assert.notNull;
-
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+import static edu.vse.utils.UriConstants.shipping;
+import static org.springframework.util.Assert.notNull;
+
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
-@JsonTypeName("wrapping")
-public class Wrapping {
+@JsonTypeName("shipping")
+public class Shipping {
 
     private final Integer id;
     private final String name;
     private final Float price;
+    private final Float deliveryTime;
     private final Links links;
 
-    public Wrapping(Integer id, String name, Float price) {
+    public Shipping(Integer id, String name, Float price, Float deliveryTime) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.deliveryTime = deliveryTime;
         this.links = new Links(id);
     }
 
@@ -36,6 +38,10 @@ public class Wrapping {
         return price;
     }
 
+    public Float getDeliveryTime() {
+        return deliveryTime;
+    }
+
     public Links getLinks() {
         return links;
     }
@@ -46,7 +52,7 @@ public class Wrapping {
         public Links(Integer id) {
             notNull(id, "Id is mandatory.");
 
-            this.self = wrapping.expand(id).toString();
+            this.self = shipping.expand(id).toString();
         }
 
         public String getSelf() {

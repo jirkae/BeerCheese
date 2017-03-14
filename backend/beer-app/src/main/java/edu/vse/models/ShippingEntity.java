@@ -1,17 +1,17 @@
 package edu.vse.models;
 
-import static javax.persistence.GenerationType.AUTO;
+import edu.vse.dtos.Shipping;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import edu.vse.dtos.Wrapping;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
-@Table(name = "wrapping")
-public class WrappingEntity {
+@Table(name = "shipping")
+public class ShippingEntity {
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -21,7 +21,9 @@ public class WrappingEntity {
 
     private Float price;
 
-    public WrappingEntity() {
+    private Float deliveryTime;
+
+    public ShippingEntity() {
     }
 
     public Integer getId() {
@@ -48,7 +50,15 @@ public class WrappingEntity {
         this.price = price;
     }
 
-    public Wrapping toDto() {
-        return new Wrapping(id, name, price);
+    public Float getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Float deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public Shipping toDto() {
+        return new Shipping(id, name, price, deliveryTime);
     }
 }

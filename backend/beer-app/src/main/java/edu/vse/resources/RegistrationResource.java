@@ -54,17 +54,17 @@ public class RegistrationResource {
     }
 
     private void checkRegistration(Registration registration) {
-        notNull(registration);
-        notNull(registration.getLogin());
-        notNull(registration.getPassword());
-        notNull(registration.getVerifyPassword());
-        notNull(registration.getFirstName());
-        notNull(registration.getLastName());
-        notNull(registration.getBirthday());
-        notNull(registration.getEmail());
-        notNull(registration.getPhoneNumber());
-        isTrue(registration.getVerifyPassword().equals(registration.getPassword()));
-        isTrue(EMAIL_PATTERN.matcher(registration.getEmail()).matches());
+        notNull(registration,"Registration is mandatory.");
+        notNull(registration.getLogin(), "Login is mandatory.");
+        notNull(registration.getPassword(), "Product is mandatory.");
+        notNull(registration.getVerifyPassword(), "Verify passord is mandatory.");
+        notNull(registration.getFirstName(), "First name is mandatory.");
+        notNull(registration.getLastName(), "Last name is mandatory.");
+        notNull(registration.getBirthday(), "Birthday is mandatory.");
+        notNull(registration.getEmail(),"Email is mandatory.");
+        notNull(registration.getPhoneNumber(),"Phone number is mandatory.");
+        isTrue(registration.getVerifyPassword().equals(registration.getPassword()),"Passwords must equal.");
+        isTrue(EMAIL_PATTERN.matcher(registration.getEmail()).matches(),"Invalid email format.");
         try {
             DateUtils.parseDate(registration.getBirthday(), "dd/MM/yyyy");
         } catch (ParseException e) {

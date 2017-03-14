@@ -24,3 +24,6 @@ INSERT INTO `token` (`id`, `user`, `token`, `created`, `expiration`)
 VALUES (1, 1, 'C6zQDwexloGL8KDMuEyE3zVdiExxJtrj', '1970/12/1', '1970/12/2');
 INSERT INTO `token` (`id`, `user`, `token`, `created`, `expiration`)
 VALUES (2, 1, 'Lut9VKxv6nUWAAWI2yCvdD0z7FVTBQ5x', '2018/12/1', '2018/12/1');
+
+INSERT INTO `order` (`id`, `user`, `order_status`, `payment_type`, `shipping`, `shipping_address`, `billing_address`)
+VALUES (1, 2, 1, 1, 1, 1, 2);

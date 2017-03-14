@@ -80,7 +80,7 @@ public class Address {
         private final String userAddresses;
 
         public Links(Integer id, Integer user) {
-            notNull(id);
+            notNull(id, "Id is mandatory.");
 
             this.self = address.expand(id).toString();
             if (nonNull(user)) {
