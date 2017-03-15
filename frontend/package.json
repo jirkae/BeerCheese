@@ -1,6 +1,7 @@
 {
   "name": "BeerCheese",
   "version": "0.1.0",
+  "main": "node_modules/react-scripts/scripts/start.js",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.0"
@@ -11,7 +12,9 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
-    "reactstrap": "^4.3.0"
+    "reactstrap": "^4.3.0",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
