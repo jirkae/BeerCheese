@@ -1,22 +1,5 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-import static org.springframework.util.Assert.isTrue;
-import static org.springframework.util.Assert.notNull;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import javax.persistence.EntityNotFoundException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import edu.vse.daos.CategoryDao;
 import edu.vse.daos.ProductDao;
 import edu.vse.daos.SupplierDao;
@@ -26,6 +9,21 @@ import edu.vse.exceptions.NotFoundException;
 import edu.vse.models.CategoryEntity;
 import edu.vse.models.ProductEntity;
 import edu.vse.utils.UriConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
+import static org.springframework.util.Assert.isTrue;
+import static org.springframework.util.Assert.notNull;
 
 @Service
 public class ProductService {
@@ -65,6 +63,12 @@ public class ProductService {
         return new Products(collect);
     }
 
+    @Cacheable(value = "/products/", key = "'?category='.concat(#p0)")
+    public Products listByCategory(int category) {
+        List<Product> collect = productDao.findByCategory_Id(category).stream().map(ProductEntity::toDto).collect(toList());
+        return new Products(collect);
+    }
+
     @CacheEvict(value = "/products/")
     public Product save(Product product) {
         ProductEntity productEntity = productDao.saveAndFlush(fromDto(product, true));
@@ -84,16 +88,16 @@ public class ProductService {
     }
 
     private ProductEntity fromDto(Product product, boolean generateImageUUID) {
-        notNull(product);
-        notNull(product.getCategory());
-        notNull(product.getName());
-        notNull(product.getPrice());
-        notNull(product.getQuantity());
-        notNull(product.getPriceAfterDiscount());
-        notNull(product.getSupplier());
-        notNull(product.getDescription());
-        isTrue(UriConstants.category.matches(product.getCategory()));
-        isTrue(UriConstants.supplier.matches(product.getSupplier()));
+        notNull(product, "Product is mandatory");
+        notNull(product.getCategory(), "Category is mandatory");
+        notNull(product.getName(), "Name is mandatory");
+        notNull(product.getPrice(), "Price is mandatory");
+        notNull(product.getQuantity(), "Quantity is mandatory");
+        notNull(product.getPriceAfterDiscount(), "Price after discount is mandatory");
+        notNull(product.getSupplier(), "Supplier is mandatory");
+        notNull(product.getDescription(), "Description is mandatory");
+        isTrue(UriConstants.category.matches(product.getCategory()), "Invalid category URI");
+        isTrue(UriConstants.supplier.matches(product.getSupplier()), "Invalid supplier URI");
 
         int category = Integer.parseInt(UriConstants.category.match(product.getCategory()).get("id"));
         CategoryEntity categoryEntity = categoryDao.findById(category)

@@ -4,11 +4,9 @@
     "street": "shitty street 7",
     "city": "shittown",
     "country": "/api/countries/1",
-    "user": "/api/users/1",
     "note": "yolo",
     "links": {
-      "self": "/api/addresses/1",
-      "userAddresses": "/api/addresses?user=1"
+      "self": "/api/addresses/1"
     }
   }
 }

@@ -6,7 +6,6 @@
     <cache alias="/countries/" uses-template="default"/>
     <cache alias="/suppliers/" uses-template="default"/>
     <cache alias="/products/" uses-template="default"/>
-    <cache alias="/wrappings/" uses-template="default"/>
     <cache alias="/categories/" uses-template="default"/>
     <cache alias="/shippings/" uses-template="default"/>
     <cache alias="/orders/" uses-template="default"/>

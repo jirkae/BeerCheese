@@ -1,18 +1,9 @@
 package edu.vse.resources;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Optional;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-
+import edu.vse.exceptions.InternalServerErrorException;
+import edu.vse.exceptions.NotFoundException;
+import edu.vse.services.ImageService;
+import edu.vse.utils.UriConstants;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.vse.exceptions.InternalServerErrorException;
-import edu.vse.exceptions.NotFoundException;
-import edu.vse.services.ImageService;
-import edu.vse.utils.UriConstants;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/images")

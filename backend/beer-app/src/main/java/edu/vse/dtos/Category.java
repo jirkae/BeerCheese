@@ -1,17 +1,16 @@
 package edu.vse.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import edu.vse.utils.UriConstants;
+
+import java.util.Objects;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
 import static org.springframework.util.Assert.notNull;
-
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
-import edu.vse.utils.UriConstants;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("category")

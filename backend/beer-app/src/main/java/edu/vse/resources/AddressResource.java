@@ -29,22 +29,8 @@ public class AddressResource {
 
     @RequestMapping(value = "/{id}", method = GET)
     public Address getAddress(@PathVariable int id) {
-        if (CallContext.isAdmin()) {
-            return addressService.getAddress(id)
-                    .orElseThrow(() -> new NotFoundException("Address not found"));
-        } else {
-            return CallContext.getContext().getUserId()
-                    .flatMap(user -> addressService.getAddressForUser(id, user))
-                    .orElseThrow(() -> new NotFoundException("Address not found"));
-        }
-    }
-
-    @RequestMapping(method = GET)
-    public Addresses listAddresses(@RequestParam int user) {
-        if (CallContext.isAdmin()) {
-            return addressService.getUsersAdresses(user);
-        } else {
-            return new Addresses(Collections.emptyList());
-        }
+        //TODO access check
+        return addressService.getAddress(id)
+                .orElseThrow(() -> new NotFoundException("Address not found"));
     }
 }

@@ -1,22 +1,21 @@
 package edu.vse.services;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Optional;
-
+import edu.vse.daos.ProductDao;
+import edu.vse.exceptions.ImageConflictException;
+import edu.vse.exceptions.InternalServerErrorException;
+import edu.vse.hooks.ImageLocationHook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import edu.vse.daos.ProductDao;
-import edu.vse.exceptions.ImageConflictException;
-import edu.vse.exceptions.InternalServerErrorException;
-import edu.vse.hooks.ImageLocationHook;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Optional;
 
 @Service
 public class ImageService {

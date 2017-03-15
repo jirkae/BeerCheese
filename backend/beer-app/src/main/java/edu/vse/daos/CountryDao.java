@@ -1,10 +1,9 @@
 package edu.vse.daos;
 
-import java.util.List;
-
+import edu.vse.models.CountryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.vse.models.CountryEntity;
+import java.util.List;
 
 public interface CountryDao extends JpaRepository<CountryEntity, Integer> {
 

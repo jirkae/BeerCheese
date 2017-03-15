@@ -10,10 +10,10 @@ VALUES ('2', 'user', '$2a$10$abqFjbMuW8wadiKbOMpguuM5WfJK1i9J4mRE/qKEy82Uz/VjgJb
 INSERT INTO `user_role` (`user`, `role`) VALUES (1, 1);
 INSERT INTO `user_role` (`user`, `role`) VALUES (2, 2);
 
-INSERT INTO `address` (`id`, `user`, `street`, `city`, `country`, `note`)
-VALUES (1, 1, 'shitty street 7', 'shittown', 1, 'yolo');
-INSERT INTO `address` (`id`, `user`, `street`, `city`, `country`, `note`)
-VALUES (2, NULL, 'shitty street 8', 'shittown 2', 1, 'yolo');
+INSERT INTO `address` (`id`, `street`, `city`, `country`, `note`)
+VALUES (1, 'shitty street 7', 'shittown', 1, 'yolo');
+INSERT INTO `address` (`id`, `street`, `city`, `country`, `note`)
+VALUES (2, 'shitty street 8', 'shittown 2', 1, 'yolo');
 
 INSERT INTO `supplier` (`id`, `name`, `phone_number`, `delivery_time`) VALUES (1, 'YoloCorp', '+420789098678', 3);
 
@@ -25,5 +25,5 @@ VALUES (1, 1, 'C6zQDwexloGL8KDMuEyE3zVdiExxJtrj', '1970/12/1', '1970/12/2');
 INSERT INTO `token` (`id`, `user`, `token`, `created`, `expiration`)
 VALUES (2, 1, 'Lut9VKxv6nUWAAWI2yCvdD0z7FVTBQ5x', '2018/12/1', '2018/12/1');
 
-INSERT INTO `order` (`id`, `user`, `order_status`, `payment_type`, `shipping`, `shipping_address`, `billing_address`)
-VALUES (1, 2, 1, 1, 1, 1, 2);
+INSERT INTO `order` (`id`, `user`, `order_status`, `payment_type`, `shipping`, `shipping_address`, `billing_address`, `discount`)
+VALUES (1, 2, 1, 1, 1, 1, 2, 100);

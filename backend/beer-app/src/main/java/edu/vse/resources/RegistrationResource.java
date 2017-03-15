@@ -1,14 +1,11 @@
 package edu.vse.resources;
 
-import static org.springframework.util.Assert.isTrue;
-import static org.springframework.util.Assert.notNull;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.regex.Pattern;
-
+import edu.vse.daos.RoleDao;
+import edu.vse.daos.UserDao;
+import edu.vse.dtos.Registration;
+import edu.vse.dtos.User;
+import edu.vse.exceptions.InternalServerErrorException;
+import edu.vse.models.UserEntity;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.vse.daos.RoleDao;
-import edu.vse.daos.UserDao;
-import edu.vse.dtos.Registration;
-import edu.vse.dtos.User;
-import edu.vse.exceptions.InternalServerErrorException;
-import edu.vse.models.UserEntity;
+import java.text.ParseException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.regex.Pattern;
+
+import static org.springframework.util.Assert.isTrue;
+import static org.springframework.util.Assert.notNull;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/api/registrations")

@@ -1,9 +1,7 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.Collection;
-
+import edu.vse.daos.UserDao;
+import edu.vse.models.UserEntity;
 import org.springframework.data.domain.Example;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,8 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import edu.vse.daos.UserDao;
-import edu.vse.models.UserEntity;
+import java.util.Collection;
+
+import static java.util.stream.Collectors.toList;
 
 public class SecurityUserDetailService implements UserDetailsService {
 

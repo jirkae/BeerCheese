@@ -1,15 +1,10 @@
 package edu.vse.configuration;
 
-import javax.servlet.Filter;
-
-import org.springframework.beans.factory.annotation.Value;
+import edu.vse.filters.LoggingContextFilter;
+import edu.vse.filters.RequestLoggingFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import edu.vse.filters.JwtFilter;
-import edu.vse.filters.LoggingContextFilter;
-import edu.vse.filters.RequestLoggingFilter;
 
 @Configuration
 public class FiltersConfig {

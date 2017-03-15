@@ -1,11 +1,10 @@
 package edu.vse.daos;
 
-import java.util.List;
-import java.util.Optional;
-
+import edu.vse.models.CategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.vse.models.CategoryEntity;
+import java.util.List;
+import java.util.Optional;
 
 public interface CategoryDao extends JpaRepository<CategoryEntity, Integer> {
 

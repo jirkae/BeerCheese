@@ -43,6 +43,8 @@ public class OrderEntity {
     @JoinColumn(name = "shipping")
     private ShippingEntity shipping;
 
+    private Float discount;
+
     public OrderEntity() {
     }
 
@@ -102,7 +104,15 @@ public class OrderEntity {
         this.shipping = shipping;
     }
 
+    public Float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Float discount) {
+        this.discount = discount;
+    }
+
     public Order toDto() {
-        return new Order(id, user.getId(), status.getName(), paymentType.getName(), shipping.getId(), shippingAddress.getId(), billingAddress == null ? null : billingAddress.getId());
+        return new Order(id, user.getId(), status.getName(), paymentType.getName(), shipping.getId(), shippingAddress.getId(), billingAddress == null ? null : billingAddress.getId(), discount);
     }
 }

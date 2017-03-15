@@ -1,22 +1,20 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
+import edu.vse.daos.CountryDao;
+import edu.vse.dtos.Countries;
+import edu.vse.dtos.Country;
+import edu.vse.models.CountryEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import edu.vse.daos.CountryDao;
-import edu.vse.dtos.Countries;
-import edu.vse.dtos.Country;
-import edu.vse.models.CountryEntity;
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class CountryService {

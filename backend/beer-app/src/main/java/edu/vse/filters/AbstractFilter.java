@@ -1,11 +1,11 @@
 package edu.vse.filters;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 abstract class AbstractFilter implements Filter {
 

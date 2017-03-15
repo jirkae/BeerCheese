@@ -1,14 +1,14 @@
 package edu.vse.models;
 
 
-import static javax.persistence.GenerationType.AUTO;
+import edu.vse.dtos.Country;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import edu.vse.dtos.Country;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "country")

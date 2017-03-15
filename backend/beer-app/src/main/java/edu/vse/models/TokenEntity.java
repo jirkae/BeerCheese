@@ -1,13 +1,12 @@
 package edu.vse.models;
 
-import static javax.persistence.GenerationType.AUTO;
-
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
+
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "token")

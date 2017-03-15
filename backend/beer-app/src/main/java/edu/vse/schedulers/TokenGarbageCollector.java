@@ -1,17 +1,25 @@
 package edu.vse.schedulers;
 
-import java.util.Calendar;
-import java.util.Date;
-
+import edu.vse.daos.TokenDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import edu.vse.daos.TokenDao;
+import java.util.Calendar;
+import java.util.Date;
 
+/**
+ * Eagerly initialize({@link Lazy} set to `false`) and make transactional({@link Transactional}).
+ *
+ * Purpose of this bean is to garbage collect unnecessary tokens in database.
+ */
+@Lazy(false)
 @Component
+@Transactional
 public class TokenGarbageCollector {
 
     private static final Logger log = LoggerFactory.getLogger(TokenGarbageCollector.class);

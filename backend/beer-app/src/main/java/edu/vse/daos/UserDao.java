@@ -1,11 +1,10 @@
 package edu.vse.daos;
 
-import java.util.List;
-import java.util.Optional;
-
+import edu.vse.models.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.vse.models.UserEntity;
+import java.util.List;
+import java.util.Optional;
 
 public interface UserDao extends JpaRepository<UserEntity, Integer> {
 

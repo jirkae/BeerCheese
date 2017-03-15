@@ -1,9 +1,8 @@
 package edu.vse.configuration;
 
-import static org.springframework.boot.autoconfigure.security.SecurityProperties.ACCESS_OVERRIDE_ORDER;
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-
+import edu.vse.daos.UserDao;
+import edu.vse.filters.JwtFilter;
+import edu.vse.services.SecurityUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
-import edu.vse.daos.UserDao;
-import edu.vse.filters.JwtFilter;
-import edu.vse.services.SecurityUserDetailService;
+import static org.springframework.boot.autoconfigure.security.SecurityProperties.ACCESS_OVERRIDE_ORDER;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
 @EnableWebSecurity
@@ -62,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(r -> r.getRequestURI().startsWith("/api/products/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
                 .antMatchers("/api/users/current").authenticated()
                 .antMatchers("/api/users").hasAuthority("admin")
+                .antMatchers("/api/messages").hasAuthority("admin")
                 .antMatchers("/api/addresses**").authenticated()
                 .antMatchers("/api/packages**").authenticated()
                 .antMatchers("/api/orders**").authenticated()

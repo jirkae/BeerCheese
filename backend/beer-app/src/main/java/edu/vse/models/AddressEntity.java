@@ -29,8 +29,6 @@ public class AddressEntity {
 
     private String note;
 
-    private Integer user;
-
     public AddressEntity() {
     }
 
@@ -81,15 +79,7 @@ public class AddressEntity {
         this.note = note;
     }
 
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
-    }
-
     public Address toDto() {
-        return new Address(id, street, city, country.getId(), note, user);
+        return new Address(id, street, city, country.getId(), note);
     }
 }

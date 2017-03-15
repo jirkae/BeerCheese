@@ -68,6 +68,13 @@ public class ProductDaoJpaTest extends AbstractAppJpaTest {
     }
 
     @Test
+    public void testFindByCategory() throws Exception {
+        List<ProductEntity> byCategory = productDao.findByCategory_Id(1);
+
+        assertThat(byCategory, hasSize(1));
+    }
+
+    @Test
     public void testDelete() throws Exception {
         productDao.delete(1);
     }

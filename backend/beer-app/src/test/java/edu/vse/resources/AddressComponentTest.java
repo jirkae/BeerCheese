@@ -27,14 +27,4 @@ public class AddressComponentTest extends AbstractAppMvcTest {
                 .havingStatusEqualTo(200)
                 .havingBody(jsonEquals(getResourceAsString("json/address2.json")));
     }
-
-    @Test
-    public void testListAddressesByUser() throws Exception {
-        fireAsAdmin()
-                .get()
-                .to("/api/addresses?user=1")
-                .expectResponse()
-                .havingStatusEqualTo(200)
-                .havingBody(jsonEquals(getResourceAsString("json/userAddresses.json")));
-    }
 }

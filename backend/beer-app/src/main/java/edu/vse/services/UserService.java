@@ -1,20 +1,18 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
-
 import edu.vse.daos.UserDao;
 import edu.vse.dtos.User;
 import edu.vse.dtos.Users;
 import edu.vse.models.UserEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserService {

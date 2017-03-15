@@ -1,6 +1,6 @@
 package edu.vse.models;
 
-import static javax.persistence.GenerationType.AUTO;
+import edu.vse.dtos.Category;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import edu.vse.dtos.Category;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "category")

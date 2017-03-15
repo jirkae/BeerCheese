@@ -1,16 +1,15 @@
 package edu.vse.dtos;
 
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
-import static edu.vse.utils.UriConstants.product;
-import static org.springframework.util.Assert.notNull;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import edu.vse.utils.UriConstants;
+
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+import static edu.vse.utils.UriConstants.product;
+import static org.springframework.util.Assert.notNull;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("product")

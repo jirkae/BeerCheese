@@ -1,11 +1,10 @@
 package edu.vse.daos;
 
-import java.util.List;
-
+import edu.vse.models.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import edu.vse.models.RoleEntity;
+import java.util.List;
 
 public interface RoleDao extends JpaRepository<RoleEntity, Integer> {
 

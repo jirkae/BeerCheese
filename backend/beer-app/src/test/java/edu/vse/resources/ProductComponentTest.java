@@ -39,6 +39,16 @@ public class ProductComponentTest extends AbstractAppMvcTest {
     }
 
     @Test
+    public void testListByCategory() throws Exception {
+        fire()
+                .get()
+                .to("/api/products?category=1")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/products.json")));
+    }
+
+    @Test
     public void testPostProduct() throws Exception {
         fireAsAdmin()
                 .post()

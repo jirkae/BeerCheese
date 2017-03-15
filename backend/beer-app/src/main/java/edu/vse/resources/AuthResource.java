@@ -1,24 +1,14 @@
 package edu.vse.resources;
 
-import static io.jsonwebtoken.SignatureAlgorithm.HS512;
-import static java.util.stream.Collectors.toList;
-import static org.springframework.http.HttpStatus.OK;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Optional;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import edu.vse.daos.TokenDao;
+import edu.vse.daos.UserDao;
+import edu.vse.dtos.Login;
+import edu.vse.models.TokenEntity;
+import edu.vse.models.UserEntity;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +24,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.vse.daos.TokenDao;
-import edu.vse.daos.UserDao;
-import edu.vse.dtos.Login;
-import edu.vse.models.TokenEntity;
-import edu.vse.models.UserEntity;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.Jwts;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Optional;
+
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/api/auth")
@@ -50,8 +48,8 @@ public class AuthResource {
 
     private static final Logger log = LoggerFactory.getLogger(AuthResource.class);
 
-    private static final long FIVE_MINUTES = 300 * 1000;
-    private static final int EXPIRATION_IN_HOURS = 6;
+    private static final long HOUR = 3600 * 1000;
+    private static final int EXPIRATION_IN_HOURS = 24;
     private static final String X_AUTH = "X-Auth";
     private static final String X_TOKEN = "X-Token";
     private static final String X_ROLES = "X-Roles";
@@ -95,7 +93,7 @@ public class AuthResource {
         }
         final UserEntity userEntity = userDao.findOne(Example.of(new UserEntity(login.getUsername())));
 
-        Date expiration = new Date(new Date().getTime() + FIVE_MINUTES);
+        Date expiration = new Date(new Date().getTime() + HOUR);
 
         String token = createToken(userEntity, expiration);
         setXAuthCookie(httpServletResponse, (int) expiration.getTime(), token);
@@ -154,7 +152,7 @@ public class AuthResource {
             calendar.add(Calendar.MINUTE, 5);
             final Date expirationWithGracePeriod = calendar.getTime();
             if (expirationWithGracePeriod.before(currentDate)) {
-                log.info("action=refresh-attempt status=failed reason=after-expiration-plus-grace-period grace-period={}", FIVE_MINUTES);
+                log.info("action=refresh-attempt status=failed reason=after-expiration-plus-grace-period grace-period={}", HOUR);
                 return ResponseEntity.status(UNAUTHORIZED).build();
             }
 
@@ -164,7 +162,7 @@ public class AuthResource {
 
                 if (token.getExpiration().after(currentDate)) {
                     UserEntity userEntity = userDao.findOne(accessUserId);
-                    Date newAccessExpiration = new Date(new Date().getTime() + FIVE_MINUTES);
+                    Date newAccessExpiration = new Date(new Date().getTime() + HOUR);
                     String newToken = createToken(userEntity, newAccessExpiration, refreshToken);
                     setXAuthCookie(httpServletResponse, (int) newAccessExpiration.getTime(), newToken);
 

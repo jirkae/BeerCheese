@@ -1,9 +1,6 @@
 package edu.vse.models;
 
-import static javax.persistence.GenerationType.AUTO;
-
-import java.util.Date;
-import java.util.List;
+import edu.vse.dtos.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Date;
+import java.util.List;
 
-import edu.vse.dtos.User;
+import static javax.persistence.GenerationType.AUTO;
 
 @Entity
 @Table(name = "`user`")

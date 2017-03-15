@@ -1,18 +1,17 @@
 package edu.vse.resources;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import edu.vse.context.CallContext;
 import edu.vse.dtos.User;
 import edu.vse.dtos.Users;
 import edu.vse.exceptions.ForbiddenException;
 import edu.vse.exceptions.NotFoundException;
 import edu.vse.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping(value = "/api/users")

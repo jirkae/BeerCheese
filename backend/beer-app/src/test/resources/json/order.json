@@ -7,6 +7,7 @@
     "shipping": "/api/shippings/1",
     "shippingAddress": "/api/addresses/1",
     "billingAddress": "/api/addresses/2",
+    "discount": 100.0,
     "links": {
       "self": "/api/orders/1",
       "ordersPackages": "/api/packages?order=1"

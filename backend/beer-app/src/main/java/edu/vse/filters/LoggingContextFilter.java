@@ -1,18 +1,16 @@
 package edu.vse.filters;
 
 
-import java.io.IOException;
+import edu.vse.context.CallContext;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.MDC;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import org.slf4j.MDC;
-
-import edu.vse.context.CallContext;
+import java.io.IOException;
 
 public class LoggingContextFilter extends AbstractFilter {
     @Override

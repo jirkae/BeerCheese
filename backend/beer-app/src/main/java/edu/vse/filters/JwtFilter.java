@@ -1,19 +1,11 @@
 package edu.vse.filters;
 
-import static java.util.stream.Collectors.toList;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import edu.vse.context.CallContext;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.Jwts;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,11 +13,18 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import edu.vse.context.CallContext;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.Jwts;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class JwtFilter extends AbstractFilter {
 
@@ -66,6 +65,7 @@ public class JwtFilter extends AbstractFilter {
             setUpCallContext(userId, username, roles);
 
             List<SimpleGrantedAuthority> authorities = Arrays.stream(roles.split(","))
+                    .filter(StringUtils::isNotEmpty)
                     .map(r -> new SimpleGrantedAuthority(r))
                     .collect(toList());
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);

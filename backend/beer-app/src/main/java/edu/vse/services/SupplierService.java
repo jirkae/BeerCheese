@@ -1,22 +1,20 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
+import edu.vse.daos.SupplierDao;
+import edu.vse.dtos.Supplier;
+import edu.vse.dtos.Suppliers;
+import edu.vse.models.SupplierEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import edu.vse.daos.SupplierDao;
-import edu.vse.dtos.Supplier;
-import edu.vse.dtos.Suppliers;
-import edu.vse.models.SupplierEntity;
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class SupplierService {

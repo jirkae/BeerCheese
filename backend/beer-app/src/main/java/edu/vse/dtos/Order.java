@@ -22,9 +22,10 @@ public class Order {
     private final String shipping;
     private final String shippingAddress;
     private final String billingAddress;
+    private final Float discount;
     private final Links links;
 
-    public Order(Integer id, Integer user, String status, String paymentType, Integer shipping, Integer shippingAddress, Integer billingAddress) {
+    public Order(Integer id, Integer user, String status, String paymentType, Integer shipping, Integer shippingAddress, Integer billingAddress, Float discount) {
         this.id = id;
         this.user = UriConstants.user.expand(user).toString();
         this.status = status;
@@ -32,6 +33,7 @@ public class Order {
         this.shipping = UriConstants.shipping.expand(shipping).toString();
         this.shippingAddress = UriConstants.address.expand(shipping).toString();
         this.billingAddress = billingAddress == null ? null : UriConstants.address.expand(billingAddress).toString();
+        this.discount = discount;
         this.links = new Links(id);
     }
 
@@ -61,6 +63,10 @@ public class Order {
 
     public String getBillingAddress() {
         return billingAddress;
+    }
+
+    public Float getDiscount() {
+        return discount;
     }
 
     public Links getLinks() {

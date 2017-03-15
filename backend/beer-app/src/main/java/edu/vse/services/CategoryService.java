@@ -1,22 +1,20 @@
 package edu.vse.services;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
-
+import edu.vse.daos.CategoryDao;
+import edu.vse.dtos.Categories;
+import edu.vse.dtos.Category;
+import edu.vse.models.CategoryEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import edu.vse.daos.CategoryDao;
-import edu.vse.dtos.Categories;
-import edu.vse.dtos.Category;
-import edu.vse.models.CategoryEntity;
+import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class CategoryService {

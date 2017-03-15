@@ -1,5 +1,13 @@
 package edu.vse.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import java.util.Date;
+
 import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
 import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
@@ -8,14 +16,6 @@ import static edu.vse.utils.UriConstants.userAddresses;
 import static edu.vse.utils.UriConstants.userOrders;
 import static edu.vse.utils.UriConstants.userRoles;
 import static org.springframework.util.Assert.notNull;
-
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("user")
