@@ -10,3 +10,4 @@
 #
 chronograph
 db_backup.sh
+db_user_check.sh
