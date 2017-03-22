@@ -64,7 +64,7 @@ public class OrderService {
     @Cacheable(value = "/orders/", key = "#p0")
     public Optional<Order> getOrder(int id) {
         try {
-            List<Integer> packageIds= packageDao.findByOrder_Id(id).stream().map(PackageEntity::getId).collect(toList());
+            List<Integer> packageIds = packageDao.findByOrder_Id(id).stream().map(PackageEntity::getId).collect(toList());
             List<ProductPackageEntity> productPackages = productPackageDao.findByPackageEntity_IdIn(packageIds);
             Float price = calculatePrice(productPackages);
             return Optional.of(orderDao.getOne(id)).map(orderEntity -> orderEntity.toDto((price)));
@@ -77,10 +77,10 @@ public class OrderService {
     @Cacheable(value = "/orders/", key = "#p0/#p1")
     public Optional<Order> getOrderForUser(int id, int user) {
         try {
-            List<Integer> packageIds= packageDao.findByOrder_Id(id).stream().map(PackageEntity::getId).collect(toList());
+            List<Integer> packageIds = packageDao.findByOrder_Id(id).stream().map(PackageEntity::getId).collect(toList());
             List<ProductPackageEntity> productPackages = productPackageDao.findByPackageEntity_IdIn(packageIds);
             Float price = calculatePrice(productPackages);
-            return orderDao.getByIdAndUser_Id(id, user).map(orderEntity -> orderEntity.toDto(price));
+            return orderDao.findByIdAndUser_Id(id, user).map(orderEntity -> orderEntity.toDto(price));
         } catch (EntityNotFoundException e) {
             log.info("action=address-not-found id={}", id);
             return Optional.empty();
@@ -88,8 +88,19 @@ public class OrderService {
     }
 
     @CacheEvict(value = "/orders/")
-    public Order createOrder(Order order) {
+    public Order save(Order order) {
         OrderEntity orderEntity = orderDao.saveAndFlush(fromDto(order));
+        return orderEntity.toDto(0F);
+    }
+
+    @CacheEvict(value = "/orders/")
+    public Order saveWithId(Order order, int id) {
+        OrderEntity oldOrderEntity = orderDao.findById(id)
+                .orElseThrow(() -> new NotFoundException("Order not found"));
+
+        OrderEntity detached = fromDto(order);
+        detached.setId(oldOrderEntity.getId());
+        OrderEntity orderEntity = orderDao.saveAndFlush(detached);
         return orderEntity.toDto(0F);
     }
 

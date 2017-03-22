@@ -20,6 +20,7 @@ import org.springframework.security.web.context.SecurityContextPersistenceFilter
 
 import static org.springframework.boot.autoconfigure.security.SecurityProperties.ACCESS_OVERRIDE_ORDER;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
@@ -59,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .requestMatchers(r -> r.getRequestURI().startsWith("/images/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
                 .requestMatchers(r -> r.getRequestURI().startsWith("/api/products/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
+                .requestMatchers(r -> r.getRequestURI().startsWith("/api/orders/") && r.getMethod().equals(PUT.name())).hasAuthority("admin")
                 .antMatchers("/api/users/current").authenticated()
                 .antMatchers("/api/users").hasAuthority("admin")
                 .antMatchers("/api/messages").hasAuthority("admin")

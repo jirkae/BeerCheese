@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface OrderDao extends JpaRepository<OrderEntity, Integer> {
 
-    Optional<OrderEntity> getByIdAndUser_Id(int id, int user);
+    Optional<OrderEntity> findByIdAndUser_Id(int id, int user);
+
+    Optional<OrderEntity> findById(int id);
 }
