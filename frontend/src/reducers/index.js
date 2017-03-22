@@ -16,7 +16,7 @@ const user = (state = initialState, action) => {
     case 'UPDATE_USER_SUCCESS':
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       };
     case 'LOGOUT_USER_SUCCESS':
       browserHistory.push('/');
@@ -27,5 +27,5 @@ const user = (state = initialState, action) => {
 };
 
 export const rootReducer = combineReducers({
-  user
+  user,
 });

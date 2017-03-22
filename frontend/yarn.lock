@@ -4187,6 +4187,10 @@ react-dom@^15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-lazyload@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-lazyload/-/react-lazyload-2.2.5.tgz#0c871c7bf6541a33bef4ebfd49efa42a0f6e2c0a"
+
 react-redux@^5.x.x:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.3.tgz#86c3b68d56e74294a42e2a740ab66117ef6c019f"

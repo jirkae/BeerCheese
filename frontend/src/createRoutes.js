@@ -1,7 +1,7 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import HomePage from './pages/HomePage.js';
-import PageNotFound from './pages/PageNotFound.js';
+import HomePage from './pages/HomePage';
+import PageNotFound from './pages/PageNotFound';
 import RootPage from './pages/RootPage';
 
 export function createRoutes(store) {
@@ -15,7 +15,7 @@ export function createRoutes(store) {
   return (
     <Route path="/" component={RootPage}>
       <IndexRoute component={HomePage} />
-      {/*<Route path="/messages" component={MessagesPage} onEnter={requireAuth}/>*/}
+      {/* <Route path="/messages" component={MessagesPage} onEnter={requireAuth}/>*/}
       <Route path="*" component={PageNotFound} />
     </Route>
   );

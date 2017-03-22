@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import {Provider} from "react-redux";
-import {Router, browserHistory} from "react-router";
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 import './App.css';
-import {createRoutes} from "./createRoutes";
+import { createRoutes } from './createRoutes';
 
 class App extends Component {
   render() {
-      const {store} = this.props;
-      const routes = createRoutes(store);
+    const { store } = this.props;
+    const routes = createRoutes(store);
     return (
-    <Provider store={store}>
+      <Provider store={store}>
         <Router history={browserHistory} >
-            {routes}
+          {routes}
         </Router>
-    </Provider>
+      </Provider>
     );
   }
 }

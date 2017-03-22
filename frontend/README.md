@@ -1,3 +1,60 @@
+How to set it up:
+download and install WebStorm ... https://www.jetbrains.com/webstorm/download/#section=windows
+    - ask for student account, you'll get unlimited edition for free
+download and install git (git bash) ... https://git-for-windows.github.io/
+download and install node.js ... https://nodejs.org/dist/v6.9.1/node-v6.9.1-x64.msi
+check that node and npm are in path (in windows: System -> Advanced System Settings -> Environment Variables... -> PATH)
+
+open git bash
+use cd .. to move to right directory of your choice
+mkdir eshop
+cd eshop
+
+npm install -g yarn
+git init
+git remote add origin https://github.com/4it445-vse/Tym-4-Travelbuddy.git
+git clone https://github.com/4it445-vse/Tym-4-Travelbuddy.git
+git fetch --all
+git checkout origin/master
+
+#set WebStorm
+[in WebStrom]
+CTRL + ALT + S
+Languages & Frameworks -> JavaScript -> Code Quality Tools -> ESLint
+Tick enabled
+select node.exe (that you have installed)
+select es lint from BeerCheese\frontend\node_modules\eslint
+Tick Automatic Search
+OK
+
+Editor -> Code Style -> JavaScript -> Tabs And Indents
+Set Tab Size, Indent, Continuation Indent to 2
+
+
+#create your own branch
+[in git bash in BeerCheese/frontend folder]
+git checkout -b feature/myOwnBranch origin/master
+
+[in git bash in BeerCheese/frontend folder]
+yarn
+node .
+
+#after you will be done with development
+try to run it in browser and check that you haven't introduced any warnings/errors (printed into console)
+[in git bash in BeerCheese/frontend folder]
+git add .
+git commit -m 'Some comment about what I have done'
+git push origin/feature/myOwnBranch
+go to git hup and create merge request to master
+
+if any review comments will appear, fix the code accordingly
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
