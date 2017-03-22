@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS `product` (
   `active`               INT(1)        NOT NULL,
   `image`                VARCHAR(255)  NULL,
   `description`          VARCHAR(2048) NULL,
-  `message`              VARCHAR(2048) NULL,
   PRIMARY KEY (`id`, `category`),
   INDEX `fk_Product_Supplier_idx` (`supplier` ASC),
   INDEX `fk_product_category1_idx` (`category` ASC),
@@ -205,13 +204,15 @@ CREATE TABLE IF NOT EXISTS `package` (
   DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS `product_package` (
-  `product`  INT   NOT NULL AUTO_INCREMENT,
-  `package`  INT   NOT NULL,
-  `quantity` INT   NOT NULL,
-  `price`    FLOAT NOT NULL,
-  PRIMARY KEY (`product`, `package`),
+  `id`       INT           NOT NULL AUTO_INCREMENT,
+  `product`  INT           NOT NULL,
+  `package`  INT           NOT NULL,
+  `quantity` INT           NOT NULL,
+  `price`    FLOAT         NOT NULL,
+  `message`  VARCHAR(2048) NULL,
   INDEX `fk_product_has_package_package1_idx` (`package` ASC),
   INDEX `fk_product_has_package_product1_idx` (`product` ASC),
+  PRIMARY KEY (`id`),
   CONSTRAINT `fk_product_has_package_product1`
   FOREIGN KEY (`product`)
   REFERENCES `product` (`id`)

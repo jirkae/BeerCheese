@@ -27,3 +27,7 @@ VALUES (2, 1, 'Lut9VKxv6nUWAAWI2yCvdD0z7FVTBQ5x', '2018/12/1', '2018/12/1');
 
 INSERT INTO `order` (`id`, `user`, `order_status`, `payment_type`, `shipping`, `shipping_address`, `billing_address`, `discount`)
 VALUES (1, 2, 1, 1, 1, 1, 2, 100);
+
+INSERT INTO `package` (`id`, `order`) VALUES (1, 1);
+
+INSERT INTO `product_package` (`product`, `package`, `quantity`, `price`, `message`) VALUES (1, 1, 1, 1, NULL);
