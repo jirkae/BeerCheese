@@ -82,23 +82,27 @@ public class Package {
     @JsonInclude(NON_NULL)
     public static class EmbeddedProduct {
         private final String product;
-        private final Integer quantitity;
+        private final Integer quantity;
+        private final String message;
         private final Float price;
 
-        public EmbeddedProduct(Integer product, Integer quantity, Float price) {
+        public EmbeddedProduct(Integer product, Integer quantity, String message, Float price) {
             notNull(product, "Product is mandatory.");
 
             this.product = UriConstants.product.expand(product).toString();
-            this.quantitity = quantity;
+            this.message = message;
+            this.quantity = quantity;
             this.price = price;
         }
 
         @JsonCreator
         public EmbeddedProduct(@JsonProperty("product") String product,
                                @JsonProperty("quantity") Integer quantity,
+                               @JsonProperty("message") String message,
                                @JsonProperty("price") Float price) {
             this.product = product;
-            this.quantitity = quantity;
+            this.quantity = quantity;
+            this.message = message;
             this.price = price;
         }
 
@@ -107,7 +111,11 @@ public class Package {
         }
 
         public Integer getQuantity() {
-            return quantitity;
+            return quantity;
+        }
+
+        public String getMessage() {
+            return message;
         }
 
         public Float getPrice() {

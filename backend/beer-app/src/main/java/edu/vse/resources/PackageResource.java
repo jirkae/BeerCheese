@@ -32,5 +32,4 @@ public class PackageResource {
     public Packages list() {
         return packageService.listAll();
     }
-
 }

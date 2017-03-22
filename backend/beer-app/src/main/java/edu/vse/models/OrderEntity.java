@@ -48,6 +48,16 @@ public class OrderEntity {
     public OrderEntity() {
     }
 
+    public OrderEntity(UserEntity user, AddressEntity shippingAddress, AddressEntity billingAddress, OrderStatusEntity status, PaymentTypeEntity paymentType, ShippingEntity shipping) {
+        this.user = user;
+        this.shippingAddress = shippingAddress;
+        this.billingAddress = billingAddress;
+        this.status = status;
+        this.paymentType = paymentType;
+        this.shipping = shipping;
+        this.discount = 0F;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -112,7 +122,7 @@ public class OrderEntity {
         this.discount = discount;
     }
 
-    public Order toDto() {
-        return new Order(id, user.getId(), status.getName(), paymentType.getName(), shipping.getId(), shippingAddress.getId(), billingAddress == null ? null : billingAddress.getId(), discount);
+    public Order toDto(Float price) {
+        return new Order(id, user.getId(), status.getName(), paymentType.getName(), shipping.getId(), shippingAddress.getId(), billingAddress == null ? null : billingAddress.getId(), discount, price);
     }
 }

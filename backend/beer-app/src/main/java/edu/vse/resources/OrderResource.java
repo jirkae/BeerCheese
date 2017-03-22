@@ -6,10 +6,13 @@ import edu.vse.exceptions.NotFoundException;
 import edu.vse.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/api/orders")
@@ -32,5 +35,10 @@ public class OrderResource {
                     .flatMap(user -> orderService.getOrderForUser(id, user))
                     .orElseThrow(() -> new NotFoundException("Order not found"));
         }
+    }
+
+    @RequestMapping(method = POST)
+    public Order create(@RequestBody Order order) {
+        return orderService.createOrder(order);
     }
 }

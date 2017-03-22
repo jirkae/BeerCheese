@@ -26,4 +26,15 @@ public class OrderComponentTest extends AbstractAppMvcTest {
                 .havingStatusEqualTo(200)
                 .havingBody(jsonEquals(getResourceAsString("json/order.json")));
     }
+
+    @Test
+    public void testCreateOrder() throws Exception {
+        fireAsUser()
+                .post()
+                .to("/api/orders")
+                .withBody(getResourceAsString("json/createOrderRequest.json"))
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/createOrderResponse.json")));
+    }
 }

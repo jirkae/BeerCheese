@@ -1,6 +1,8 @@
 package edu.vse.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import edu.vse.utils.UriConstants;
@@ -12,7 +14,6 @@ import static org.springframework.util.Assert.notNull;
 
 @JsonTypeInfo(include = WRAPPER_OBJECT, use = NAME)
 @JsonTypeName("order")
-@JsonInclude(NON_NULL)
 public class Order {
 
     private final Integer id;
@@ -23,9 +24,10 @@ public class Order {
     private final String shippingAddress;
     private final String billingAddress;
     private final Float discount;
+    private final Float price;
     private final Links links;
 
-    public Order(Integer id, Integer user, String status, String paymentType, Integer shipping, Integer shippingAddress, Integer billingAddress, Float discount) {
+    public Order(Integer id, Integer user, String status, String paymentType, Integer shipping, Integer shippingAddress, Integer billingAddress, Float discount, Float price) {
         this.id = id;
         this.user = UriConstants.user.expand(user).toString();
         this.status = status;
@@ -35,6 +37,26 @@ public class Order {
         this.billingAddress = billingAddress == null ? null : UriConstants.address.expand(billingAddress).toString();
         this.discount = discount;
         this.links = new Links(id);
+        this.price = price;
+    }
+
+    @JsonCreator
+    public Order(@JsonProperty("user") String user,
+                 @JsonProperty("status") String status,
+                 @JsonProperty("paymentType") String paymentType,
+                 @JsonProperty("shipping") String shipping,
+                 @JsonProperty("shippingAddress") String shippingAddress,
+                 @JsonProperty("billingAddress") String billingAddress) {
+        this.user = user;
+        this.status = status;
+        this.paymentType = paymentType;
+        this.shipping = shipping;
+        this.shippingAddress = shippingAddress;
+        this.billingAddress = billingAddress;
+        this.id = null;
+        this.discount = null;
+        this.price = null;
+        this.links = null;
     }
 
     public Integer getId() {
@@ -67,6 +89,10 @@ public class Order {
 
     public Float getDiscount() {
         return discount;
+    }
+
+    public Float getPrice() {
+        return price;
     }
 
     public Links getLinks() {
