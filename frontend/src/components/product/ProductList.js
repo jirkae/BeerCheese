@@ -3,6 +3,7 @@ import { Container, Row } from 'reactstrap';
 import LazyLoad from "react-lazyload";
 import Loading from "../images/Loading";
 import Product from "./Product";
+import axios from "../../api";
 
 export default class ProductList extends Component {
   state = {
@@ -10,6 +11,9 @@ export default class ProductList extends Component {
   };
 
   componentDidMount(){
+    axios.get('/products').then(response => {
+      console.log('response', response);
+    });
     this.setState({
       productIds: [1,2,3,4,5,6,7,8,9,10]
     });
