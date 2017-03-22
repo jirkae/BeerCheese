@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Row, Col, Container, Jumbotron, Button } from 'reactstrap';
+import React from 'react';
+import { Row, Col, Jumbotron, Button } from 'reactstrap';
 
-export default class HomePage extends Component {
-  render() {
-    return (
-      <Container>
-        <Row>
-          <Col>
-            <Jumbotron>
-              <h1 className="display-3">Welcome v Pivních Suvenýrech!</h1>
-              <p className="lead">
-                <Button outline color="primary">Good bye</Button>
-              </p>
-            </Jumbotron>
+const HomePage = () => {
+  return (
+    <Row>
+      <Col>
+        <Jumbotron>
+          <h1 className="display-3">Welcome v Pivních Suvenýrech!</h1>
+          <p className="lead">
+            <Button outline color="primary">Good bye</Button>
+          </p>
+        </Jumbotron>
+      </Col>
+    </Row>
+  );
+};
 
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+export default HomePage;
