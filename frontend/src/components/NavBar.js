@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarToggler, NavbarBrand,
-  Collapse, Nav, NavItem, NavLink } from 'reactstrap';
+import {
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Collapse,
+  Nav,
+  NavItem,
+  NavLink
+} from 'reactstrap';
 import { Link } from 'react-router';
 
 class NavBar extends Component {
@@ -17,6 +24,8 @@ class NavBar extends Component {
       isOpen: !this.state.isOpen
     });
   };
+
+  //TODO Upravit navbar tak, aby odpovidal zadani z wireframu
 
   render() {
     return (
