@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const PageNotFound = () => {
-  // document.body.style.backgroundImage = "url(https://static.pexels.com/photos/132037/pexels-photo-132037.jpeg)";
   return (
     <div className="row pad-t-5">
       <div className="container white">

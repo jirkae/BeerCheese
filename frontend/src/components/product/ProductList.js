@@ -5,6 +5,8 @@ import Loading from "../images/Loading";
 import Product from "./Product";
 import axios from "../../api";
 
+const mockProductIds = [1,2,3,4,5,6,7,8,9,10];
+
 export default class ProductList extends Component {
   state = {
     productIds: null
@@ -15,7 +17,7 @@ export default class ProductList extends Component {
       console.log('response', response);
     });
     this.setState({
-      productIds: [1,2,3,4,5,6,7,8,9,10]
+      productIds: mockProductIds
     });
   }
 

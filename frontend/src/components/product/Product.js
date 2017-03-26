@@ -1,25 +1,61 @@
 import React, { Component } from 'react';
-import { Col } from 'reactstrap';
+import { Card, CardBlock, CardTitle, CardSubtitle, CardLink} from 'reactstrap';
+import localizedTexts from '../../text_localization/LocalizedStrings';
+import { connect } from 'react-redux';
+import { openModal } from '../../actions/openModal';
 
-export default class Product extends Component {
+const mockProductDetails =  {
+    "product": {
+      "id": 1,
+      "category": "/api/categories/1",
+      "name": "Beer",
+      "price": 100.0,
+      "quantity": 2,
+      "priceAfterDiscount": 90.0,
+      "active": true,
+      "supplier": "/api/suppliers/1",
+      "image": "/images/1.jpeg",
+      "description": "test description",
+      "links": {
+        "self": "/api/products/1"
+      }
+    }
+};
+
+class Product extends Component {
   state = {
-    name: null
+    product: null
   };
 
   componentWillMount() {
     //TODO call the rest to get details for given id
     this.setState({
-      name: 'Product ' + this.props.productId
+      ...mockProductDetails
     });
   }
 
   render() {
-    if(this.state.name){
+    if(this.state.product){
+      const { product } = this.state;
       return(
-        <Col lg="4" md="6" xs="12">
-          <h2>{this.state.name}</h2>
-        </Col>
+        <Card onClick={() => {this.props.openModal({name:'productDetails', data: product})}}>
+          <CardBlock>
+            <CardTitle>{product.name}</CardTitle>
+          </CardBlock>
+          <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+          <CardBlock>
+            <CardSubtitle>{product.priceAfterDiscount}</CardSubtitle>
+            <CardLink href="#">{localizedTexts.Product.btnAddToChart}</CardLink>
+          </CardBlock>
+        </Card>
       )
     }
   }
 }
+
+export default connect(
+  null,
+  {
+    openModal
+  }
+)(Product)
