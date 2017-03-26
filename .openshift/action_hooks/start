@@ -14,6 +14,7 @@ sed -e "s|spring.datasource.password.*|spring.datasource.password=${OPENSHIFT_MY
 sed -e "s|spring.datasource.jdbcUrl.*|spring.datasource.jdbcUrl=jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/beer|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
 sed -e "s|server.port.*|server.port=${OPENSHIFT_DIY_PORT}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
 sed -e "s|server.address.*|server.address=${OPENSHIFT_DIY_IP}|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
+sed -e "s|images.location.path.*|images.location.path=${OPENSHIFT_DATA_DIR}images|" -i ${OPENSHIFT_DATA_DIR}deployment/app.properties
 
 echo 'Booting up'
 
