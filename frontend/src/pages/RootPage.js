@@ -7,9 +7,9 @@ import Modals from '../components/navigation/Modals';
 import { css } from 'glamor';
 
 const fullWidth = css({
-  'margin': 0,
-  'padding': 0,
-  'width': '100%'
+  margin: 0,
+  padding: 0,
+  width: '100%'
 });
 
 const RootPage = ({ children }) => {
@@ -19,7 +19,7 @@ const RootPage = ({ children }) => {
         <NavBar />
         <NavPanel />
         <Modals />
-          { children }
+        {children}
       </Container>
       <Footer />
     </div>

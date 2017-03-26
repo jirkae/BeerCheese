@@ -1,5 +1,15 @@
 import React from 'react';
-import { Container, Row, Col, Input, Button, Form, FormGroup, Label, FormFeedback } from 'reactstrap';
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  FormFeedback
+} from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
 export default class AdminLoginPage extends React.Component {
@@ -14,19 +24,19 @@ export default class AdminLoginPage extends React.Component {
 
   handleSubmit = () => {
     let errors = {
-      name:null,
-      pass:null
+      name: null,
+      pass: null
     };
-    if(!this.state.name){
+    if (!this.state.name) {
       errors.name = localizedTexts.logIn.mandatoryField;
     }
-    if(!this.state.pass){
+    if (!this.state.pass) {
       errors.pass = localizedTexts.logIn.mandatoryField;
     }
-    this.setState({errors})
+    this.setState({ errors });
   };
 
-  updateFields = (e) => {
+  updateFields = e => {
     const { name, value } = e.target;
     let tempState = this.state;
     tempState[name] = value;
@@ -49,9 +59,14 @@ export default class AdminLoginPage extends React.Component {
         <Row>
           <Col>
             <Form>
-              <FormGroup color={this.state.errors.name?'danger':''}>
+              <FormGroup color={this.state.errors.name ? 'danger' : ''}>
                 <Label for="name">{localizedTexts.logIn.name}</Label>
-                <Input state={this.state.errors.name?'danger':''} name="name" value={this.state.name} onChange={this.updateFields}/>
+                <Input
+                  state={this.state.errors.name ? 'danger' : ''}
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.updateFields}
+                />
                 <FormFeedback>{this.state.errors.name}</FormFeedback>
               </FormGroup>
             </Form>
@@ -60,9 +75,15 @@ export default class AdminLoginPage extends React.Component {
         <Row>
           <Col>
             <Form>
-              <FormGroup color={this.state.errors.pass?'danger':''}>
+              <FormGroup color={this.state.errors.pass ? 'danger' : ''}>
                 <Label for="pass">{localizedTexts.logIn.pass}</Label>
-                <Input type="password" state={this.state.errors.pass?'danger':''} name="pass" value={this.state.pass} onChange={this.updateFields}/>
+                <Input
+                  type="password"
+                  state={this.state.errors.pass ? 'danger' : ''}
+                  name="pass"
+                  value={this.state.pass}
+                  onChange={this.updateFields}
+                />
                 <FormFeedback>{this.state.errors.pass}</FormFeedback>
               </FormGroup>
             </Form>
@@ -70,11 +91,12 @@ export default class AdminLoginPage extends React.Component {
         </Row>
         <Row>
           <Col>
-            <Button onClick={this.handleSubmit}>{localizedTexts.logIn.btnSignIn}</Button>
+            <Button onClick={this.handleSubmit}>
+              {localizedTexts.logIn.btnSignIn}
+            </Button>
           </Col>
         </Row>
       </Container>
     );
   }
 }
-

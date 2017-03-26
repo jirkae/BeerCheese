@@ -9,4 +9,3 @@ export default class RegistrationPage extends React.Component {
     );
   }
 }
-

@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Row, Col, Jumbotron, Button, Nav, NavItem, NavLink, NavbarBrand, Container } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Jumbotron,
+  Button,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarBrand,
+  Container
+} from 'reactstrap';
 import ProductList from '../../components/product/ProductList';
-import PackageCreationNavigation from '../../components/navigation/PackageCreationNav';
+import PackageCreationNavigation
+  from '../../components/navigation/PackageCreationNav';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
-const mockBeerCategories = ["black", "lager"];
-
+const mockBeerCategories = ['black', 'lager'];
 
 export default class CreatePackagePackagePage extends Component {
   state = {
@@ -14,7 +24,7 @@ export default class CreatePackagePackagePage extends Component {
   };
 
   renderNavBeerItems = () => {
-    if(this.state.beerCategoryExpanded){
+    if (this.state.beerCategoryExpanded) {
       return mockBeerCategories.map(value => (
         <NavItem>
           <NavLink href="#">{localizedTexts.categories[value]}</NavLink>
@@ -24,16 +34,24 @@ export default class CreatePackagePackagePage extends Component {
     return null;
   };
 
- render(){
+  render() {
     return (
       <Container>
-        <PackageCreationNavigation stage={3}/>
+        <PackageCreationNavigation stage={3} />
         <Row>
           <Col xl="2" lg="2" md="4" sm="12" xs="12">
             <Nav vertical>
               <NavbarBrand>{localizedTexts.HomePage.categories}</NavbarBrand>
               <NavItem>
-                <NavLink onClick={() => this.setState({beerCategoryExpanded:!this.state.beerCategoryExpanded})} href="#">{localizedTexts.HomePage.beer}</NavLink>
+                <NavLink
+                  onClick={() =>
+                    this.setState({
+                      beerCategoryExpanded: !this.state.beerCategoryExpanded
+                    })}
+                  href="#"
+                >
+                  {localizedTexts.HomePage.beer}
+                </NavLink>
               </NavItem>
               {this.renderNavBeerItems()}
             </Nav>

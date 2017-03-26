@@ -1,7 +1,7 @@
 import React from 'react';
-import {Jumbotron} from 'reactstrap';
-import {Link} from 'react-router';
-import {Row, Col} from 'reactstrap';
+import { Jumbotron } from 'reactstrap';
+import { Link } from 'react-router';
+import { Row, Col } from 'reactstrap';
 import localizedStrings from '../../text_localization/LocalizedStrings';
 import { css } from 'glamor';
 import CartContent from '../CartContent';
@@ -20,26 +20,37 @@ export default class NavPanel extends React.Component {
           <Row>
             <Col xs="7">
               <ul className={`${this.cssCartControl}`}>
-                <li>{localizedStrings.NavPanel.amount}: {this.state.amount} ks</li>
-                <li>{localizedStrings.NavPanel.price}: {this.state.price} Kč</li>
+                <li>
+                  {localizedStrings.NavPanel.amount}: {this.state.amount} ks
+                </li>
+                <li>
+                  {localizedStrings.NavPanel.price}: {this.state.price} Kč
+                </li>
               </ul>
             </Col>
             <Col xs="5">
-              <Link to="#" className={`${this.cssExpandLink}`} onClick={()=>this.setState({showCartContent:!this.state.showCartContent})}>
-                <i className="fa fa-expand fa-3"/>
+              <Link
+                to="#"
+                className={`${this.cssExpandLink}`}
+                onClick={() =>
+                  this.setState({
+                    showCartContent: !this.state.showCartContent
+                  })}
+              >
+                <i className="fa fa-expand fa-3" />
               </Link>
             </Col>
           </Row>
         </Jumbotron>
-        { this.state.showCartContent ? <CartContent /> : ''}
+        {this.state.showCartContent ? <CartContent /> : ''}
       </div>
     );
   }
 
   cssNavPanel = css({
-    'margin': 0,
-    'padding': '5px',
-    'height': '70px'
+    margin: 0,
+    padding: '5px',
+    height: '70px'
   });
 
   cssCartControl = css({
@@ -50,7 +61,7 @@ export default class NavPanel extends React.Component {
   });
 
   cssExpandLink = css({
-    'textDecoration': 'none',
-    'color': 'black'
-  })
+    textDecoration: 'none',
+    color: 'black'
+  });
 }

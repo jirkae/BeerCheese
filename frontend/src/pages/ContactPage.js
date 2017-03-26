@@ -9,4 +9,3 @@ export default class ContactPage extends React.Component {
     );
   }
 }
-

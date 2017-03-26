@@ -9,4 +9,3 @@ export default class BusinessConditionsPage extends React.Component {
     );
   }
 }
-

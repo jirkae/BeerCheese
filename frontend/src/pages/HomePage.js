@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import { Row, Col, Jumbotron, Button, Nav, NavItem, NavLink, NavbarBrand } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Jumbotron,
+  Button,
+  Nav,
+  NavItem,
+  NavLink,
+  NavbarBrand
+} from 'reactstrap';
 import ProductList from '../components/product/ProductList';
 import WelcomeWarningPopUp from '../components/popup/WelcomeWarningPopUp';
 import localizedTexts from '../text_localization/LocalizedStrings';
 
-const mockBeerCategories = ["black", "lager"];
-const mockSupplementsCategories = ["glass", "beerMat"];
-
+const mockBeerCategories = ['black', 'lager'];
+const mockSupplementsCategories = ['glass', 'beerMat'];
 
 export default class HomePage extends Component {
   state = {
@@ -15,7 +23,7 @@ export default class HomePage extends Component {
   };
 
   renderNavBeerItems = () => {
-    if(this.state.beerCategoryExpanded){
+    if (this.state.beerCategoryExpanded) {
       return mockBeerCategories.map(value => (
         <NavItem>
           <NavLink href="#">{localizedTexts.categories[value]}</NavLink>
@@ -26,7 +34,7 @@ export default class HomePage extends Component {
   };
 
   renderNavSupplementsItems = () => {
-    if(this.state.supplCategoryExpanded){
+    if (this.state.supplCategoryExpanded) {
       return mockSupplementsCategories.map(value => (
         <NavItem>
           <NavLink href="#">{localizedTexts.categories[value]}</NavLink>
@@ -36,7 +44,7 @@ export default class HomePage extends Component {
     return null;
   };
 
- render(){
+  render() {
     return (
       <Row>
         <WelcomeWarningPopUp />
@@ -44,15 +52,33 @@ export default class HomePage extends Component {
           <Nav vertical>
             <NavbarBrand>{localizedTexts.HomePage.categories}</NavbarBrand>
             <NavItem>
-              <NavLink onClick={() => this.setState({beerCategoryExpanded:!this.state.beerCategoryExpanded})} href="#">{localizedTexts.HomePage.beer}</NavLink>
+              <NavLink
+                onClick={() =>
+                  this.setState({
+                    beerCategoryExpanded: !this.state.beerCategoryExpanded
+                  })}
+                href="#"
+              >
+                {localizedTexts.HomePage.beer}
+              </NavLink>
             </NavItem>
             {this.renderNavBeerItems()}
             <NavItem>
-              <NavLink onClick={() => this.setState({supplCategoryExpanded:!this.state.supplCategoryExpanded})} href="#">{localizedTexts.HomePage.supplements}</NavLink>
+              <NavLink
+                onClick={() =>
+                  this.setState({
+                    supplCategoryExpanded: !this.state.supplCategoryExpanded
+                  })}
+                href="#"
+              >
+                {localizedTexts.HomePage.supplements}
+              </NavLink>
             </NavItem>
             {this.renderNavSupplementsItems()}
             <NavItem>
-              <NavLink href="#">{localizedTexts.HomePage.createPackage}</NavLink>
+              <NavLink href="#">
+                {localizedTexts.HomePage.createPackage}
+              </NavLink>
             </NavItem>
           </Nav>
         </Col>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Jumbotron} from 'reactstrap';
 import {Row, Col} from 'reactstrap';
-import localizedStrings from '../text_localization/LocalizedStrings';
+// import localizedStrings from '../text_localization/LocalizedStrings';
 
 export default () => (
   <Jumbotron>

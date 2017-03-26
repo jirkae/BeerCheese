@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Container } from 'reactstrap';
-import PackageCreationNavigation from '../../components/navigation/PackageCreationNav';
-import localizedTexts from '../../text_localization/LocalizedStrings';
+import PackageCreationNavigation
+  from '../../components/navigation/PackageCreationNav';
+// import localizedTexts from '../../text_localization/LocalizedStrings';
 
 export default class CreatePackageMessagePage extends Component {
   state = {
@@ -9,10 +10,10 @@ export default class CreatePackageMessagePage extends Component {
     supplCategoryExpanded: false
   };
 
- render(){
+  render() {
     return (
       <Container>
-        <PackageCreationNavigation stage={4}/>
+        <PackageCreationNavigation stage={4} />
         <Row>
           Message
         </Row>

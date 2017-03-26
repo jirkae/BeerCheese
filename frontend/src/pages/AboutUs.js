@@ -4,4 +4,4 @@ export default () => (
   <div>
     O nás
   </div>
-)
+);

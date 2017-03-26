@@ -2,102 +2,102 @@ import LocalizedStrings from 'react-localization';
 
 export default new LocalizedStrings({
   cs: {
-    WelcomeWarningPopUp:{
-      message:"Pokračováním potvrzuji, že jsem starší 18 let",
-      okBtn:"Pokračovat"
+    WelcomeWarningPopUp: {
+      message: 'Pokračováním potvrzuji, že jsem starší 18 let',
+      okBtn: 'Pokračovat'
     },
-    NavBar:{
-      aboutUs: "O nás",
-      terms: "Obchodní podmínky",
-      contact: "Kontakt",
-      mainPage: "Produkty",
-      logIn:"Přihlásit",
-      signUp:"Registrace",
-      logOut:"Odhlásit",
-      customers:"Zákazníci",
-      suppliers:"Dodavatelé",
-      products:"Produkty",
-      orders:"Objednávky",
-      packagesOverview:"Přehled balíčků",
-      createPackage:"Vytvořit balíček"
+    NavBar: {
+      aboutUs: 'O nás',
+      terms: 'Obchodní podmínky',
+      contact: 'Kontakt',
+      mainPage: 'Produkty',
+      logIn: 'Přihlásit',
+      signUp: 'Registrace',
+      logOut: 'Odhlásit',
+      customers: 'Zákazníci',
+      suppliers: 'Dodavatelé',
+      products: 'Produkty',
+      orders: 'Objednávky',
+      packagesOverview: 'Přehled balíčků',
+      createPackage: 'Vytvořit balíček'
     },
-    PackageCreationNav:{
-      back: "Zpět",
-      next: "Další",
-      beer: "Pivo",
-      supplements: "Doplňky",
-      packages: "Balení",
-      message: "Vzkaz",
-      summary: "Shrnutí"
+    PackageCreationNav: {
+      back: 'Zpět',
+      next: 'Další',
+      beer: 'Pivo',
+      supplements: 'Doplňky',
+      packages: 'Balení',
+      message: 'Vzkaz',
+      summary: 'Shrnutí'
     },
-    PackageOverviewNav:{
-      back: "Zpět",
-      next: "Další",
-      packages: "Balíčky",
-      delPay: "Doprava/Platba",
-      delDetails: "Doručovací údaje",
-      summary: "Shrnutí"
+    PackageOverviewNav: {
+      back: 'Zpět',
+      next: 'Další',
+      packages: 'Balíčky',
+      delPay: 'Doprava/Platba',
+      delDetails: 'Doručovací údaje',
+      summary: 'Shrnutí'
     },
     NavPanel: {
-      pageName: "Pivní suvenýry",
-      amount: "Počet",
-      price: "Cena"
+      pageName: 'Pivní suvenýry',
+      amount: 'Počet',
+      price: 'Cena'
     },
     HomePage: {
-      categories: "Kategorie",
-      beer: "Pivo",
-      supplements: "Doplňky",
-      createPackage: "Vytvořit balíček",
-      previous: "Předchozí",
-      next: "Další"
+      categories: 'Kategorie',
+      beer: 'Pivo',
+      supplements: 'Doplňky',
+      createPackage: 'Vytvořit balíček',
+      previous: 'Předchozí',
+      next: 'Další'
     },
     Product: {
-      btnAddToChart: "Přidat do košíku"
+      btnAddToChart: 'Přidat do košíku'
     },
     AdminCustomersPage: {
-      id: "ID",
-      name: "Jméno",
-      surname: "Příjmení",
-      email: "Email"
+      id: 'ID',
+      name: 'Jméno',
+      surname: 'Příjmení',
+      email: 'Email'
     },
     AdminOrdersPage: {
-      id: "ID",
-      customer: "Zákazník",
-      email: "Email",
-      state: "Stav"
+      id: 'ID',
+      customer: 'Zákazník',
+      email: 'Email',
+      state: 'Stav'
     },
     AdminProductsPage: {
-      id: "ID",
-      name: "Název",
-      category: "Kategorie",
-      price: "Cena",
-      supplier: "Dodavatel",
-      btnAddProduct: "Přidat produkt"
+      id: 'ID',
+      name: 'Název',
+      category: 'Kategorie',
+      price: 'Cena',
+      supplier: 'Dodavatel',
+      btnAddProduct: 'Přidat produkt'
     },
     AdminSuppliersPage: {
-      id: "ID",
-      name: "Název",
-      email: "Email",
-      btnAddSupplier: "Přidat dodavatele"
+      id: 'ID',
+      name: 'Název',
+      email: 'Email',
+      btnAddSupplier: 'Přidat dodavatele'
     },
     admin: {
-      pageName: "Pivní suvenýry administrace"
+      pageName: 'Pivní suvenýry administrace'
     },
     logIn: {
-      title: "Přihlášení",
-      name: "Jméno",
-      mandatoryField: "Políčko je povinné",
-      pass: "Heslo",
-      btnSignIn: "Přihlásit"
+      title: 'Přihlášení',
+      name: 'Jméno',
+      mandatoryField: 'Políčko je povinné',
+      pass: 'Heslo',
+      btnSignIn: 'Přihlásit'
     },
     categories: {
-      black: "Černé",
-      lager: "Ležák",
-      glass: "Sklo",
-      beerMat: "Podtácky"
+      black: 'Černé',
+      lager: 'Ležák',
+      glass: 'Sklo',
+      beerMat: 'Podtácky'
     },
-    boiledEgg:"Uovo sodo",
-    softBoiledEgg:"Uovo alla coque",
-    choice:"Come scegliere l'uovo"
+    boiledEgg: 'Uovo sodo',
+    softBoiledEgg: 'Uovo alla coque',
+    choice: "Come scegliere l'uovo"
   }
 });

@@ -15,4 +15,4 @@ export default () => (
       </Col>
     </Row>
   </Container>
-)
+);

@@ -32,4 +32,4 @@ export default connect(
   {
     hideModals
   }
-)(Modals)
+)(Modals);

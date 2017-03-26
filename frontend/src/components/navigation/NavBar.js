@@ -18,8 +18,8 @@ const BEER_IMG_URL = 'https://img.clipartfox.com/c6c3f93fcfdd38440d093b314060440
 
 class NavBar extends Component {
   state = {
-      isOpen: false
-    };
+    isOpen: false
+  };
 
   toggle = () => {
     this.setState({
@@ -31,37 +31,68 @@ class NavBar extends Component {
     return (
       <Navbar color="faded" light toggleable>
         <NavbarBrand tag={Link} to="/">
-          <h3><img src={BEER_IMG_URL} alt="beerIcon" className={`${this.cssBeerIcon}`}/> Pivní suvenýry</h3>
+          <h3>
+            <img
+              src={BEER_IMG_URL}
+              alt="beerIcon"
+              className={`${this.cssBeerIcon}`}
+            />
+            {' '}
+            Pivní suvenýry
+          </h3>
         </NavbarBrand>
         <NavbarToggler right onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink tag={Link} to="/about_us">{localizedTexts.NavBar.aboutUs}</NavLink>
+              <NavLink tag={Link} to="/about_us">
+                {localizedTexts.NavBar.aboutUs}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/conditions">{localizedTexts.NavBar.terms}</NavLink>
+              <NavLink tag={Link} to="/conditions">
+                {localizedTexts.NavBar.terms}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/contact">{localizedTexts.NavBar.contact}</NavLink>
+              <NavLink tag={Link} to="/contact">
+                {localizedTexts.NavBar.contact}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/">{localizedTexts.NavBar.mainPage}</NavLink>
+              <NavLink tag={Link} to="/">
+                {localizedTexts.NavBar.mainPage}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/package_overview_packages">{localizedTexts.NavBar.packagesOverview}</NavLink>
+              <NavLink tag={Link} to="/package_overview_packages">
+                {localizedTexts.NavBar.packagesOverview}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/create_package_beer">{localizedTexts.NavBar.createPackage}</NavLink>
+              <NavLink tag={Link} to="/create_package_beer">
+                {localizedTexts.NavBar.createPackage}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="#" onClick={() => this.props.openModal({name:'logIn',data:null})}>{localizedTexts.NavBar.logIn}</NavLink>
+              <NavLink
+                tag={Link}
+                to="#"
+                onClick={() =>
+                  this.props.openModal({ name: 'logIn', data: null })}
+              >
+                {localizedTexts.NavBar.logIn}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/register">{localizedTexts.NavBar.signUp}</NavLink>
+              <NavLink tag={Link} to="/register">
+                {localizedTexts.NavBar.signUp}
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="#" onClick={() => console.log('log out')}>{localizedTexts.NavBar.logOut}</NavLink>
+              <NavLink tag={Link} to="#" onClick={() => console.log('log out')}>
+                {localizedTexts.NavBar.logOut}
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
@@ -70,14 +101,11 @@ class NavBar extends Component {
   }
 
   cssBeerIcon = css({
-    'height': '70px',
-    'width': '70px'
+    height: '70px',
+    width: '70px'
   });
 }
 
-export default connect(
-  null,
-  {
-    openModal
-  }
-)(NavBar)
+export default connect(null, {
+  openModal
+})(NavBar);

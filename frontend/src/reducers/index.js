@@ -13,17 +13,14 @@ const userInitialState = (() => {
   return currentUser;
 })();
 
-const reducer = (initialState) => {
+const reducer = initialState => {
   return (state = initialState, action) => {
-    if(action.reducer){
-      return action.reducer(
-        state,
-        action.payload
-      );
-    }else{
+    if (action.reducer) {
+      return action.reducer(state, action.payload);
+    } else {
       return state;
     }
-  }
+  };
 };
 
 export const rootReducer = combineReducers({
