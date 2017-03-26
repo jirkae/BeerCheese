@@ -1,10 +1,9 @@
 package edu.vse.resources;
 
-import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
-
+import edu.vse.AbstractAppMvcTest;
 import org.junit.Test;
 
-import edu.vse.AbstractAppMvcTest;
+import static net.javacrumbs.jsonunit.JsonMatchers.jsonEquals;
 
 public class CategoryComponentTest extends AbstractAppMvcTest {
 
@@ -36,5 +35,25 @@ public class CategoryComponentTest extends AbstractAppMvcTest {
                 .expectResponse()
                 .havingStatusEqualTo(200)
                 .havingBody(jsonEquals(getResourceAsString("json/categoriesByMainCategory.json")));
+    }
+
+    @Test
+    public void testListMainCategories() throws Exception {
+        fire()
+                .get()
+                .to("/api/categories?isMainCategory=true")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/mainCategories.json")));
+    }
+
+    @Test
+    public void testListSubCategories() throws Exception {
+        fire()
+                .get()
+                .to("/api/categories?isMainCategory=false")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBody(jsonEquals(getResourceAsString("json/subCategories.json")));
     }
 }

@@ -13,4 +13,8 @@ public interface CategoryDao extends JpaRepository<CategoryEntity, Integer> {
     List<CategoryEntity> findAll();
 
     List<CategoryEntity> findByMainCategory_Id(int id);
+
+    List<CategoryEntity> findByMainCategoryIsNull();
+
+    List<CategoryEntity> findByMainCategoryIsNotNull();
 }

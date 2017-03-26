@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -49,5 +50,16 @@ public class CategoryService {
     public Categories listByMainCategory(int id) {
         List<Category> collect = categoryDao.findByMainCategory_Id(id).stream().map(CategoryEntity::toDto).collect(toList());
         return new Categories(collect);
+    }
+
+    @Cacheable(value = "/categories/", key = "'?isMainCategory='.concat(#p0)")
+    public Categories listByTypeOfCategory(boolean isMainCategory) {
+        Stream<CategoryEntity> collect;
+        if (isMainCategory) {
+            collect = categoryDao.findByMainCategoryIsNull().stream();
+        } else {
+            collect = categoryDao.findByMainCategoryIsNotNull().stream();
+        }
+        return new Categories(collect.map(CategoryEntity::toDto).collect(toList()));
     }
 }

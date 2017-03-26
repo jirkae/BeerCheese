@@ -1,0 +1,26 @@
+{
+  "categories": {
+    "items": [
+      {
+        "category": {
+          "id": 1,
+          "name": "Beer",
+          "links": {
+            "self": "/api/categories/1",
+            "subCategories": "/api/categories?mainCategory=1"
+          }
+        }
+      },
+      {
+        "category": {
+          "id": 4,
+          "name": "Cheese",
+          "links": {
+            "self": "/api/categories/4",
+            "subCategories": "/api/categories?mainCategory=4"
+          }
+        }
+      }
+    ]
+  }
+}

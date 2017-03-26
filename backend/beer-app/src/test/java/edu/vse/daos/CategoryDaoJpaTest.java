@@ -1,19 +1,20 @@
 package edu.vse.daos;
 
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
-
-import java.util.List;
-
+import edu.vse.AbstractAppJpaTest;
+import edu.vse.models.CategoryEntity;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import edu.vse.AbstractAppJpaTest;
-import edu.vse.models.CategoryEntity;
+import java.util.List;
+
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 public class CategoryDaoJpaTest  extends AbstractAppJpaTest {
 
@@ -47,9 +48,26 @@ public class CategoryDaoJpaTest  extends AbstractAppJpaTest {
     }
 
     @Test
-    public void findByMainCategory_Id() throws Exception {
+    public void testFindByMainCategory_Id() throws Exception {
         List<CategoryEntity> byMainCategory_id = categoryDao.findByMainCategory_Id(1);
 
         assertThat(byMainCategory_id, hasSize(2));
+    }
+
+    @Test
+    public void testFindByMainCategoryIsNull() throws Exception {
+        List<CategoryEntity> byMainCategoryIsNull = categoryDao.findByMainCategoryIsNull();
+
+        assertThat(byMainCategoryIsNull, hasSize(2));
+        assertThat(byMainCategoryIsNull, hasItem(hasProperty("mainCategory", nullValue())));
+    }
+
+
+    @Test
+    public void testFindByMainCategoryIsNotNull() throws Exception {
+        List<CategoryEntity> byMainCategoryIsNull = categoryDao.findByMainCategoryIsNotNull();
+
+        assertThat(byMainCategoryIsNull, hasSize(2));
+        assertThat(byMainCategoryIsNull, hasItem(hasProperty("mainCategory", notNullValue())));
     }
 }

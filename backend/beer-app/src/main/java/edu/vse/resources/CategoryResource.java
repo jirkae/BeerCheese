@@ -31,9 +31,12 @@ public class CategoryResource {
     }
 
     @RequestMapping(method = GET)
-    public Categories list(@RequestParam(required = false) Optional<Integer> mainCategory) {
+    public Categories list(@RequestParam(required = false) Optional<Integer> mainCategory,
+                           @RequestParam(required = false) Optional<Boolean> isMainCategory) {
         if (mainCategory.isPresent()) {
             return categoryService.listByMainCategory(mainCategory.get());
+        } else if (isMainCategory.isPresent()) {
+            return categoryService.listByTypeOfCategory(isMainCategory.get());
         } else {
             return categoryService.list();
         }
