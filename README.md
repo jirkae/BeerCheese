@@ -8,6 +8,7 @@
 * Link to build job on Travis CI - [Travis CI](https://travis-ci.org/jansyk13/BeerCheese)
 * Link to deployed application on OpenShift - [BeerApp](http://beer-jansyk13.rhcloud.com/)
 * Link to API description on Apiary - [Apiary](http://docs.beercheese.apiary.io/#)
+* Link to Uptime - [Uptime](https://uptime-jansyk13.rhcloud.com/dashboard/events)
 
 ## Quick GIT guide
 ### How to squash commits into one or more
