@@ -33,4 +33,24 @@ public class StaticContentComponentTest extends AbstractAppComponentTest {
                 .havingStatusEqualTo(200)
                 .havingBodyEqualTo(INDEX);
     }
+
+    @Test
+    public void testAppPathsLoadingIndex() throws Exception {
+        fire()
+                .get()
+                .to("/app/test")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBodyEqualTo(INDEX);
+    }
+
+    @Test
+    public void testSimpleAppPathLoadingIndex() throws Exception {
+        fire()
+                .get()
+                .to("/app")
+                .expectResponse()
+                .havingStatusEqualTo(200)
+                .havingBodyEqualTo(INDEX);
+    }
 }
