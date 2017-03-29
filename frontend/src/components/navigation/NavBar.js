@@ -65,7 +65,7 @@ class NavBar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="/package_overview_packages">
+              <NavLink tag={Link} to="/package-overview">
                 {localizedTexts.NavBar.packagesOverview}
               </NavLink>
             </NavItem>

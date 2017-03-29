@@ -11,22 +11,22 @@ export default props => (
     <Col xl="8s" lg="8" md="8" sm="8" xs="6">
       <Nav>
         <NavItem>
-          <NavLink tag={Link} to="/package_overview_packages">
+          <NavLink tag={Link} to="/package-overview">
             {localizedTexts.PackageOverviewNav.packages}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/package_overview_del_pay">
+          <NavLink tag={Link} to="/package-overview/del-pay">
             {localizedTexts.PackageOverviewNav.delPay}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/package_overview_del_details">
+          <NavLink tag={Link} to="/package-overview/del-details">
             {localizedTexts.PackageOverviewNav.delDetails}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to="/package_overview_summary">
+          <NavLink tag={Link} to="/package-overview/summary">
             {localizedTexts.PackageOverviewNav.summary}
           </NavLink>
         </NavItem>

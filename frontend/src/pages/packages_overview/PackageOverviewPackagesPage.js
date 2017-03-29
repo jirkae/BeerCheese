@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { Row, Container } from 'reactstrap';
-import PackageOverviewNav from '../../components/navigation/PackageOverviewNav';
-// import localizedTexts from '../../text_localization/LocalizedStrings';
-
-
+import { Row } from 'reactstrap';
 
 export default class PackageOverviewPackagesPage extends Component {
- render(){
+  render() {
     return (
-      <Container>
-        <PackageOverviewNav stage={1}/>
-        <Row>
-          PackageOverviewPackagesPage
+      <Row>
+        PackageOverviewPackagesPage
         </Row>
-      </Container>
     );
   }
 }
