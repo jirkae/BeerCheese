@@ -1,0 +1,12 @@
+{
+  "supplier": {
+    "id": "${json-unit.ignore}",
+    "name": "YoloCorp",
+    "phoneNumber": "+420789098678",
+    "deliveryTime": 3,
+    "links": {
+      "self": "/api/suppliers/2",
+      "suppliersProducts": "/api/products?supplier=2"
+    }
+  }
+}

@@ -26,6 +26,12 @@ public class SupplierEntity {
     public SupplierEntity() {
     }
 
+    public SupplierEntity(String name, String phoneNumber, Long deliveryTime) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.deliveryTime = deliveryTime;
+    }
+
     public SupplierEntity(Integer id, String name, String phoneNumber, Long deliveryTime) {
         this.id = id;
         this.name = name;

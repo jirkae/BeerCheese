@@ -61,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(r -> r.getRequestURI().startsWith("/images/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
                 .requestMatchers(r -> r.getRequestURI().startsWith("/api/products/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
                 .requestMatchers(r -> r.getRequestURI().startsWith("/api/orders/") && r.getMethod().equals(PUT.name())).hasAuthority("admin")
+                .requestMatchers(r -> r.getRequestURI().startsWith("/api/supplier/") && r.getMethod().equals(PUT.name())).hasAuthority("admin")
+                .requestMatchers(r -> r.getRequestURI().startsWith("/api/supplier/") && r.getMethod().equals(POST.name())).hasAuthority("admin")
                 .antMatchers("/api/users/current").authenticated()
                 .antMatchers("/api/users").hasAuthority("admin")
                 .antMatchers("/api/messages").hasAuthority("admin")

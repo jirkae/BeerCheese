@@ -1,5 +1,7 @@
 package edu.vse.dtos;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import edu.vse.utils.UriConstants;
@@ -18,6 +20,17 @@ public class Supplier {
     private final String phoneNumber;
     private final Long deliveryTime;
     private final Links links;
+
+    @JsonCreator
+    public Supplier(@JsonProperty("name") String name,
+                    @JsonProperty("phoneNumber") String phoneNumber,
+                    @JsonProperty("deliveryTime") Long deliveryTime) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.deliveryTime = deliveryTime;
+        this.id = null;
+        this.links = null;
+    }
 
     public Supplier(Integer id, String name, String phoneNumber, Long deliveryTime) {
         this.id = id;
