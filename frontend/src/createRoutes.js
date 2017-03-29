@@ -9,6 +9,7 @@ import CreatePackageBeerPage from './pages/configurator/CreatePackageBeerPage';
 import CreatePackageMessagePage from './pages/configurator/CreatePackageMessagePage';
 import CreatePackagePackagePage from './pages/configurator/CreatePackagePackagePage';
 import CreatePackageSummaryPage from './pages/configurator/CreatePackageSummaryPage';
+import PackageOverviewRootPage from './pages/packages_overview/PackageOverviewRootPage';
 import CreatePackageSupplementPage from './pages/configurator/CreatePackageSupplementPage';
 import PackageOverviewSummaryPage from './pages/packages_overview/PackageOverviewSummaryPage';
 import PackageOverviewPackagesPage from './pages/packages_overview/PackageOverviewPackagesPage';
@@ -51,10 +52,12 @@ export function createRoutes(store) {
         <Route path="/create_package_package" component={CreatePackagePackagePage} />
         <Route path="/create_package_summary" component={CreatePackageSummaryPage} />
         <Route path="/create_package_supplement" component={CreatePackageSupplementPage} />
-        <Route path="/package_overview_summary" component={PackageOverviewSummaryPage} />
-        <Route path="/package_overview_packages" component={PackageOverviewPackagesPage} />
-        <Route path="/package_overview_del_pay" component={PackageOverviewDelPayPage} />
-        <Route path="/package_overview_del_details" component={PackageOverviewDeliveryDetailsPage} />
+        <Route path="/package-overview" component={PackageOverviewRootPage} >
+          <IndexRoute component={PackageOverviewPackagesPage} />
+          <Route path="summary" component={PackageOverviewSummaryPage} />
+          <Route path="del-pay" component={PackageOverviewDelPayPage} />
+          <Route path="del-details" component={PackageOverviewDeliveryDetailsPage} />
+        </Route>
         <Route path="/contact" component={ContactPage} />
         <Route path="/conditions" component={BusinessConditionsPage} />
         <Route path="/about_us" component={AboutUs} />
