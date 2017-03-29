@@ -48,6 +48,7 @@ public class ImageResourceComponentTest extends AbstractAppMvcTest {
                 .expectResponse()
                 .havingStatusEqualTo(200)
                 .havingHeaderEqualTo("Content-type", "image/jpeg")
+                .havingHeaderEqualTo("Cache-Control", "private, max-age=600")
                 .havingBodyEqualTo("Hello World!\n");
     }
 

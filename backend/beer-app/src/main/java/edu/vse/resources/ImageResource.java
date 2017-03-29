@@ -57,6 +57,7 @@ public class ImageResource {
                 throw new InternalServerErrorException("Error while IO");
             }
             httpServletResponse.addHeader(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_JPEG_VALUE);
+            httpServletResponse.setHeader(HttpHeaders.CACHE_CONTROL, "private, max-age=600");
         } else {
             throw new NotFoundException("Image not found");
         }
