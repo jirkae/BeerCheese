@@ -38,6 +38,43 @@ export default new LocalizedStrings({
       delDetails: 'Doručovací údaje',
       summary: 'Shrnutí'
     },
+    PackageOverview: {
+      packages: {
+        edit: 'Upravit',
+        remove: 'Odebrat',
+      },
+      delPay: {
+        selectDelivery: 'Vyberte dopravu',
+        selectPayment: 'Vyberte platbu',
+      },
+      deliveryDetails: {
+        contacts: 'Kontaktní údaje',
+        firstName: 'Jméno',
+        lastName: 'Příjmení',
+        email: 'Váš email',
+        phone: 'Telefon',
+        street: 'Ulice č. p.',
+        city: 'Město',
+        zip: 'PSČ',
+        register: 'Registrovat účet',
+        differentInvoiceContact: 'Kontaktní údaje se neshodují s fakturačními',
+        differentDeliveryContact: 'Kontaktní údaje se neshodují s doručovacími',
+        agree: 'Potvrzuji, že je mi více než 18 let a souhlasím s obchodními podmínkami',
+      },
+      summary: {
+        personal: 'Osobní údaje',
+        delivery: 'Doprava',
+        payment: 'Platba',
+        packages: 'Balíčky',
+      },
+      priceCalculation: {
+        title: 'Sečteno a podtrženo',
+        delivery: 'Doprava',
+        payment: 'Platba',
+        packages: 'Balíčky',
+        total: 'Cena celkem',
+      },
+    },
     NavPanel: {
       pageName: 'Pivní suvenýry',
       amount: 'Počet',
