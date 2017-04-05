@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +35,7 @@ import java.util.Optional;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
@@ -227,6 +229,7 @@ public class AuthResource {
     }
 
     private void setXAuthHeader(HttpServletResponse httpServletResponse, String token) {
+        httpServletResponse.addHeader(ACCESS_CONTROL_EXPOSE_HEADERS, X_AUTH);
         httpServletResponse.setHeader(X_AUTH, token);
     }
 }

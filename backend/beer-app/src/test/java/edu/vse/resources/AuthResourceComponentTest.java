@@ -15,6 +15,7 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
+import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
@@ -29,6 +30,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .expectResponse()
                 .havingStatusEqualTo(200)
+                .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
                 .havingHeader("X-Auth=", notNullValue());
     }
 
@@ -40,6 +42,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .getResponse();
 
+        response.getValidator().havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth");
         String xAuth = response.getHeader("X-Auth");
         if (xAuth != null) {
             fire()
@@ -48,6 +51,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                     .withHeader("X-Auth", xAuth)
                     .expectResponse()
                     .havingStatusEqualTo(200)
+                    .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
                     .havingHeaderEqualTo("X-Auth", "");
         } else {
             fail();
@@ -72,6 +76,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
             responseRefresh.getValidator()
                     .havingStatusEqualTo(200)
+                    .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
                     .havingHeader("X-Auth", notNullValue());
 
             String refresh = responseRefresh.getHeader("X-Auth");
