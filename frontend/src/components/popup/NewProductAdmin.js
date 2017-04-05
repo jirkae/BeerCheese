@@ -116,6 +116,8 @@ export default class NewProductAdmin extends React.Component {
         <ModalBody>
           <Container>
             <Row>
+              <h3>Přidat produkt</h3>
+              <br/> <br/>
               <Form onSubmit={this.onSubmit}>
 
                 <FormGroup row>
