@@ -1,8 +1,8 @@
 import React from 'react';
-import {Container, Button, Table, Jumbotron} from 'reactstrap';
+import { Container, Button, Table, Jumbotron } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
-import {connect} from 'react-redux';
-import {openModal} from '../../actions/openModal';
+import { connect } from 'react-redux';
+import { openModal } from '../../actions/openModal';
 import api from '../../api';
 
 class AdminSuppliersPage extends React.Component {
@@ -19,7 +19,6 @@ class AdminSuppliersPage extends React.Component {
       .then((response) => {
         if (response) {
           this.setState({
-            ...this.state,
             suppliers: response.data.suppliers.items.map(item => {return item.supplier})
           });
         }
