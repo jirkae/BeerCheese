@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class PackageDaoJpaTest extends AbstractAppJpaTest {
 
@@ -50,5 +53,12 @@ public class PackageDaoJpaTest extends AbstractAppJpaTest {
         PackageEntity packageEntity = new PackageEntity(orderEntity);
 
         packageDao.saveAndFlush(packageEntity);
+    }
+
+    @Test
+    public void testGetById() throws Exception {
+        Optional<PackageEntity> byId = packageDao.getById(1);
+
+        assertTrue(byId.isPresent());
     }
 }

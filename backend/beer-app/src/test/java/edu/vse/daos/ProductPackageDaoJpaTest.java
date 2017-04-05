@@ -1,7 +1,6 @@
 package edu.vse.daos;
 
 import edu.vse.AbstractAppJpaTest;
-import edu.vse.dtos.Package;
 import edu.vse.models.PackageEntity;
 import edu.vse.models.ProductEntity;
 import edu.vse.models.ProductPackageEntity;
@@ -11,12 +10,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ProductPackageDaoJpaTest extends AbstractAppJpaTest {
@@ -63,5 +63,26 @@ public class ProductPackageDaoJpaTest extends AbstractAppJpaTest {
         );
 
         productPackageDao.saveAndFlush(productPackageEntity);
+    }
+
+    @Test
+    public void testFindByPackageEntity_Id() throws Exception {
+        List<ProductPackageEntity> list = productPackageDao.findByPackageEntity_Id(1);
+
+        assertThat(list, hasSize(1));
+    }
+
+    @Test
+    public void testFindByPackageEntity_IdIn() throws Exception {
+        List<ProductPackageEntity> list = productPackageDao.findByPackageEntity_IdIn(asList(1));
+
+        assertThat(list, hasSize(1));
+    }
+
+    @Test
+    public void testDeleteByPackageEntity_Id() throws Exception {
+        int i = productPackageDao.deleteAllByPackageEntity_Id(1);
+
+        assertEquals(i, 1);
     }
 }

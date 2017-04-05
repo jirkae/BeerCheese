@@ -1,0 +1,16 @@
+{
+  "package": {
+    "order": "/api/orders/1",
+    "products": [
+      {
+        "product": "/api/products/2",
+        "quantity": 5,
+        "price": 100.0
+      }
+    ],
+    "id": 2,
+    "links": {
+      "self": "/api/packages/2"
+    }
+  }
+}
