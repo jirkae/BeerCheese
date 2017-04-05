@@ -34,7 +34,6 @@ class AdminSuppliersPage extends React.Component {
         <tr key={supplier.id}>
           <td>{supplier.id}</td>
           <td>{supplier.name}</td>
-          <td>{supplier.email}</td>
           <td>
             <Button
               onClick={() =>
@@ -60,7 +59,6 @@ class AdminSuppliersPage extends React.Component {
             <tr>
               <th>{localizedTexts.AdminSuppliersPage.id}</th>
               <th>{localizedTexts.AdminSuppliersPage.name}</th>
-              <th>{localizedTexts.AdminSuppliersPage.email}</th>
               <th />
             </tr>
             </thead>
