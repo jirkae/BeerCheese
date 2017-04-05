@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Calendar;
@@ -94,7 +93,7 @@ public class AuthResource {
         Date expiration = new Date(new Date().getTime() + HOUR);
 
         String token = createToken(userEntity, expiration);
-        setXAuthCookie(httpServletResponse, (int) expiration.getTime(), token);
+        setXAuthHeader(httpServletResponse, token);
         return ResponseEntity.status(OK).build();
     }
 
@@ -113,7 +112,7 @@ public class AuthResource {
             final String refreshToken = accessJwt.getBody().get(X_TOKEN, String.class);
 
             tokenDao.deleteAllByUserAndToken(accessUserId, refreshToken);
-            setXAuthCookie(httpServletResponse, 0, "");
+            setXAuthHeader(httpServletResponse, "");
             log.info("action=logout-attempt status=success");
             return ResponseEntity.status(OK).build();
         } else {
@@ -162,7 +161,7 @@ public class AuthResource {
                     UserEntity userEntity = userDao.findOne(accessUserId);
                     Date newAccessExpiration = new Date(new Date().getTime() + HOUR);
                     String newToken = createToken(userEntity, newAccessExpiration, refreshToken);
-                    setXAuthCookie(httpServletResponse, (int) newAccessExpiration.getTime(), newToken);
+                    setXAuthHeader(httpServletResponse, newToken);
 
                     log.info("action=refresh-attempt status=success");
                     return ResponseEntity.status(OK).build();
@@ -227,13 +226,7 @@ public class AuthResource {
         return token;
     }
 
-    private void setXAuthCookie(HttpServletResponse httpServletResponse, int expiration, String token) {
-        Cookie tokenCookie = new Cookie(X_AUTH, token);
-        tokenCookie.setMaxAge(expiration);
-        tokenCookie.setHttpOnly(true);
-        tokenCookie.setSecure(true);
-        tokenCookie.setDomain(domain);
-
-        httpServletResponse.addCookie(tokenCookie);
+    private void setXAuthHeader(HttpServletResponse httpServletResponse, String token) {
+        httpServletResponse.setHeader(X_AUTH, token);
     }
 }

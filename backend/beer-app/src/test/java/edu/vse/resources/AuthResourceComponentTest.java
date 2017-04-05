@@ -10,19 +10,13 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static io.jsonwebtoken.SignatureAlgorithm.HS512;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 public class AuthResourceComponentTest extends AbstractAppMvcTest {
-
-    private static final Pattern pattern = Pattern.compile("X-Auth=(.+?);");
 
     @Value("${security.jwt.secret.access}")
     private String accessJwtSecret;
@@ -35,14 +29,7 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .expectResponse()
                 .havingStatusEqualTo(200)
-                .havingHeader("Set-cookie", hasItem(
-                        allOf(
-                                containsString("X-Auth="),
-                                containsString("Secure"),
-                                containsString("HttpOnly")
-                        )
-                        )
-                );
+                .havingHeader("X-Auth=", notNullValue());
     }
 
     @Test
@@ -53,18 +40,15 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .getResponse();
 
-        String xAuthValue = response.getHeader("Set-cookie");
-        Matcher matcher = pattern.matcher(xAuthValue);
-        if (matcher.find()) {
-            String xAuth = matcher.group(1);
-
+        String xAuth = response.getHeader("X-Auth");
+        if (xAuth != null) {
             fire()
                     .delete()
                     .to("/api/auth/login")
                     .withHeader("X-Auth", xAuth)
                     .expectResponse()
                     .havingStatusEqualTo(200)
-                    .havingHeaderEqualTo("Set-cookie", "X-Auth=;Max-Age=0;Secure;HttpOnly");
+                    .havingHeaderEqualTo("X-Auth", "");
         } else {
             fail();
         }
@@ -78,11 +62,8 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .getResponse();
 
-        String xAuthValue = response.getHeader("Set-cookie");
-        Matcher matcher = pattern.matcher(xAuthValue);
-        if (matcher.find()) {
-            String xAuth = matcher.group(1);
-
+        String xAuth = response.getHeader("X-Auth");
+        if (xAuth != null) {
             Response responseRefresh = fire()
                     .get()
                     .to("/api/auth/token")
@@ -91,21 +72,12 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
             responseRefresh.getValidator()
                     .havingStatusEqualTo(200)
-                    .havingHeader("Set-cookie", hasItem(
-                            allOf(
-                                    containsString("X-Auth="),
-                                    containsString("Secure"),
-                                    containsString("HttpOnly")
-                            )
-                            )
-                    );
+                    .havingHeader("X-Auth", notNullValue());
 
-            Matcher matcherRefresh = pattern.matcher(responseRefresh.getHeader("Set-cookie"));
+            String refresh = responseRefresh.getHeader("X-Auth");
 
-            if (matcherRefresh.find()) {
-                String xAuthRefresh = matcherRefresh.group(1);
-
-                assertFalse(xAuth.equalsIgnoreCase(xAuthRefresh));
+            if (refresh != null) {
+                assertFalse(xAuth.equalsIgnoreCase(refresh));
             } else {
                 fail();
             }
