@@ -36,7 +36,6 @@ class AdminProductsPage extends React.Component {
         <tr key={product.id}>
           <td>{product.id}</td>
           <td>{product.name}</td>
-          <td>{product.category}</td>
           <td>{product.price}</td>
           <td>
             <Button
@@ -63,7 +62,6 @@ class AdminProductsPage extends React.Component {
             <tr>
               <th>{localizedTexts.AdminProductsPage.id}</th>
               <th>{localizedTexts.AdminProductsPage.name}</th>
-              <th>{localizedTexts.AdminProductsPage.category}</th>
               <th>{localizedTexts.AdminProductsPage.price}</th>
               <th />
             </tr>
