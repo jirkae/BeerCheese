@@ -17,7 +17,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -84,9 +83,8 @@ public class AuthResource {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
 
-        Authentication authentication;
         try {
-            authentication = authenticationManager.authenticate(authenticationToken);
+            authenticationManager.authenticate(authenticationToken);
         } catch (AuthenticationException e) {
             log.info("action=invalid-login username={}", login.getUsername());
             return ResponseEntity.status(UNAUTHORIZED).build();

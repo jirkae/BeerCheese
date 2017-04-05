@@ -3,6 +3,7 @@ package edu.vse.models;
 import edu.vse.dtos.User;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.AUTO;
 
 @Entity
@@ -36,7 +38,8 @@ public class UserEntity {
 
     private Date birthday;
 
-    @ManyToMany
+    // another code smell - due to closing transaction in basic auth
+    @ManyToMany(fetch = EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "`user`", nullable = false, updatable = false),
             inverseJoinColumns = @JoinColumn(name = "role", nullable = false, updatable = false)

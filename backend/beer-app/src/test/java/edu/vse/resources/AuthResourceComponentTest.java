@@ -1,24 +1,24 @@
 package edu.vse.resources;
 
-import static io.jsonwebtoken.SignatureAlgorithm.HS512;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
+import edu.vse.AbstractAppMvcTest;
+import io.jsonwebtoken.Jwts;
+import net.javacrumbs.restfire.Response;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
-
-import edu.vse.AbstractAppMvcTest;
-import io.jsonwebtoken.Jwts;
-import net.javacrumbs.restfire.Response;
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
@@ -164,5 +164,29 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withHeader("X-Auth", token)
                 .expectResponse()
                 .havingStatusEqualTo(401);
+    }
+
+    @Test
+    public void testBasicAuth() throws Exception {
+        String auth = "Basic " + Base64.getEncoder().encodeToString("dummy:dummyEncryptedPassword".getBytes());
+
+        fire()
+                .get()
+                .withHeader("Authorization", auth)
+                .to("/api/ping/secure")
+                .expectResponse()
+                .havingStatusEqualTo(204);
+    }
+
+    @Test
+    public void testBasicAuthRoles() throws Exception {
+        String auth = "Basic " + Base64.getEncoder().encodeToString("dummy:dummyEncryptedPassword".getBytes());
+
+        fire()
+                .get()
+                .withHeader("Authorization", auth)
+                .to("/api/users")
+                .expectResponse()
+                .havingStatusEqualTo(200);
     }
 }

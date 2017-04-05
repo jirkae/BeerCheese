@@ -15,4 +15,9 @@ public class PingResource {
     @ResponseStatus(NO_CONTENT)
     public void ping() {
     }
+
+    @RequestMapping(value = "/secure", method = GET)
+    @ResponseStatus(NO_CONTENT)
+    public void pingSecure() {
+    }
 }
