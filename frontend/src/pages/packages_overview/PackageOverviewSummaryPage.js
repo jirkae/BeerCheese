@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Col } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
-export default class PackageOverviewSummaryPage extends Component {
+const packageOverviewSummaryPage = (props) => (
 
-  render() {
-    return (
       <Row>
-        <Col sm={6}>
+        <Col xs={6}>
           <h4>{localizedTexts.PackageOverview.summary.personal}</h4>
           Karel Novák<br />
           Korunní 127<br />
@@ -18,12 +16,12 @@ export default class PackageOverviewSummaryPage extends Component {
           <h4>{localizedTexts.PackageOverview.summary.payment}</h4>
           Dobírka
         </Col>
-        <Col sm={6}>
+        <Col xs={6}>
           <h4>{localizedTexts.PackageOverview.summary.packages}</h4>
           Balíček 1<br />
           Balíček 2<br />
         </Col>
       </Row>
-    );
-  }
-}
+);
+
+export default packageOverviewSummaryPage;

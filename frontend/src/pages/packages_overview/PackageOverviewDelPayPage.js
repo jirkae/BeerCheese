@@ -7,9 +7,9 @@ export default class PackageOverviewDelPayPage extends Component {
 
     function makeOptions(name, options) {
       let items = [];
-      options.forEach(function(data){
+      options.forEach(function (data) {
         items.push(
-          <Row>
+          <Row key={name + '-' + data.value}>
             <Col xs={8}>
               <label><input type="radio" name={name} value={data.value} /> {data.label}</label>
             </Col>
@@ -22,19 +22,19 @@ export default class PackageOverviewDelPayPage extends Component {
 
     function makeDeliveryOptions() {
       var options = [
-        {label: 'Česká pošta', value: 'post', price: 15},
-        {label: 'PPL', value: 'ppl', price: 25},
+        { label: 'Česká pošta', value: 'post', price: 15 },
+        { label: 'PPL', value: 'ppl', price: 25 },
       ];
-      
+
       return makeOptions('delivery', options);
     }
 
     function makePaymentOptions() {
       var options = [
-        {label: 'Dobírka', value: 'cod', price: 55},
-        {label: 'Platební karta', value: 'card', price: 0},
+        { label: 'Dobírka', value: 'cod', price: 55 },
+        { label: 'Platební karta', value: 'card', price: 0 },
       ];
-      
+
       return makeOptions('payment', options);
     }
 

@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
-import { Row, Table, Button } from 'reactstrap';
+import { Table, Button, Input } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
 export default class PackageOverviewPackagesPage extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleCountChange = this.handleCountChange.bind(this);
+  }
+
+  handleCountChange(e) {
+    
+  }
+
   render() {
-    function makeRow() {
-      return (<tr>
-        <td>Balíček 1</td>
-        <td><input type="number" value="2" /></td>
-        <td>750</td>
-        <td><Button size="sm" color="secondary">{localizedTexts.PackageOverview.packages.edit}</Button></td>
-        <td><Button size="sm" color="secondary">{localizedTexts.PackageOverview.packages.remove}</Button></td>
-      </tr>);
+    let makeRow = (i) => {
+      return (
+        <tr key={i}>
+          <td>Balíček 1</td>
+          <td><Input type="number" defaultValue="2" onChange={this.handleCountChange} style={{width: '80px'}}/></td>
+          <td>750</td>
+          <td><Button size="sm" color="secondary">{localizedTexts.PackageOverview.packages.edit}</Button></td>
+          <td><Button size="sm" color="secondary">{localizedTexts.PackageOverview.packages.remove}</Button></td>
+        </tr>
+      );
     }
 
-    function getRows() {
+    let getRows = () => {
       let rows = [];
       for (var i = 0; i < 10; i++) {
-        rows.push(makeRow());
+        rows.push(makeRow(i));
       }
       return rows;
     }

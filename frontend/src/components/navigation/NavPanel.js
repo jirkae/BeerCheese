@@ -54,10 +54,10 @@ export default class NavPanel extends React.Component {
   });
 
   cssCartControl = css({
-    'list-style-type': 'none',
-    'min-width': '140px',
-    'padding-left': '20px',
-    'padding-top': '5px'
+    listStyleType: 'none',
+    minWidth: '140px',
+    paddingLeft: '20px',
+    paddingTop: '5px'
   });
 
   cssExpandLink = css({
