@@ -15,7 +15,7 @@ export default class PackageOverviewPackagesPage extends Component {
   }
 
   render() {
-    let makeRow = (i) => {
+    const makeRow = (i) => {
       return (
         <tr key={i}>
           <td>Balíček 1</td>
@@ -27,7 +27,7 @@ export default class PackageOverviewPackagesPage extends Component {
       );
     }
 
-    let getRows = () => {
+    const getRows = () => {
       let rows = [];
       for (var i = 0; i < 10; i++) {
         rows.push(makeRow(i));
