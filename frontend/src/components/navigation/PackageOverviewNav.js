@@ -4,7 +4,7 @@ import { Row, Col, Button, NavLink, NavItem, Nav } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
 export default props => (
-  <Row>
+  <Row style={{"marginTop": '30px',"marginBottom": '30px'}}>
     <Col xl="2" lg="2" md="2" sm="2" xs="3">
       <Button>{localizedTexts.PackageOverviewNav.back}</Button>
     </Col>

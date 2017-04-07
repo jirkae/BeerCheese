@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
 import PackageOverviewNav from '../../components/navigation/PackageOverviewNav';
+import PriceCalculation from '../../components/packageOverview/PriceCalculation';
 
-export default class PackageOverviewRootPage extends Component {
-    render() {
-        return(
-            <Container>
-                <PackageOverviewNav />
-                {this.props.children}
-            </Container>
-        );
-    }
-}
+const packageOverviewRootPage = (props) => (
+    <Container>
+        <PackageOverviewNav />
+        <Row>
+            <Col xs={8}>
+                {props.children}
+            </Col>
+            <Col xs={4}>
+                <PriceCalculation />
+            </Col>
+        </Row>
+    </Container>
+)
+
+export default packageOverviewRootPage;
