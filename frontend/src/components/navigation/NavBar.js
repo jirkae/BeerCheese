@@ -13,6 +13,7 @@ import localizedTexts from '../../text_localization/LocalizedStrings';
 import { connect } from 'react-redux';
 import { openModal } from '../../actions/openModal';
 import { css } from 'glamor';
+import { logout } from '../../actions/auth';
 
 const BEER_IMG_URL = 'https://img.clipartfox.com/c6c3f93fcfdd38440d093b3140604408_beer-free-to-use-clipart-beer-clipart-transparent-background_985-1280.png';
 
@@ -76,8 +77,8 @@ class NavBar extends Component {
             </NavItem>
             <NavItem>
               <NavLink
-                tag={Link}
-                to="#"
+                // tag={Link}
+                // to="#"
                 onClick={() =>
                   this.props.openModal({ name: 'logIn', data: null })}
               >
@@ -90,7 +91,7 @@ class NavBar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink tag={Link} to="#" onClick={() => console.log('log out')}>
+              <NavLink tag={Link} to="#" onClick={() => this.props.logout()}>
                 {localizedTexts.NavBar.logOut}
               </NavLink>
             </NavItem>
@@ -107,5 +108,6 @@ class NavBar extends Component {
 }
 
 export default connect(null, {
-  openModal
+  openModal,
+  logout
 })(NavBar);

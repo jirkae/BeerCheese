@@ -20,28 +20,23 @@ public class Package {
 
     private final Integer id;
     private final String order;
-    private final String wrapping;
     private final List<EmbeddedProduct> products;
     private final Links links;
 
-    public Package(Integer id, Integer order, Integer wrapping, List<EmbeddedProduct> products) {
+    public Package(Integer id, Integer order, List<EmbeddedProduct> products) {
         this.id = id;
         this.order = UriConstants.order.expand(order).toString();
-        this.wrapping = UriConstants.wrapping.expand(wrapping).toString();
         this.products = products;
         this.links = new Links(id);
     }
 
     @JsonCreator
-    public Package(@JsonProperty("id") Integer id,
-                   @JsonProperty("order") String order,
-                   @JsonProperty("wrapping") String wrapping,
+    public Package(@JsonProperty("order") String order,
                    @JsonProperty("products") List<EmbeddedProduct> products) {
-        this.id = id;
         this.order = order;
-        this.wrapping = wrapping;
         this.products = products;
-        this.links = new Links(id);
+        this.id = null;
+        this.links = null;
     }
 
     public Integer getId() {
@@ -50,10 +45,6 @@ public class Package {
 
     public String getOrder() {
         return order;
-    }
-
-    public String getWrapping() {
-        return wrapping;
     }
 
     public List<EmbeddedProduct> getProducts() {
@@ -98,12 +89,11 @@ public class Package {
         @JsonCreator
         public EmbeddedProduct(@JsonProperty("product") String product,
                                @JsonProperty("quantity") Integer quantity,
-                               @JsonProperty("message") String message,
-                               @JsonProperty("price") Float price) {
+                               @JsonProperty("message") String message) {
             this.product = product;
             this.quantity = quantity;
             this.message = message;
-            this.price = price;
+            this.price = null;
         }
 
         public String getProduct() {

@@ -1,0 +1,8 @@
+{
+  "timestamp": "${json-unit.ignore}",
+  "status": 404,
+  "error": "Not Found",
+  "exception": "edu.vse.exceptions.NotFoundException",
+  "message": "Package not found",
+  "path": "/api/packages/300"
+}

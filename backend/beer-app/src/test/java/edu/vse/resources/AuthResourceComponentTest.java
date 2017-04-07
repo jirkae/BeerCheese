@@ -1,28 +1,23 @@
 package edu.vse.resources;
 
-import static io.jsonwebtoken.SignatureAlgorithm.HS512;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.fail;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
-
 import edu.vse.AbstractAppMvcTest;
 import io.jsonwebtoken.Jwts;
 import net.javacrumbs.restfire.Response;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.util.Base64;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+import static org.springframework.http.HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 public class AuthResourceComponentTest extends AbstractAppMvcTest {
-
-    private static final Pattern pattern = Pattern.compile("X-Auth=(.+?);");
 
     @Value("${security.jwt.secret.access}")
     private String accessJwtSecret;
@@ -35,14 +30,8 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .expectResponse()
                 .havingStatusEqualTo(200)
-                .havingHeader("Set-cookie", hasItem(
-                        allOf(
-                                containsString("X-Auth="),
-                                containsString("Secure"),
-                                containsString("HttpOnly")
-                        )
-                        )
-                );
+                .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
+                .havingHeader("X-Auth=", notNullValue());
     }
 
     @Test
@@ -53,18 +42,17 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .getResponse();
 
-        String xAuthValue = response.getHeader("Set-cookie");
-        Matcher matcher = pattern.matcher(xAuthValue);
-        if (matcher.find()) {
-            String xAuth = matcher.group(1);
-
+        response.getValidator().havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth");
+        String xAuth = response.getHeader("X-Auth");
+        if (xAuth != null) {
             fire()
                     .delete()
                     .to("/api/auth/login")
                     .withHeader("X-Auth", xAuth)
                     .expectResponse()
                     .havingStatusEqualTo(200)
-                    .havingHeaderEqualTo("Set-cookie", "X-Auth=;Max-Age=0;Secure;HttpOnly");
+                    .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
+                    .havingHeaderEqualTo("X-Auth", "");
         } else {
             fail();
         }
@@ -78,11 +66,8 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withBody("{\"login\":{\"username\":\"dummy\",\"password\":\"dummyEncryptedPassword\"}}")
                 .getResponse();
 
-        String xAuthValue = response.getHeader("Set-cookie");
-        Matcher matcher = pattern.matcher(xAuthValue);
-        if (matcher.find()) {
-            String xAuth = matcher.group(1);
-
+        String xAuth = response.getHeader("X-Auth");
+        if (xAuth != null) {
             Response responseRefresh = fire()
                     .get()
                     .to("/api/auth/token")
@@ -91,21 +76,13 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
 
             responseRefresh.getValidator()
                     .havingStatusEqualTo(200)
-                    .havingHeader("Set-cookie", hasItem(
-                            allOf(
-                                    containsString("X-Auth="),
-                                    containsString("Secure"),
-                                    containsString("HttpOnly")
-                            )
-                            )
-                    );
+                    .havingHeaderEqualTo(ACCESS_CONTROL_EXPOSE_HEADERS, "X-Auth")
+                    .havingHeader("X-Auth", notNullValue());
 
-            Matcher matcherRefresh = pattern.matcher(responseRefresh.getHeader("Set-cookie"));
+            String refresh = responseRefresh.getHeader("X-Auth");
 
-            if (matcherRefresh.find()) {
-                String xAuthRefresh = matcherRefresh.group(1);
-
-                assertFalse(xAuth.equalsIgnoreCase(xAuthRefresh));
+            if (refresh != null) {
+                assertFalse(xAuth.equalsIgnoreCase(refresh));
             } else {
                 fail();
             }
@@ -164,5 +141,29 @@ public class AuthResourceComponentTest extends AbstractAppMvcTest {
                 .withHeader("X-Auth", token)
                 .expectResponse()
                 .havingStatusEqualTo(401);
+    }
+
+    @Test
+    public void testBasicAuth() throws Exception {
+        String auth = "Basic " + Base64.getEncoder().encodeToString("dummy:dummyEncryptedPassword".getBytes());
+
+        fire()
+                .get()
+                .withHeader("Authorization", auth)
+                .to("/api/ping/secure")
+                .expectResponse()
+                .havingStatusEqualTo(204);
+    }
+
+    @Test
+    public void testBasicAuthRoles() throws Exception {
+        String auth = "Basic " + Base64.getEncoder().encodeToString("dummy:dummyEncryptedPassword".getBytes());
+
+        fire()
+                .get()
+                .withHeader("Authorization", auth)
+                .to("/api/users")
+                .expectResponse()
+                .havingStatusEqualTo(200);
     }
 }

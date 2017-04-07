@@ -3,91 +3,83 @@ import { Container, Button, Table, Jumbotron } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 import { connect } from 'react-redux';
 import { openModal } from '../../actions/openModal';
+import api from '../../api';
 
-const mockProducts = [
-  {
-    id: 1,
-    category: '/api/categories/1',
-    name: 'Beer',
-    price: 100.0,
-    quantity: 2,
-    priceAfterDiscount: 90.0,
-    active: true,
-    supplier: '/api/suppliers/1',
-    image: '/images/1.jpeg',
-    description: 'test description',
-    links: {
-      self: '/api/products/1'
-    }
-  },
-  {
-    id: 2,
-    category: '/api/categories/1',
-    name: 'Beer',
-    price: 100.0,
-    quantity: 2,
-    priceAfterDiscount: 90.0,
-    active: true,
-    supplier: '/api/suppliers/1',
-    image: '/images/1.jpeg',
-    description: 'test description',
-    links: {
-      self: '/api/products/1'
-    }
+class AdminProductsPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: []
+    };
   }
-];
 
-const getTableContent = openModal => {
-  return mockProducts.map(product => {
+  componentDidMount() {
+    api.get('products')
+      .then((response) => {
+        if (response) {
+          this.setState({
+            products: response.data.products.items.map(item => {
+              return item.product
+            })
+          });
+        }
+      })
+      .catch(response => {
+        console.log('error ', response);
+      });
+  }
+
+  getTableContent = () => {
+    return this.state.products.map(product => {
+      return (
+        <tr key={product.id}>
+          <td>{product.id}</td>
+          <td>{product.name}</td>
+          <td>{product.price}</td>
+          <td>
+            <Button
+              onClick={() =>
+                this.props.openModal({name: 'editProductAdmin', data: product})}
+            >
+              <i className="fa fa-pencil"/>
+            </Button>
+          </td>
+        </tr>
+      );
+    });
+  };
+
+  render() {
     return (
-      <tr key={product.id}>
-        <td>{product.id}</td>
-        <td>{product.name}</td>
-        <td>{product.category}</td>
-        <td>{product.price}</td>
-        <td>{product.supplier}</td>
-        <td>
+      <div>
+        <Jumbotron>
+          <h1 className="display-4">{localizedTexts.NavBar.products}</h1>
+        </Jumbotron>
+        <Container>
+          <Table striped>
+            <thead>
+            <tr>
+              <th>{localizedTexts.AdminProductsPage.id}</th>
+              <th>{localizedTexts.AdminProductsPage.name}</th>
+              <th>{localizedTexts.AdminProductsPage.price}</th>
+              <th />
+            </tr>
+            </thead>
+            <tbody>
+            {this.getTableContent()}
+            </tbody>
+          </Table>
           <Button
-            onClick={() =>
-              openModal({ name: 'editProductAdmin', data: product })}
+            onClick={() => this.props.openModal({name: 'newProductAdmin', data: null})}
           >
-            <i className="fa fa-pencil" />
+            {localizedTexts.AdminProductsPage.btnAddProduct}
           </Button>
-        </td>
-      </tr>
+        </Container>
+      </div>
     );
-  });
-};
-
-const AdminProductsPage = props => (
-  <div>
-    <Jumbotron>
-      <h1 className="display-4">{localizedTexts.NavBar.products}</h1>
-    </Jumbotron>
-    <Container>
-      <Table striped>
-        <thead>
-          <tr>
-            <th>{localizedTexts.AdminProductsPage.id}</th>
-            <th>{localizedTexts.AdminProductsPage.name}</th>
-            <th>{localizedTexts.AdminProductsPage.category}</th>
-            <th>{localizedTexts.AdminProductsPage.price}</th>
-            <th>{localizedTexts.AdminProductsPage.supplier}</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>
-          {getTableContent(props.openModal)}
-        </tbody>
-      </Table>
-      <Button
-        onClick={() => props.openModal({ name: 'newProductAdmin', data: null })}
-      >
-        {localizedTexts.AdminProductsPage.btnAddProduct}
-      </Button>
-    </Container>
-  </div>
-);
+  }
+}
 
 export default connect(null, {
   openModal

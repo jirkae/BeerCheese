@@ -1,6 +1,7 @@
 package edu.vse.configuration;
 
 import edu.vse.daos.UserDao;
+import edu.vse.filters.BasicAuthFilter;
 import edu.vse.filters.JwtFilter;
 import edu.vse.services.SecurityUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${env.production}")
     private boolean inProduction;
 
-    @Value("${security.jwt.secret.access}")
-    private String accessJwtSecret;
-
-
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private JwtFilter jwtFilter;
+
+    @Autowired
+    private BasicAuthFilter basicAuthFilter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -54,7 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
         // add JwtFilter after SecurityContextPersistenceFilter, so context is not overwritten by the new context
-        http.addFilterAfter(jwtFilter(), SecurityContextPersistenceFilter.class);
+        http.addFilterAfter(jwtFilter, SecurityContextPersistenceFilter.class);
+        http.addFilterAfter(basicAuthFilter, JwtFilter.class);
 
         // set access rules
         http.authorizeRequests()
@@ -69,6 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/addresses**").authenticated()
                 .antMatchers("/api/packages**").authenticated()
                 .antMatchers("/api/orders**").authenticated()
+                .antMatchers("/api/packages**").authenticated()
+                .antMatchers("/api/ping/secure").authenticated()
                 .antMatchers("/**").permitAll();
     }
 
@@ -93,10 +99,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsServiceInit() {
         return new SecurityUserDetailService(userDao);
-    }
-
-    @Bean
-    public JwtFilter jwtFilter() {
-        return new JwtFilter(accessJwtSecret);
     }
 }

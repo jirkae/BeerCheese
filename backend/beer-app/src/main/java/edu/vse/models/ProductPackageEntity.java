@@ -1,5 +1,7 @@
 package edu.vse.models;
 
+import edu.vse.dtos.Package;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -88,5 +90,9 @@ public class ProductPackageEntity {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Package.EmbeddedProduct toDto() {
+        return new Package.EmbeddedProduct(id, quantity, message, price);
     }
 }

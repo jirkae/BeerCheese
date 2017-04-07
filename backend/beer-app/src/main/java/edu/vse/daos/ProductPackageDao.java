@@ -8,4 +8,8 @@ import java.util.List;
 public interface ProductPackageDao extends JpaRepository<ProductPackageEntity, Integer> {
 
     List<ProductPackageEntity> findByPackageEntity_IdIn(List<Integer> ids);
+
+    List<ProductPackageEntity> findByPackageEntity_Id(int id);
+
+    int deleteAllByPackageEntity_Id(int id);
 }

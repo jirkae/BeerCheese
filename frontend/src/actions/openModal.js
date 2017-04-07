@@ -1,22 +1,13 @@
-import { defaultDispatch } from './common';
+import { defaultDispatch, ommitState } from './common';
+import { MODAL } from '../reducers/index';
 
-export const hideModals = () => defaultDispatch(
-  {
-    name:null,
-    data:null
-  },
-  (state, payload) => payload
-);
+const defaultDispatchModal = (payload, reducer = ommitState) =>
+  defaultDispatch(MODAL, payload, reducer);
 
-export const openModal = (payload) => {
-  console.log(payload);
-  return defaultDispatch(
-    payload,
-    (state, payload) => payload
-  );
-};
+export const hideModals = () =>
+  defaultDispatchModal({
+    name: null,
+    data: null
+  });
 
-
-
-
-
+export const openModal = payload => defaultDispatchModal(payload);
