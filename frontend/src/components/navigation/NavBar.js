@@ -17,6 +17,10 @@ import { logout } from '../../actions/auth';
 
 const BEER_IMG_URL = 'https://img.clipartfox.com/c6c3f93fcfdd38440d093b3140604408_beer-free-to-use-clipart-beer-clipart-transparent-background_985-1280.png';
 
+const AuthNav = ({ isAuth, children }) => {
+  return isAuth ? <div>{children}</div> : null;
+};
+
 class NavBar extends Component {
   state = {
     isOpen: false
@@ -29,18 +33,19 @@ class NavBar extends Component {
   };
 
   render() {
+    const { auth } = this.props;
     return (
       <Navbar color="faded" light toggleable>
         <NavbarBrand tag={Link} to="/">
-          <h3>
-            <img
-              src={BEER_IMG_URL}
-              alt="beerIcon"
-              className={`${this.cssBeerIcon}`}
-            />
-            {' '}
+          <img
+            src={BEER_IMG_URL}
+            alt="beerIcon"
+            className={`${this.cssBeerIcon}`}
+          />
+          <span>
+            &nbsp;
             Pivní suvenýry
-          </h3>
+          </span>
         </NavbarBrand>
         <NavbarToggler right onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -65,34 +70,29 @@ class NavBar extends Component {
                 {localizedTexts.NavBar.mainPage}
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem tag={AuthNav} isAuth={auth.isAuthenticated}>
               <NavLink tag={Link} to="/package-overview">
                 {localizedTexts.NavBar.packagesOverview}
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/create_package_beer">
-                {localizedTexts.NavBar.createPackage}
+            <NavItem tag={AuthNav} isAuth={auth.isAuthenticated}>
+              <NavLink tag={Link} to="#" onClick={() => this.props.logout()}>
+                {localizedTexts.NavBar.logOut}
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem tag={AuthNav} isAuth={!auth.isAuthenticated}>
               <NavLink
-                // tag={Link}
-                // to="#"
+                tag={Link}
+                to="#"
                 onClick={() =>
                   this.props.openModal({ name: 'logIn', data: null })}
               >
                 {localizedTexts.NavBar.logIn}
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem tag={AuthNav} isAuth={!auth.isAuthenticated}>
               <NavLink tag={Link} to="/register">
                 {localizedTexts.NavBar.signUp}
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="#" onClick={() => this.props.logout()}>
-                {localizedTexts.NavBar.logOut}
               </NavLink>
             </NavItem>
           </Nav>
@@ -102,12 +102,15 @@ class NavBar extends Component {
   }
 
   cssBeerIcon = css({
-    height: '70px',
-    width: '70px'
+    height: '50px',
+    width: '50px'
   });
 }
 
-export default connect(null, {
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(mapStateToProps, {
   openModal,
   logout
 })(NavBar);

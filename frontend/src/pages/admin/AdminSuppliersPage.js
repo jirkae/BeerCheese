@@ -6,7 +6,6 @@ import { openModal } from '../../actions/openModal';
 import api from '../../api';
 
 class AdminSuppliersPage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -15,11 +14,14 @@ class AdminSuppliersPage extends React.Component {
   }
 
   componentDidMount() {
-    api.get('suppliers')
-      .then((response) => {
+    api
+      .get('suppliers')
+      .then(response => {
         if (response) {
           this.setState({
-            suppliers: response.data.suppliers.items.map(item => {return item.supplier})
+            suppliers: response.data.suppliers.items.map(item => {
+              return item.supplier;
+            })
           });
         }
       })
@@ -37,9 +39,12 @@ class AdminSuppliersPage extends React.Component {
           <td>
             <Button
               onClick={() =>
-                this.props.openModal({name: 'editSupplierAdmin', data: supplier})}
+                this.props.openModal({
+                  name: 'editSupplierAdmin',
+                  data: supplier
+                })}
             >
-              <i className="fa fa-pencil"/>
+              <i className="fa fa-pencil" />
             </Button>
           </td>
         </tr>
@@ -56,19 +61,19 @@ class AdminSuppliersPage extends React.Component {
         <Container>
           <Table striped>
             <thead>
-            <tr>
-              <th>{localizedTexts.AdminSuppliersPage.id}</th>
-              <th>{localizedTexts.AdminSuppliersPage.name}</th>
-              <th />
-            </tr>
+              <tr>
+                <th>{localizedTexts.AdminSuppliersPage.id}</th>
+                <th>{localizedTexts.AdminSuppliersPage.name}</th>
+                <th />
+              </tr>
             </thead>
             <tbody>
-            {this.getTableContent()}
+              {this.getTableContent()}
             </tbody>
           </Table>
           <Button
             onClick={() =>
-              this.props.openModal({name: 'newSupplierAdmin', data: null})}
+              this.props.openModal({ name: 'newSupplierAdmin', data: null })}
           >
             {localizedTexts.AdminSuppliersPage.btnAddSupplier}
           </Button>

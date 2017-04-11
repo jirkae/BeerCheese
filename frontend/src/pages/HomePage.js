@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Jumbotron,
   Button,
   Nav,
   NavItem,
@@ -12,6 +11,7 @@ import {
 import ProductList from '../components/product/ProductList';
 import WelcomeWarningPopUp from '../components/popup/WelcomeWarningPopUp';
 import localizedTexts from '../text_localization/LocalizedStrings';
+import { Link } from 'react-router';
 
 const mockBeerCategories = ['black', 'lager'];
 const mockSupplementsCategories = ['glass', 'beerMat'];
@@ -49,7 +49,15 @@ export default class HomePage extends Component {
       <Row>
         <WelcomeWarningPopUp />
         <Col xl="2" lg="2" md="4" sm="12" xs="12">
-          <Nav vertical>
+          <Nav pills vertical>
+            <Button
+              outline
+              color="primary"
+              tag={Link}
+              to="/create_package_beer"
+            >
+              {localizedTexts.HomePage.createPackage}
+            </Button>
             <NavbarBrand>{localizedTexts.HomePage.categories}</NavbarBrand>
             <NavItem>
               <NavLink
@@ -75,19 +83,14 @@ export default class HomePage extends Component {
               </NavLink>
             </NavItem>
             {this.renderNavSupplementsItems()}
-            <NavItem>
-              <NavLink href="#">
-                {localizedTexts.HomePage.createPackage}
-              </NavLink>
-            </NavItem>
           </Nav>
         </Col>
         <Col xl="10" lg="10" md="8" sm="12" xs="12">
-          <Jumbotron>
-            <ProductList />
-            <Button>{localizedTexts.HomePage.previous}</Button>
-            <Button>{localizedTexts.HomePage.next}</Button>
-          </Jumbotron>
+
+          <ProductList />
+          <Button>{localizedTexts.HomePage.previous}</Button>
+          <Button>{localizedTexts.HomePage.next}</Button>
+
         </Col>
       </Row>
     );

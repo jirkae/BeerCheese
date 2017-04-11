@@ -1,13 +1,10 @@
-import axios, { CancelToken } from 'axios';
+import axios from 'axios';
+
+const BASE_URL = 'https://beer-jansyk13.rhcloud.com/api';
 
 const api = axios.create({
-  //TODO pull this into config file
-  baseURL: 'https://beer-jansyk13.rhcloud.com/api'
+  baseURL: BASE_URL
 });
-
-export function getCancelTokenSource() {
-  return CancelToken.source();
-}
 
 export default api;
 
@@ -26,7 +23,7 @@ const config = {
   // `baseURL` will be prepended to `url` unless `url` is absolute.
   // It can be convenient to set `baseURL` for an instance of axios to pass relative URLs
   // to methods of that instance.
-  baseURL: 'https://some-domain.com/api/',
+  baseURL: 'https://beer-jansyk13.rhcloud.com/api',
 
   // `transformRequest` allows changes to the request data before it is sent to the server
   // This is only applicable for request methods 'PUT', 'POST', and 'PATCH'
@@ -106,8 +103,4 @@ const config = {
   // `maxRedirects` defines the maximum number of redirects to follow in node.js.
   // If set to 0, no redirects will be followed.
   maxRedirects: 5 // default
-
-  // `cancelToken` specifies a cancel token that can be used to cancel the request
-  // (see Cancellation section below for details)
-  // cancelToken: new CancelToken(function(cancel) {})
 };

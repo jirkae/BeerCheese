@@ -6,15 +6,24 @@ import PageNotFound from './pages/PageNotFound';
 import RootPage from './pages/RootPage';
 import AdminLoginPage from './pages/admin/AdminLogInPage';
 import CreatePackageBeerPage from './pages/configurator/CreatePackageBeerPage';
-import CreatePackageMessagePage from './pages/configurator/CreatePackageMessagePage';
-import CreatePackagePackagePage from './pages/configurator/CreatePackagePackagePage';
-import CreatePackageSummaryPage from './pages/configurator/CreatePackageSummaryPage';
-import PackageOverviewRootPage from './pages/packages_overview/PackageOverviewRootPage';
-import CreatePackageSupplementPage from './pages/configurator/CreatePackageSupplementPage';
-import PackageOverviewSummaryPage from './pages/packages_overview/PackageOverviewSummaryPage';
-import PackageOverviewPackagesPage from './pages/packages_overview/PackageOverviewPackagesPage';
-import PackageOverviewDelPayPage from './pages/packages_overview/PackageOverviewDelPayPage';
-import PackageOverviewDeliveryDetailsPage from './pages/packages_overview/PackageOverviewDeliveryDetailsPage';
+import CreatePackageMessagePage
+  from './pages/configurator/CreatePackageMessagePage';
+import CreatePackagePackagePage
+  from './pages/configurator/CreatePackagePackagePage';
+import CreatePackageSummaryPage
+  from './pages/configurator/CreatePackageSummaryPage';
+import PackageOverviewRootPage
+  from './pages/packages_overview/PackageOverviewRootPage';
+import CreatePackageSupplementPage
+  from './pages/configurator/CreatePackageSupplementPage';
+import PackageOverviewSummaryPage
+  from './pages/packages_overview/PackageOverviewSummaryPage';
+import PackageOverviewPackagesPage
+  from './pages/packages_overview/PackageOverviewPackagesPage';
+import PackageOverviewDelPayPage
+  from './pages/packages_overview/PackageOverviewDelPayPage';
+import PackageOverviewDeliveryDetailsPage
+  from './pages/packages_overview/PackageOverviewDeliveryDetailsPage';
 import RegistrationPage from './pages/RegistrationPage';
 import ContactPage from './pages/ContactPage';
 import BusinessConditionsPage from './pages/BusinessConditionsPage';
@@ -27,36 +36,68 @@ import AdminSuppliersPage from './pages/admin/AdminSuppliersPage';
 
 export function createRoutes(store) {
   const requireAuthAdmin = (nextState, replace) => {
-    /*const { user } = store.getState();
-    if (!user) {
+    //right now we allow anyone who is authenticated
+    const { auth } = store.getState();
+    if (!auth.isAuthenticated) {
       replace('/admin');
-    }*/
+    }
   };
 
   return (
     <Route path="/">
       <Route path="/admin">
         <IndexRoute component={AdminLoginPage} />
-        <Route component={AdminRootPage} >
-          <Route path="customers" component={AdminCustomersPage} onEnter={requireAuthAdmin}/>
-          <Route path="orders" component={AdminOrdersPage} onEnter={requireAuthAdmin}/>
-          <Route path="products" component={AdminProductsPage} onEnter={requireAuthAdmin}/>
-          <Route path="suppliers" component={AdminSuppliersPage} onEnter={requireAuthAdmin}/>
+        <Route component={AdminRootPage}>
+          <Route
+            path="customers"
+            component={AdminCustomersPage}
+            onEnter={requireAuthAdmin}
+          />
+          <Route
+            path="orders"
+            component={AdminOrdersPage}
+            onEnter={requireAuthAdmin}
+          />
+          <Route
+            path="products"
+            component={AdminProductsPage}
+            onEnter={requireAuthAdmin}
+          />
+          <Route
+            path="suppliers"
+            component={AdminSuppliersPage}
+            onEnter={requireAuthAdmin}
+          />
         </Route>
       </Route>
-      <Route component={RootPage} >
+      <Route component={RootPage}>
         <IndexRoute component={HomePage} />
         <Route path="/register" component={RegistrationPage} />
         <Route path="/create_package_beer" component={CreatePackageBeerPage} />
-        <Route path="/create_package_message" component={CreatePackageMessagePage} />
-        <Route path="/create_package_package" component={CreatePackagePackagePage} />
-        <Route path="/create_package_summary" component={CreatePackageSummaryPage} />
-        <Route path="/create_package_supplement" component={CreatePackageSupplementPage} />
-        <Route path="/package-overview" component={PackageOverviewRootPage} >
+        <Route
+          path="/create_package_message"
+          component={CreatePackageMessagePage}
+        />
+        <Route
+          path="/create_package_package"
+          component={CreatePackagePackagePage}
+        />
+        <Route
+          path="/create_package_summary"
+          component={CreatePackageSummaryPage}
+        />
+        <Route
+          path="/create_package_supplement"
+          component={CreatePackageSupplementPage}
+        />
+        <Route path="/package-overview" component={PackageOverviewRootPage}>
           <IndexRoute component={PackageOverviewPackagesPage} />
           <Route path="summary" component={PackageOverviewSummaryPage} />
           <Route path="del-pay" component={PackageOverviewDelPayPage} />
-          <Route path="del-details" component={PackageOverviewDeliveryDetailsPage} />
+          <Route
+            path="del-details"
+            component={PackageOverviewDeliveryDetailsPage}
+          />
         </Route>
         <Route path="/contact" component={ContactPage} />
         <Route path="/conditions" component={BusinessConditionsPage} />

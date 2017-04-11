@@ -26,18 +26,19 @@ import api from '../api';
 
 function callApi(endpoint, authenticated, config = {}) {
   let token = localStorage.getItem('x-auth') || null;
-  // let config = {};Ff
   if (authenticated) {
     if (token) {
-      config.headers = Object.assign({},config.headers, { 'x-auth': token });
+      config.headers = Object.assign({}, config.headers, { 'x-auth': token });
     } else {
       const error = { message: 'No authentication token' };
       return Promise.reject({ error });
-      // throw 'No token saved!';
     }
   }
 
-  return api(endpoint, config).catch(err => console.log(err));
+  const request = api(endpoint, config);
+  request.catch(err => console.log(err));
+
+  return request;
 }
 
 export const CALL_API = 'Call API';
@@ -70,13 +71,14 @@ export default store =>
       }
 
       const [requestAction, successAction, errorAction] = actions;
-      
+
       next(requestAction());
       // Passing the authenticated boolean back in our data will let us distinguish between normal and secret quotes
       return callApi(endpoint, authenticated, config)
         .then(response => {
-          // console.log(response);
           next(successAction({ response, authenticated }));
         })
-        .catch(error => {next(errorAction({ error }))});
+        .catch(error => {
+          next(errorAction({ error }));
+        });
     };
