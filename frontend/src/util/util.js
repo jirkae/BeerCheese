@@ -29,9 +29,10 @@ export function isString(obj) {
 export function deepValue(obj, path) {
   const arrPath = path.split('.');
   for (let i = 0, len = arrPath.length; i < len; i++) {
-    if (!isUndefined(obj[path[i]])) {
-      obj = obj[path[i]];
-    }
+    if (!isUndefined(obj[arrPath[i]])) {
+      obj = obj[arrPath[i]];
+    } else
+      return null;
   }
   return obj;
 }
