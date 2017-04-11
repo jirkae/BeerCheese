@@ -1,10 +1,8 @@
-import {
-  defaultDispatch,
-  dispatchToAPI,
-  ommitState
-} from './common';
+import { defaultDispatch, dispatchToAPI, ommitState } from './common';
 import { AUTH } from '../reducers/index';
 import { isNullOrUndef } from '../util/util';
+import { getCurrentUser } from './currentUser';
+import { hideModals } from './openModal';
 
 const defaultDispatchAuth = (payload, reducer = ommitState) =>
   defaultDispatch(AUTH, payload, reducer);
@@ -41,25 +39,26 @@ const loginSuccess = data =>
     ) {
       localStorage.setItem('x-auth', data.response.headers['x-auth']);
       dispatch(loginReceived());
+      dispatch(getCurrentUser());
+      dispatch(hideModals());
     } else {
       dispatch(loginError('No auth token received'));
     }
   };
 
-const logoutRequested = () =>
-  defaultDispatchAuth({
+const logoutRequested = () => {
+  localStorage.removeItem('x-auth');
+  return defaultDispatchAuth({
     isFetching: true,
     isAuthenticated: true
   });
+};
 
 const logoutSuccess = () => {
-  localStorage.setItem('x-auth', null);
-  return defaultDispatchAuth(
-    {
-      isFetching: false,
-      isAuthenticated: false
-    }
-  );
+  return defaultDispatchAuth({
+    isFetching: false,
+    isAuthenticated: false
+  });
 };
 
 /* Thunks */

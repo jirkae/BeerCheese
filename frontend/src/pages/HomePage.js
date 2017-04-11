@@ -49,7 +49,7 @@ export default class HomePage extends Component {
       <Row>
         <WelcomeWarningPopUp />
         <Col xl="2" lg="2" md="4" sm="12" xs="12">
-          <Nav vertical>
+          <Nav pills vertical>
             <NavbarBrand>{localizedTexts.HomePage.categories}</NavbarBrand>
             <NavItem>
               <NavLink

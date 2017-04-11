@@ -1,5 +1,4 @@
 import React from 'react';
-import { Jumbotron } from 'reactstrap';
 import { Link } from 'react-router';
 import { Row, Col } from 'reactstrap';
 import localizedStrings from '../../text_localization/LocalizedStrings';
@@ -17,7 +16,7 @@ export default class Cart extends React.Component {
   render() {
     return (
       <Col xs={2}>
-        <Jumbotron className={`${this.cssNavPanel}`}>
+
           <Row>
             <Col xs="7">
               <ul className={`${this.cssCartControl}`}>
@@ -43,8 +42,8 @@ export default class Cart extends React.Component {
               </Link>
             </Col>
           </Row>
-        </Jumbotron>
         {this.state.showCartContent ? <CartContent /> : ''}
+
       </Col>
     );
   }

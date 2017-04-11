@@ -16,6 +16,8 @@ import Cart from './Cart';
 
 const BEER_IMG_URL = 'https://img.clipartfox.com/c6c3f93fcfdd38440d093b3140604408_beer-free-to-use-clipart-beer-clipart-transparent-background_985-1280.png';
 
+
+
 export default class NavBar extends Component {
   state = {
     isOpen: false
@@ -31,15 +33,15 @@ export default class NavBar extends Component {
     return (
       <Navbar light toggleable>
         <NavbarBrand tag={Link} to="/">
-          <h3>
-            <img
-              src={BEER_IMG_URL}
-              alt="beerIcon"
-              className={`${this.cssBeerIcon}`}
-            />
-            {' '}
+          <img
+            src={BEER_IMG_URL}
+            alt="beerIcon"
+            className={`${this.cssBeerIcon}`}
+          />
+          <span>
+            &nbsp;
             Pivní suvenýry
-          </h3>
+          </span>
         </NavbarBrand>
         <NavbarToggler right onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -67,7 +69,7 @@ export default class NavBar extends Component {
   }
 
   cssBeerIcon = css({
-    height: '70px',
-    width: '70px'
+    height: '50px',
+    width: '50px'
   });
 }
