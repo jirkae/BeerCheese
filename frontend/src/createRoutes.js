@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import PageNotFound from './pages/PageNotFound';
 import RootPage from './pages/RootPage';
 import AdminLoginPage from './pages/admin/AdminLogInPage';
+import CreatePackageRootPage from './pages/configurator/CreatePackageRootPage';
 import CreatePackageBeerPage from './pages/configurator/CreatePackageBeerPage';
 import CreatePackageMessagePage from './pages/configurator/CreatePackageMessagePage';
 import CreatePackagePackagePage from './pages/configurator/CreatePackagePackagePage';
@@ -47,11 +48,13 @@ export function createRoutes(store) {
       <Route component={RootPage} >
         <IndexRoute component={HomePage} />
         <Route path="/register" component={RegistrationPage} />
-        <Route path="/create_package_beer" component={CreatePackageBeerPage} />
-        <Route path="/create_package_message" component={CreatePackageMessagePage} />
-        <Route path="/create_package_package" component={CreatePackagePackagePage} />
-        <Route path="/create_package_summary" component={CreatePackageSummaryPage} />
-        <Route path="/create_package_supplement" component={CreatePackageSupplementPage} />
+        <Route path="/create-package" component={CreatePackageRootPage} >
+          <IndexRoute component={CreatePackageBeerPage} />
+          <Route path="supplement" component={CreatePackageSupplementPage} />
+          <Route path="package" component={CreatePackagePackagePage} />
+          <Route path="message" component={CreatePackageMessagePage} />
+          <Route path="summary" component={CreatePackageSummaryPage} />
+        </Route>
         <Route path="/package-overview" component={PackageOverviewRootPage} >
           <IndexRoute component={PackageOverviewPackagesPage} />
           <Route path="summary" component={PackageOverviewSummaryPage} />

@@ -38,11 +38,11 @@ class Product extends Component {
     if(this.state.product){
       const { product } = this.state;
       return(
-        <Card onClick={() => {this.props.openModal({name:'productDetails', data: product})}}>
+        <Card onClick={() => {this.props.openModal({name:'productDetails', data: product})}} style={{margin: '0 25px 25px 0'}}>
           <CardBlock>
             <CardTitle>{product.name}</CardTitle>
           </CardBlock>
-          <img width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="product" />
+          <img width={this.props.size} src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="product" />
           <CardBlock>
             <CardSubtitle>{product.priceAfterDiscount}</CardSubtitle>
             <CardLink href="#">{localizedTexts.Product.btnAddToChart}</CardLink>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row } from 'reactstrap';
+import { Row } from 'reactstrap';
 import LazyLoad from "react-lazyload";
 import Loading from "../images/Loading";
 import Product from "./Product";
@@ -32,7 +32,7 @@ export default class ProductList extends Component {
     for(let i = 0; i < productIds.length; i++) {
       render.push(
         <LazyLoad placeholder={<Loading />} key={productIds[i]} height="50px" >
-          <Product productId={productIds[i]} />
+          <Product productId={productIds[i]} size={this.props.itemSize}/>
         </LazyLoad>
       )
     }
@@ -42,11 +42,9 @@ export default class ProductList extends Component {
 
   render(){
     return (
-      <Container>
-        <Row>
-          {this.renderProducts()}
-        </Row>
-      </Container>
+      <Row>
+        {this.renderProducts()}
+      </Row>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Row, Col, Button, NavLink, NavItem, Nav } from 'reactstrap';
+import { Row, Col, Button, NavLink, Nav, ButtonGroup } from 'reactstrap';
 import localizedTexts from '../../text_localization/LocalizedStrings';
 
 const links = [
@@ -52,15 +52,13 @@ class PackageOverviewNav extends Component {
         </Col>
         <Col xl="8" lg="8" md="8" sm="8" xs="6">
           <Nav>
-            {links.map(function (link, i) {
-              return (
-                <NavItem key={i}>
-                  <NavLink tag={Link} to={link.link}>
-                    {link.name}
-                  </NavLink>
-                </NavItem>
-              );
-            })}
+            <ButtonGroup className="mr-auto ml-auto">
+              {links.map((link, i) => {
+                return (
+                  <Button key={i} onClick={() => {this.context.router.push(link.link)}}>{link.name}</Button>
+                );
+              })}
+            </ButtonGroup>
           </Nav>
         </Col>
         <Col xl="2" lg="2" md="2" sm="2" xs="3" className="text-right">
