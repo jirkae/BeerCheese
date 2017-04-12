@@ -12,6 +12,7 @@ import ProductList from '../components/product/ProductList';
 import WelcomeWarningPopUp from '../components/popup/WelcomeWarningPopUp';
 import localizedTexts from '../text_localization/LocalizedStrings';
 import FontAwesome from 'react-fontawesome';
+import { Link } from 'react-router';
 
 const mockBeerCategories = ['black', 'lager'];
 const mockSupplementsCategories = ['glass', 'beerMat'];
@@ -76,9 +77,9 @@ export default class HomePage extends Component {
             </NavItem>
             {this.renderNavSupplementsItems()}
             <NavItem>
-              <NavLink href="/create-package">
+              <Link to="/create-package">
                 <Button color="secondary" size="lg">{localizedTexts.HomePage.createPackage} <FontAwesome style={{fontSize: '25px'}} name="gift" /></Button>
-              </NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Col>
