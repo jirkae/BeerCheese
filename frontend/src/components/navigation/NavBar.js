@@ -6,22 +6,19 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavbarBrand
+  NavbarBrand,
+  Button
 } from 'reactstrap';
 import { Link } from 'react-router';
 import localizedTexts from '../../text_localization/LocalizedStrings';
-import { connect } from 'react-redux';
-import { openModal } from '../../actions/openModal';
 import { css } from 'glamor';
-import { logout } from '../../actions/auth';
+import Cart from './Cart';
 
 const BEER_IMG_URL = 'https://img.clipartfox.com/c6c3f93fcfdd38440d093b3140604408_beer-free-to-use-clipart-beer-clipart-transparent-background_985-1280.png';
 
-const AuthNav = ({ isAuth, children }) => {
-  return isAuth ? <div>{children}</div> : null;
-};
 
-class NavBar extends Component {
+
+export default class NavBar extends Component {
   state = {
     isOpen: false
   };
@@ -33,9 +30,8 @@ class NavBar extends Component {
   };
 
   render() {
-    const { auth } = this.props;
     return (
-      <Navbar color="faded" light toggleable>
+      <Navbar light toggleable>
         <NavbarBrand tag={Link} to="/">
           <img
             src={BEER_IMG_URL}
@@ -49,54 +45,25 @@ class NavBar extends Component {
         </NavbarBrand>
         <NavbarToggler right onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="ml-auto" navbar>
+          <Nav className="ml-auto mr-auto" navbar>
             <NavItem>
               <NavLink tag={Link} to="/about_us">
-                {localizedTexts.NavBar.aboutUs}
+                <Button color="secondary">{localizedTexts.NavBar.aboutUs}</Button>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/conditions">
-                {localizedTexts.NavBar.terms}
+                <Button color="secondary">{localizedTexts.NavBar.terms}</Button>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={Link} to="/contact">
-                {localizedTexts.NavBar.contact}
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/">
-                {localizedTexts.NavBar.mainPage}
-              </NavLink>
-            </NavItem>
-            <NavItem tag={AuthNav} isAuth={auth.isAuthenticated}>
-              <NavLink tag={Link} to="/package-overview">
-                {localizedTexts.NavBar.packagesOverview}
-              </NavLink>
-            </NavItem>
-            <NavItem tag={AuthNav} isAuth={auth.isAuthenticated}>
-              <NavLink tag={Link} to="#" onClick={() => this.props.logout()}>
-                {localizedTexts.NavBar.logOut}
-              </NavLink>
-            </NavItem>
-            <NavItem tag={AuthNav} isAuth={!auth.isAuthenticated}>
-              <NavLink
-                tag={Link}
-                to="#"
-                onClick={() =>
-                  this.props.openModal({ name: 'logIn', data: null })}
-              >
-                {localizedTexts.NavBar.logIn}
-              </NavLink>
-            </NavItem>
-            <NavItem tag={AuthNav} isAuth={!auth.isAuthenticated}>
-              <NavLink tag={Link} to="/register">
-                {localizedTexts.NavBar.signUp}
+                <Button color="secondary">{localizedTexts.NavBar.contact}</Button>
               </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
+        <Cart />
       </Navbar>
     );
   }
@@ -106,11 +73,3 @@ class NavBar extends Component {
     width: '50px'
   });
 }
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-export default connect(mapStateToProps, {
-  openModal,
-  logout
-})(NavBar);

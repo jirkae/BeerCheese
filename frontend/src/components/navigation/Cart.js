@@ -4,8 +4,9 @@ import { Row, Col } from 'reactstrap';
 import localizedStrings from '../../text_localization/LocalizedStrings';
 import { css } from 'glamor';
 import CartContent from '../CartContent';
+import FontAwesome from 'react-fontawesome';
 
-export default class NavPanel extends React.Component {
+export default class Cart extends React.Component {
   state = {
     price: 9000,
     amount: 3,
@@ -14,7 +15,8 @@ export default class NavPanel extends React.Component {
 
   render() {
     return (
-      <div>
+      <Col xs={2}>
+
           <Row>
             <Col xs="7">
               <ul className={`${this.cssCartControl}`}>
@@ -28,19 +30,21 @@ export default class NavPanel extends React.Component {
             </Col>
             <Col xs="5">
               <Link
-                to="#"
+                to="/package-overview"
                 className={`${this.cssExpandLink}`}
-                onClick={() =>
-                  this.setState({
-                    showCartContent: !this.state.showCartContent
-                  })}
+                onClick={() => {
+                    return;
+                    this.setState({
+                      showCartContent: !this.state.showCartContent
+                    })}}
               >
-                <i className="fa fa-expand fa-3" />
+                <FontAwesome name="shopping-cart" style={{fontSize: '45px'}}/>
               </Link>
             </Col>
           </Row>
         {this.state.showCartContent ? <CartContent /> : ''}
-      </div>
+
+      </Col>
     );
   }
 

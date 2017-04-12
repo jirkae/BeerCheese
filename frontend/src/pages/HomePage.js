@@ -11,7 +11,7 @@ import {
 import ProductList from '../components/product/ProductList';
 import WelcomeWarningPopUp from '../components/popup/WelcomeWarningPopUp';
 import localizedTexts from '../text_localization/LocalizedStrings';
-import { Link } from 'react-router';
+import FontAwesome from 'react-fontawesome';
 
 const mockBeerCategories = ['black', 'lager'];
 const mockSupplementsCategories = ['glass', 'beerMat'];
@@ -50,14 +50,6 @@ export default class HomePage extends Component {
         <WelcomeWarningPopUp />
         <Col xl="2" lg="2" md="4" sm="12" xs="12">
           <Nav pills vertical>
-            <Button
-              outline
-              color="primary"
-              tag={Link}
-              to="/create_package_beer"
-            >
-              {localizedTexts.HomePage.createPackage}
-            </Button>
             <NavbarBrand>{localizedTexts.HomePage.categories}</NavbarBrand>
             <NavItem>
               <NavLink
@@ -83,14 +75,17 @@ export default class HomePage extends Component {
               </NavLink>
             </NavItem>
             {this.renderNavSupplementsItems()}
+            <NavItem>
+              <NavLink href="/create-package">
+                <Button color="secondary" size="lg">{localizedTexts.HomePage.createPackage} <FontAwesome style={{fontSize: '25px'}} name="gift" /></Button>
+              </NavLink>
+            </NavItem>
           </Nav>
         </Col>
-        <Col xl="10" lg="10" md="8" sm="12" xs="12">
-
-          <ProductList />
+        <Col xl="10" lg="10" md="8" sm="12" xs="12" style={{paddingTop: '50px'}}>
+          <ProductList itemSize="250"/>
           <Button>{localizedTexts.HomePage.previous}</Button>
           <Button>{localizedTexts.HomePage.next}</Button>
-
         </Col>
       </Row>
     );

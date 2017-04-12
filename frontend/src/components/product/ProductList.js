@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { CardColumns } from 'reactstrap';
-import LazyLoad from 'react-lazyload';
-import Loading from '../images/Loading';
-import Product from './Product';
+import { Row } from 'reactstrap';
+import LazyLoad from "react-lazyload";
+import Loading from "../images/Loading";
+import Product from "./Product";
 import { connect } from 'react-redux';
 import { productsApi } from '../../actions/products';
 import { isNull } from '../../util/util';
@@ -18,10 +18,11 @@ class ProductList extends Component {
     if (isFetching) {
       return <Loading />;
     }
+
     if (!isNull(products) && products.length) {
       return products.map(({ product }) => (
         <LazyLoad placeholder={<Loading />} key={product.id} height="50px">
-          <Product product={product} />
+          <Product product={product} size={this.props.itemSize}/>
         </LazyLoad>
       ));
     }
@@ -29,9 +30,9 @@ class ProductList extends Component {
 
   render() {
     return (
-      <CardColumns>
+      <Row>
         {this.renderProducts()}
-      </CardColumns>
+      </Row>
     );
   }
 }
