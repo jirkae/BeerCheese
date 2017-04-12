@@ -34,9 +34,9 @@ export default class Cart extends React.Component {
                 className={`${this.cssExpandLink}`}
                 onClick={() => {
                     return;
-                    this.setState({
+                    /*this.setState({
                       showCartContent: !this.state.showCartContent
-                    })}}
+                    })*/}}
               >
                 <FontAwesome name="shopping-cart" style={{fontSize: '45px'}}/>
               </Link>
